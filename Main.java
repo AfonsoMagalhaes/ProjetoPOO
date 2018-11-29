@@ -1,13 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 
 public class Main extends JFrame{
@@ -16,9 +16,8 @@ public class Main extends JFrame{
     static Scanner auxs = new Scanner(System.in);
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
-        //estou a tentar criar uma cena de ficheiros
 
 
         try {
@@ -26,6 +25,7 @@ public class Main extends JFrame{
 
             Ficheiro f = new Ficheiro();
             Gestor gestor = new Gestor();
+            gestor.leficheiro();
 
             try {
                 gestor = f.getInfoGestor(gestor);

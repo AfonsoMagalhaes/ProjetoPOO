@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -12,15 +12,39 @@ public class Gestor extends JFrame implements Serializable  {
     private ArrayList<Local> locais;
     private ArrayList<P_Interesse> p_interesse;
 
+    private JPanel canvas;
+    private JLabel label1, label2, result,label3,label4,label5;
+    private JTextField number1;
+    private JButton buttonSum;
+    private JPanel panel;
 
-    public Gestor() {
+
+    public Gestor() throws IOException {
         this.mes = new ArrayList<>();
         this.lic = new ArrayList<>();
         this.locais = new ArrayList<>();
         this.p_interesse = new ArrayList<>();
 
+        leficheiro();
 
     }
+
+    public static void leficheiro() throws IOException {
+        File locais = new File("locais.txt");
+        if (!(locais.exists())) {
+            locais.createNewFile();
+        }
+        BufferedReader br = new BufferedReader(new FileReader(locais));
+
+        String st;
+
+        while ((st = br.readLine()) != null) {
+            String[] tab=st.split(";");
+            System.out.println(tab[0]);
+
+        }
+    }
+
 
 
     //Aqui vamos colocar as funções todas
