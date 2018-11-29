@@ -40,7 +40,7 @@ public class Gestor extends JFrame implements Serializable  {
 
         while ((st = br.readLine()) != null) {
             String[] tab=st.split(";");
-            System.out.println(tab[0]);
+            System.out.println(tab[1]);
 
         }
     }
