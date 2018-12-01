@@ -1,3 +1,5 @@
+package po;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,17 +30,17 @@ public class Ficheiro {
                 g = (Gestor) aux.readObject();
             }
         } catch (java.io.EOFException e) {
-            System.out.println("Ficheiro Vazio");
+            System.out.println("po.Ficheiro Vazio");
         } catch (java.io.InvalidClassException s) {
             PrintWriter writer = new PrintWriter("teste.txt");
             writer.print("");
             writer.close();
-            System.out.println("Ficheiro corrompido!\nFicheiro foi limpo e foi criado um novo!");
+            System.out.println("po.Ficheiro corrompido!\npo.Ficheiro foi limpo e foi criado um novo!");
         } catch (java.io.StreamCorruptedException k) {
             PrintWriter writer = new PrintWriter("teste.txt");
             writer.print("");
             writer.close();
-            System.out.println("Ficheiro corrompido!\nFicheiro foi limpo e foi criado um novo!");
+            System.out.println("po.Ficheiro corrompido!\npo.Ficheiro foi limpo e foi criado um novo!");
         }
         return g;
 

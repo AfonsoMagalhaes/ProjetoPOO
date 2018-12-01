@@ -1,3 +1,5 @@
+package po;
+
 import java.io.Serializable;
 
 abstract class Pessoa  implements Serializable {

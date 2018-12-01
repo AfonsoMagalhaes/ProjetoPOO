@@ -1,3 +1,5 @@
+package po;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -30,7 +32,7 @@ public class Gestor extends JFrame implements Serializable  {
     }
 
     public static void leficheiro() throws IOException {
-        File locais = new File("locais.txt");
+        File locais = new File("po/locais.txt");
         if (!(locais.exists())) {
             locais.createNewFile();
         }
@@ -59,8 +61,8 @@ public class Gestor extends JFrame implements Serializable  {
         JTextField nome = new JTextField(10);
         JLabel label2 = new JLabel("Email:");
         JTextField email = new JTextField(10);
-        JButton licenciatura = new JButton("Licenciatura");
-        JButton mestrado = new JButton("Mestrado");
+        JButton licenciatura = new JButton("po.Licenciatura");
+        JButton mestrado = new JButton("po.Mestrado");
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3,2));

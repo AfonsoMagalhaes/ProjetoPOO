@@ -1,7 +1,8 @@
+package po;
+
 import javax.swing.*;
 import java.awt.*;
 
-import java.io.File;
 import java.io.IOException;
 
 import java.util.Scanner;
@@ -44,7 +45,7 @@ public class Main extends JFrame{
 
                 printMenu();
                 System.out.println("Escolha: ");
-                option = Main.getInt();
+                option = po.Main.getInt();
                 switch (option) {
                     case 1:
                         gestor.criaPessoa();
