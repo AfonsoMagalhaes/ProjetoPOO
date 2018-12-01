@@ -1,5 +1,7 @@
 package po;
 
+import interfaces_GUI.Janela_inicio;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
@@ -46,13 +48,12 @@ public class Main extends JFrame{
     }
 
 
-    public static void printMenu() {
-
-
+    public void printRegisto(){
         JFrame frame = new JFrame();
         frame.setTitle("A sua viagem de sonho!");
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
         JButton button1 = new JButton("Registo de utilizadores");
         JButton button2 = new JButton("Preferencias de utilizador");
@@ -82,39 +83,13 @@ public class Main extends JFrame{
     public static void main(String[] args){
         Main viagem = new Main();
         viagem.leficheiro();
-        viagem.printMenu();
+        //viagem.printInicial();
 
         System.out.println("LISTA LOCAIS");
         for(Local tmp : viagem.locais)
             System.out.println(tmp.toString());
 
-
-
-        //AQUI fazemos um do while p imprimir e selecionar a opção da pessoa
-/*
-
-        Tipo:
-
-        boolean flag = true;
-        int option;
-        do {
-
-                printMenu();
-                System.out.println("Escolha: ");
-                option = po.Main.getInt();
-                switch (option) {
-                    case 1:
-                        gestor.criaPessoa();
-                        break;
-                    case 2:
-
-                    ....
-                    case 0:
-                        flag = false;
-                }
-                f.escreveGestor(gestor);
-            } while (flag);
- */
+        new Janela_inicio().setVisible(true);
 
 
     }
