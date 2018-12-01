@@ -2,69 +2,47 @@ package po;
 
 import javax.swing.*;
 import java.awt.*;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import java.util.ArrayList;
 
 
 public class Main extends JFrame{
 
-    static Scanner in = new Scanner(System.in);
-    static Scanner auxs = new Scanner(System.in);
+    static ArrayList<Mestrado> mestrado;
+    static ArrayList<Licenciatura> licenciatura;
+    public static ArrayList<Local> locais;
+    public static ArrayList<P_Interesse> p_interesse;
 
 
-    public static void main(String[] args){
+    public Main() {
+        this.mestrado = new ArrayList<>();
+        this.licenciatura = new ArrayList<>();
+        this.locais = new ArrayList<>();
+        this.p_interesse = new ArrayList<>();
+    }
 
-
+    public static void leficheiro() {
+        BufferedReader br = null;
+        FileReader fr = null;
+        String st;
 
         try {
-            boolean flag = true;
 
-            Ficheiro f = new Ficheiro();
-            Gestor gestor = new Gestor();
-            gestor.leficheiro();
 
-            try {
-                gestor = f.getInfoGestor(gestor);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Gestor.class.getName()).log(Level.SEVERE, null, ex);
+            br = new BufferedReader(new FileReader("locais.txt"));
+
+            while ((st = br.readLine()) != null) {
+                String[] tab = st.split(";");
+                int x = Integer.parseInt(tab[4]);
+                int y = Integer.parseInt(tab[5]);
+                Local local = new Local(tab[0], tab[1], tab[2], tab[3], x, y);
+                locais.add(local);
             }
-
-            int option;
-
-
-            //AQUI fazemos um do while p imprimir e selecionar a opção da pessoa
-/*
-
-        Tipo:
-        do {
-
-                printMenu();
-                System.out.println("Escolha: ");
-                option = po.Main.getInt();
-                switch (option) {
-                    case 1:
-                        gestor.criaPessoa();
-                        break;
-                    case 2:
-
-                    ....
-                    case 0:
-                        flag = false;
-                }
-                f.escreveGestor(gestor);
-            } while (flag);
- */
-
-
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            System.out.println("Excepcao a carregar ficheiro txt: " + e);
         }
-        printMenu();
     }
 
 
@@ -99,5 +77,45 @@ public class Main extends JFrame{
 
         frame.add(panel);
         frame.setVisible(true);
+    }
+
+    public static void main(String[] args){
+        Main viagem = new Main();
+        viagem.leficheiro();
+        viagem.printMenu();
+
+        System.out.println("LISTA LOCAIS");
+        for(Local tmp : viagem.locais)
+            System.out.println(tmp.toString());
+
+
+
+        //AQUI fazemos um do while p imprimir e selecionar a opção da pessoa
+/*
+
+        Tipo:
+
+        boolean flag = true;
+        int option;
+        do {
+
+                printMenu();
+                System.out.println("Escolha: ");
+                option = po.Main.getInt();
+                switch (option) {
+                    case 1:
+                        gestor.criaPessoa();
+                        break;
+                    case 2:
+
+                    ....
+                    case 0:
+                        flag = false;
+                }
+                f.escreveGestor(gestor);
+            } while (flag);
+ */
+
+
     }
 }
