@@ -12,11 +12,10 @@ import java.util.ArrayList;
 
 public class Main extends JFrame{
 
-    static ArrayList<Mestrado> mestrado;
-    static ArrayList<Licenciatura> licenciatura;
-    public static ArrayList<Local> locais;
-    public static ArrayList<P_Interesse> p_interesse;
-
+    private static ArrayList<Mestrado> mestrado;
+    private static ArrayList<Licenciatura> licenciatura;
+    private static ArrayList<Local> locais;
+    private static ArrayList<P_Interesse> p_interesse;
 
     public Main() {
         this.mestrado = new ArrayList<>();
@@ -37,16 +36,48 @@ public class Main extends JFrame{
 
             while ((st = br.readLine()) != null) {
                 String[] tab = st.split(";");
-                int x = Integer.parseInt(tab[4]);
-                int y = Integer.parseInt(tab[5]);
-                Local local = new Local(tab[0], tab[1], tab[2], tab[3], x, y);
+                int x = Integer.parseInt(tab[13]);
+                int y = Integer.parseInt(tab[14]);
+                Local local = new Local(tab[0], tab[1], tab[5], tab[9], x, y);
                 locais.add(local);
+                for(int i=3; i<13; i+=4) {
+                    int entrada = Integer.parseInt(tab[i]);
+                    int extra = Integer.parseInt(tab[i+1]);
+                    P_Interesse p_i = new P_Interesse(tab[1], tab[2], entrada, extra);
+                    p_interesse.add(p_i);
+                }
             }
         } catch (IOException e) {
             System.out.println("Excepcao a carregar ficheiro txt: " + e);
         }
     }
 
+
+    public int custo_local(Local local){
+        int custo=0;
+        for(P_Interesse i: p_interesse){
+            if((i.getNome()).equals(local.getPi1()) || (i.getNome()).equals(local.getPi2()) || (i.getNome()).equals(local.getPi3())){
+                custo+=i.getentrada()+i.getCustoextra();
+            }
+        }
+        return custo;
+    }
+
+    public double distancia_locais(Local local1, Local local2){
+        return Math.sqrt(Math.pow(local1.getX()-local2.getX(),2)+Math.pow(local1.getY()-local2.getY(),2));
+    }
+
+    public int deslocação_locais(Local local1, Local local2){ //nao sei como e suposta fazer...
+        return (int) (distancia_locais(local1, local2));
+    }
+
+    public int custo_viagem(Local local1, Local local2, Local local3){
+        return custo_local(local1)+custo_local(local2)+custo_local(local3)+deslocação_locais(local1, local2)+ deslocação_locais(local2, local3);
+    }
+
+    /*public void viagens_possiveis(int custo_maximo, String preferencia){
+
+    }*/
 
     public void printRegisto(){
         JFrame frame = new JFrame();

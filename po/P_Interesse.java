@@ -13,17 +13,6 @@ public class P_Interesse{
         this.custoextra = custoextra;
     }
 
-    public P_Interesse(String nome, String horario, float entrada) {
-        this.nome=nome;
-        this.horario=horario;
-        this.entrada=entrada;
-    }
-
-    public P_Interesse(String nome, String horario) {
-        this.nome=nome;
-        this.horario=horario;
-    }
-
     public String getNome() {
         return nome;
     }
