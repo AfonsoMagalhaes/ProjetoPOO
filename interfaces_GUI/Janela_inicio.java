@@ -6,45 +6,45 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Janela_inicio extends JFrame {
-    //private final JComboBox<String> fromC;
-    private JPanel canvas;
-    private JButton butao1;
-    private JLabel img;
-
-
-
+    private JButton b1;
 
     public Janela_inicio() {
-
-
         setTitle("A sua viagem de sonho!");
-        setSize(600,400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(600,600);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        butao1 = new JButton("Entrar");
 
-        JButton button1 = new JButton("Entrar");
-        ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("bagagem.jpg"));
-        Image image = imageIcon.getImage(); // transform it
-        Image newimg = image.getScaledInstance(480, 320, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-        imageIcon = new ImageIcon(newimg);
-        img=new JLabel(imageIcon);
+        setLayout(new GridLayout());
+        JLabel background=new JLabel(new ImageIcon(this.getClass().getResource("bagagem.jpg")));
 
-        canvas = new JPanel();
-        canvas.setLayout(new BorderLayout());
+        add(background);
 
-        butao1.addActionListener(new ActionListener() {
+        background.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+
+        b1 = new JButton("Entrar");
+        b1.setBackground(Color.WHITE);
+//        b1.setForeground(Color.lightGray);
+        b1.setOpaque(true);
+        b1.setBorderPainted(false);
+
+        b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 iniciaMenu(e);
-
             }
         });
 
-        canvas.add(img,BorderLayout.NORTH);
-        canvas.add(butao1,BorderLayout.SOUTH);
 
-        this.add(canvas);
+        background.add(b1, gbc);
+
+        gbc.weighty = 1;
+
         this.setVisible(true);
     }
 
