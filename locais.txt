@@ -1,4 +1,4 @@
-Lisboa;Torre de Belém;Mosteiro dos Jerónimos;Castelo de São Jorge;112483;194793;
+Lisboa;Torre de Belém;9h-20h;20;0;Mosteiro dos Jerónimos;9h-21h;15;0;Castelo de São Jorge;9h-22h;13;0;112483;194793;
 Vila Nova de Gaia;Real Comapnhia Velha;Porto Augusto's;Miradouro da Serra do Pilar;158902;462323;
 Porto;Ponte Luís I;Torre dos Clérigos;Livraria Lello;159025;465955;
 Évora;Capela dos Ossos;Templo Romano de Evora;Sé Catedral de Évora;219597;177050;
