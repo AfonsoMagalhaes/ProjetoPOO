@@ -53,6 +53,8 @@ public class Janela_inicio extends JFrame {
         new menu().setVisible(true);
     }
 
+
+
     public static void main(String args[]) {
         new Janela_inicio();
     }

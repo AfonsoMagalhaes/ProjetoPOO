@@ -12,7 +12,9 @@ public class menu extends JFrame{
     private JButton b1, b2, b3, b4;
     private JLabel l1;
 
-
+    //Ter uma combobox com os utilizadores ja inscritos pra fazer o login
+    //O botao de criar viagem e so mostrado depois de registar ou fazer login
+    //So depois do registo ou do login e que se escolhe o hot e o custo maximo para se criar a viagem
 
 
     public menu() {
