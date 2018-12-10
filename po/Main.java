@@ -15,101 +15,189 @@ public class Main extends JFrame{
     private static ArrayList<Mestrado> mestrado;
     private static ArrayList<Licenciatura> licenciatura;
     private static ArrayList<Local> locais;
-    private static ArrayList<P_Interesse> p_interesse;
+    private static ArrayList<Local> museus;
+    private float deslocacao;
 
     public Main() {
         this.mestrado = new ArrayList<>();
         this.licenciatura = new ArrayList<>();
         this.locais = new ArrayList<>();
-        this.p_interesse = new ArrayList<>();
+        this.museus = new ArrayList<>();
     }
 
-    public static void leficheiro() {
+    public void leficheiro() {
         BufferedReader br = null;
         FileReader fr = null;
         String st;
-
         try {
-
-
             br = new BufferedReader(new FileReader("locais.txt"));
-
+            this.deslocacao=Integer.parseInt(br.readLine());
+            ArrayList<P_Interesse> pinteresse = null;
+            String nome = null;
+            int x = 0, y = 0;
+            boolean museu=false;
             while ((st = br.readLine()) != null) {
                 String[] tab = st.split(";");
-                int x = Integer.parseInt(tab[13]);
-                int y = Integer.parseInt(tab[14]);
-                Local local = new Local(tab[0], tab[1], tab[5], tab[9], x, y);
-                locais.add(local);
-                for(int i=3; i<13; i+=4) {
-                    int entrada = Integer.parseInt(tab[i]);
-                    int extra = Integer.parseInt(tab[i+1]);
-                    P_Interesse p_i = new P_Interesse(tab[1], tab[2], entrada, extra);
-                    p_interesse.add(p_i);
-                }
+                if (tab[0].equals("Local")) {
+                    pinteresse = new ArrayList<P_Interesse>();
+                    x = Integer.parseInt(tab[2]);
+                    y = Integer.parseInt(tab[3]);
+                    nome = tab[1];
+                } else if (tab[0].equals("Museu")) {
+                    pinteresse.add(new Museu(tab[1],tab[2],Float.parseFloat(tab[3]), Float.parseFloat(tab[4]),tab[5]));
+                    museu=true;
+                } else if (tab[0].equals("Universidade")){
+                    pinteresse.add(new Universidade(tab[1], tab[2], Float.parseFloat(tab[3]), Float.parseFloat(tab[4])));
+                } else if (tab[0].equals("Parque Cultural")){
+                    pinteresse.add(new Cultural(tab[1],tab[2], Float.parseFloat(tab[3]),Float.parseFloat(tab[4])));
+                } else if (tab[0].equals("Parque Diversões")){
+                    pinteresse.add(new Diversões(tab[1],tab[2],Float.parseFloat(tab[3]),Float.parseFloat(tab[4]), Integer.parseInt(tab[5])));
+                } else if (tab[0].equals("Parque Aquático")){
+                    pinteresse.add(new Aquático(tab[1],tab[2], Float.parseFloat(tab[3]),Float.parseFloat(tab[4]), Integer.parseInt(tab[5]), Boolean.parseBoolean(tab[6])));
+                } else if (tab[0].equals("Bar")){
+                    pinteresse.add(new Bar(tab[1],tab[2],Float.parseFloat(tab[3]),Float.parseFloat(tab[4]), Float.parseFloat(tab[5])));
+                } else if(st.equals("\n")){
+                    Local l = new Local(nome, x, y);
+                    l.setP_interesse(pinteresse);
+                    locais.add(l);
+                    if(museu=true){
+                        museus.add(l);
+                        museu=false;
+                    }
+                } else{continue;}
             }
         } catch (IOException e) {
             System.out.println("Excepcao a carregar ficheiro txt: " + e);
         }
     }
 
-
-    public int custo_local(Local local){
-        int custo=0;
-        for(P_Interesse i: p_interesse){
-            if((i.getNome()).equals(local.getPi1()) || (i.getNome()).equals(local.getPi2()) || (i.getNome()).equals(local.getPi3())){
-                custo+=i.getentrada()+i.getCustoextra();
-            }
-        }
-        return custo;
-    }
-
-    public double distancia_locais(Local local1, Local local2){
-        return Math.sqrt(Math.pow(local1.getX()-local2.getX(),2)+Math.pow(local1.getY()-local2.getY(),2));
-    }
-
-    public int deslocação_locais(Local local1, Local local2){ //nao sei como e suposta fazer...
-        return (int) (distancia_locais(local1, local2));
-    }
-
-    public int custo_viagem(Local local1, Local local2, Local local3){
-        return custo_local(local1)+custo_local(local2)+custo_local(local3)+deslocação_locais(local1, local2)+ deslocação_locais(local2, local3);
-    }
-
-    /*public void viagens_possiveis(int custo_maximo, String preferencia){
+    /*public void escreve_ficheirobj(){
 
     }*/
 
-    public void printRegisto(){
-        JFrame frame = new JFrame();
-        frame.setTitle("A sua viagem de sonho!");
-        frame.setSize(500, 500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    /*public void le_ficheiroobj(){
 
+    }*/
 
-        JButton button1 = new JButton("Registo de utilizadores");
-        JButton button2 = new JButton("Preferencias de utilizador");
-        JButton button3 = new JButton("Montante máximo a gastar");
-        JButton button4 = new JButton("Mostrar viagens com pelo menos 1 museu");
-        JButton button5 = new JButton("Mostrar viagem selecionada");
-        JButton button6 = new JButton("Locais e pontos de interesse mais populares");
-        JLabel label = new JLabel("Escolha uma das opcoes:", SwingConstants.CENTER);
+    /*public ArrayList<Local> ordena_locais_crescente(Local[] viagem){
 
+    }*/ //vai ordenar os locais de cada viagem por ordem crescente
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(7,1));
+    /*public ArrayList<Local> ordena_locais_decrescente(Local[] viagem){
 
+    }*/ //vai ordenar os locais de cada viagem por ordem decrescente
 
-        panel.add(label);
-        panel.add(button1);
-        panel.add(button2);
-        panel.add(button3);
-        panel.add(button4);
-        panel.add(button5);
-        panel.add(button6);
+    public float custo_local(Local local){
+        int custo=0;
+        for(P_Interesse i :local.getPInteresse()){
+                    custo+=i.getEntrada()+i.getCustoextra();// alterar de novo os atributos dos pontos de interesse
+        }
+        return custo;
+    } // custo de um local
 
-        frame.add(panel);
-        frame.setVisible(true);
-    }
+    public double distancia_locais(Local local1, Local local2){
+        return Math.sqrt(Math.pow(local1.getX()-local2.getX(),2)+Math.pow(local1.getY()-local2.getY(),2));
+    } //Distância entre 2 locais
+
+    public int deslocação_locais(Local local1, Local local2){ //custo por km no ficheiro de texto(inicio)
+        return (int) (distancia_locais(local1, local2)*this.deslocacao);
+    } //Custo da deslocação entre 2 locais
+
+    public float custo_viagem(Local[] viagem){
+        return custo_local(viagem[0])+custo_local(viagem[1])+custo_local(viagem[3])+deslocação_locais(viagem[0], viagem[1])+ deslocação_locais(viagem[1], viagem[2]);
+    } //Calcula o custo da viagem
+
+    public Local pinteresse_hot(String hot){
+        Local x = null;
+        for(Local l: locais){
+            for(P_Interesse i : l.getPInteresse()){
+                if(hot.equals(i.getNome())){
+                    x = l;
+                }
+            }
+        }
+        return x;
+    } //Vai buscar o local do ponto de interesse hot
+
+    public Local local_evitar(String hot){
+        Local x = null;
+        for(Local l: locais){
+            if(hot.equals(l.getCidade())){
+                x=l;
+            }
+        }
+        return x;
+    } //Vai buscar do local a evitar
+
+    public ArrayList<Local[]> cria_viagens_lic(int custo, String hot){
+        ArrayList<Local[]> viagens = new ArrayList<>();
+        Local[] viagem = new Local[3];
+        viagem[0] = pinteresse_hot(hot);
+        for(Local m: museus) {
+            viagem[1]= m;
+            for(Local l: locais){
+                if(m.getCidade().equals(l.getCidade())){
+                    continue;
+                }else{
+                    viagem[2]=l;
+                    if(custo_viagem(viagem)<=custo){
+                        viagens.add(viagem);
+                    }
+                }
+            }
+        }
+        return viagens;
+    } //Cria lista das viagens que satisfazem o custo máximo e o ponto de interesse
+
+    public ArrayList<Local[]> cria_viagens_mes(int custo, String hot){
+        ArrayList<Local[]> viagens = new ArrayList<>();
+        Local[] viagem = new Local[3];
+        Local X = local_evitar(hot);
+        for(Local m: museus){
+            if(X.getCidade().equals(m.getCidade())){
+                continue;
+            }else{
+                viagem[0]=m;
+            }
+            for(Local l1: locais){
+                if(X.getCidade().equals(l1.getCidade())){
+                    continue;
+                }else{
+                    viagem[1]=l1;
+                }
+                for(Local l2: locais){
+                    if(X.getCidade().equals(l2.getCidade()) || l1.getCidade().equals(l2.getCidade())){
+                        continue;
+                    }else{
+                        viagem[2]=l2;
+                        if(custo_viagem(viagem)<=custo) {
+                            viagens.add(viagem);
+                        }
+                    }
+                }
+            }
+        }
+        return viagens;
+    } //Cria lista das viagens que satisfazem o custo máximo e o local a evitar
+
+    public String viagem_selecionada(Local[] viagem){
+        return "Viagem(custo: " + custo_viagem(viagem) + ")\nLocais:\n" + viagem[0].toString() + "\n" + viagem[1].toString() + "\n" + viagem[2].toString() + "\n" +
+                "Distâncias:\n" + viagem[0] + "a" + viagem[1] + " - " + distancia_locais(viagem[0], viagem[1]) + "\n" + viagem[1] + "a" + viagem[2] + " - " + distancia_locais(viagem[1], viagem[2]) + "\n" +
+                "Custos:\n" + viagem[0] + " - " + custo_local(viagem[0]) + "\n" + viagem[1] + " - " + custo_local(viagem[1]) + "\n" + viagem[2] + " - " + custo_local(viagem[2]);
+
+    } //Ponto 5 do projeto
+
+    public void add_lic(Licenciatura pessoa){
+        licenciatura.add(pessoa);
+    } //Não sei se e preciso para quando fizeres o registo meter a pessoa na lista
+
+    public void add_mes(Mestrado pessoa){
+        mestrado.add(pessoa);
+    } //Não sei se e preciso para quando fizeres o registo meter a pessoa na lista
+
+    /*public void printRegisto(){
+
+    }*/
 
     public static void main(String[] args){
         Main viagem = new Main();
