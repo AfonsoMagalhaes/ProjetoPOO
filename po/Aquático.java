@@ -1,10 +1,12 @@
 package po;
 
 public class Aquático extends Diversões {
-    int piscinas;
+    private int piscinas;
+    private boolean animais;
     public Aquático(String nome,String horario,float entrada,float custoextra, int equipamentos, boolean animais){
-        super(nome,horario,entrada,custoextra, equipamentos, animais);
+        super(nome,horario,entrada,custoextra, equipamentos);
         this.piscinas=piscinas;
+        this.animais=animais;
     }
 
     public int getPiscinas() {
@@ -13,5 +15,13 @@ public class Aquático extends Diversões {
 
     public void setPiscinas(int piscinas) {
         this.piscinas = piscinas;
+    }
+
+    public boolean getAnimais() {
+        return animais;
+    }
+
+    public void setAnimais(boolean animais) {
+        this.animais = animais;
     }
 }

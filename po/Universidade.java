@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Universidade extends P_Interesse {
     private ArrayList<String> cursos;
-    public Universidade(String nome, String horario){
-        super(nome, horario);
+    public Universidade(String nome, String horario, float entrada, float custoextra){
+        super(nome, horario, entrada, custoextra);
         this.cursos=new ArrayList<>();
     }
 

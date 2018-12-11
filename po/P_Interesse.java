@@ -3,14 +3,13 @@ package po;
 public class P_Interesse{
     private String nome;
     private String horario;
-    private float entrada;
-    private float custoextra;
+    float entrada, custoextra;
 
     public P_Interesse(String nome, String horario, float entrada, float custoextra) {
         this.nome = nome;
         this.horario = horario;
         this.entrada = entrada;
-        this.custoextra = custoextra;
+        this.custoextra= custoextra;
     }
 
     public String getNome() {
@@ -29,23 +28,19 @@ public class P_Interesse{
         this.horario=horario;
     }
 
-    public float getentrada(){
+    public float getEntrada(){
         return entrada;
     }
 
-    public void setEntrada(float entrada){
-        this.entrada=entrada;
-    }
+    public void setEntrada(float entrada){this.entrada=entrada;}
 
     public float getCustoextra(){
         return custoextra;
     }
 
-    public void setCustoextra(float custoextra){
-        this.custoextra=custoextra;
-    }
+    public void setCustoextra(float custoextra){this.custoextra=custoextra;}
 
     public String toString(){
-        return "\n-Nome: " + nome + "\n-Horário: " + horario + "\n-Custo de Entrada: " + entrada + "\nCusto Extra:" + custoextra;
+        return "\n-Nome: " + nome + "\n-Horário: " + horario + "\n";
     }
 }

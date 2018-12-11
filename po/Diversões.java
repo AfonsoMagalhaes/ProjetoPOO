@@ -1,12 +1,10 @@
 package po;
 
 public class Diversões extends Parque {
-    int equipamentos;
-    boolean animais;
-    public Diversões(String nome,String horario,float entrada,float custoextra, int equipamentos, boolean animais){
+    private int equipamentos;
+    public Diversões(String nome,String horario,float entrada,float custoextra, int equipamentos){
         super(nome,horario,entrada,custoextra);
         this.equipamentos=equipamentos;
-        this.animais=animais;
     }
 
     public int getEquipamentos() {
@@ -17,11 +15,4 @@ public class Diversões extends Parque {
         this.equipamentos = equipamentos;
     }
 
-    public boolean getAnimais() {
-        return animais;
-    }
-
-    public void setAnimais(boolean animais) {
-        this.animais = animais;
-    }
 }

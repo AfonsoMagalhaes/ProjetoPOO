@@ -1,21 +1,18 @@
 package po;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class Local implements Serializable {
     private String cidade;
-    private String pi1;
-    private String pi2;
-    private String pi3;
+    private ArrayList<P_Interesse> p_interesse;
     private int X;
     private  int Y;
 
-    public Local (String cidade,String pi1,String pi2,String pi3, int X,int Y){
+    public Local (String cidade, int X,int Y){
         this.cidade=cidade;
-        this.pi1=pi1;
-        this.pi2=pi2;
-        this.pi3=pi3;
+        this.p_interesse = new ArrayList<>();
         this.X=X;
         this.Y=Y;
     }
@@ -24,17 +21,13 @@ public class Local implements Serializable {
         return cidade;
     }
 
-    public String getPi1(){
-        return pi1;
+    public ArrayList<P_Interesse> getPInteresse(){
+        return p_interesse;
+    }
+    public void setP_interesse(ArrayList<P_Interesse> p_interesse){
+        this.p_interesse=p_interesse;
     }
 
-    public String getPi2(){
-        return pi2;
-    }
-
-    public String getPi3(){
-        return pi3;
-    }
 
     public int getX(){
         return X;
@@ -46,6 +39,8 @@ public class Local implements Serializable {
 
     @Override
     public String toString() {
-        return "[Local] Cidade: "+cidade+ ": "+pi1+" "+pi2+" "+pi3;
+
+        return "[Local] Cidade: "+cidade+ ", "+"Pontos de Interesse: "+p_interesse+", "+"Coordenadas: "+X+","+Y+";";
     }
 }
+
