@@ -5,39 +5,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class entrar extends JFrame{
+public class locaispopulares extends JFrame {
 
     private JPanel canvas;
 
-    private JButton b1, b2, b3;
-    private JLabel l1,l2,l3;
-    private JComboBox<String> fromC;
-    private JTextField number1;
-
-
-    private void visualizarViagem(ActionEvent evt) {
-        this.setVisible(false);
-        new visualizarViagem().setVisible(true);
-    }
-
-
+    private JButton b2, b3;
+    private JLabel l1;
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
         new menu().setVisible(true);
     }
 
-    private class BtnCalcula implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-
-            visualizarViagem(e);
-
-        }
-    }
-
-    public entrar(){
+    public locaispopulares(){
         setTitle("A sua viagem de sonho!");
         setSize(530,400);
         setLocationRelativeTo(null);
@@ -53,41 +33,40 @@ public class entrar extends JFrame{
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
+
+
+
+        gbc.anchor = GridBagConstraints.NORTH;
+
+        l1 =new JLabel("<html><h1><strong><b><font color=\"black\">OS LOCAIS MAIS POPULARES SÃO:</font></b></strong></h1><hr></html>");
+
+        l1.setBackground(Color.GRAY);
+        l1.setOpaque(true);
+
+
+        background.add(l1, gbc);
+
         gbc.anchor = GridBagConstraints.CENTER;
-
-
 
 
         canvas = new JPanel();
         canvas.setLayout(new GridLayout(3,2,10,10));
-        l1 = new JLabel("Selecione o seu ponto de interesse hot:", SwingConstants.CENTER);
-        l1.setBackground(Color.gray);
+
+
+
+
+
+        //aqui temos de chamar a função que calcula e imprimir os dados;
+
+
+
+
+
+
+
+        l1 = new JLabel("LOCAL 1", SwingConstants.CENTER);
         l1.setOpaque(true);
-        canvas.add(l1);
-
-        //alterar em função dos ficheiros de objeto
-        String[] items = {"Aqui vamos ler", "os locais registados"};
-        fromC = new JComboBox<>(items);
-        canvas.add(fromC);
-
-        l2 = new JLabel("Máximo a gastar:", SwingConstants.CENTER);
-        l2.setBackground(Color.gray);
-        l2.setOpaque(true);
-        canvas.add(l2);
-
-        number1 = new JTextField(10);
-        canvas.add(number1);
-
-        l3 = new JLabel("");
-        canvas.add(l3);
-
-        b1 = new JButton("Calcula viagem");
-        b1.addActionListener(new BtnCalcula());
-        canvas.add(b1);
-
-        canvas.setOpaque(false);
-
-        background.add(canvas,gbc);
+        background.add(l1,gbc);
 
         gbc.anchor = GridBagConstraints.SOUTH;
 
@@ -124,7 +103,6 @@ public class entrar extends JFrame{
     }
 
     public static void main(String args[]) {
-        new entrar();
+        new locaispopulares();
     }
-
 }

@@ -5,39 +5,35 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class entrar extends JFrame{
+public class registo extends JFrame{
 
     private JPanel canvas;
 
     private JButton b1, b2, b3;
     private JLabel l1,l2,l3;
-    private JComboBox<String> fromC;
-    private JTextField number1;
+    private JTextField n1,n2;
 
 
-    private void visualizarViagem(ActionEvent evt) {
+
+    private void entrar(ActionEvent evt) {
         this.setVisible(false);
-        new visualizarViagem().setVisible(true);
+        new entrar().setVisible(true);
     }
-
-
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
         new menu().setVisible(true);
     }
 
-    private class BtnCalcula implements ActionListener {
+    private class BtnRegista implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
-
-            visualizarViagem(e);
+            entrar(e);
 
         }
     }
 
-    public entrar(){
+    public registo(){
         setTitle("A sua viagem de sonho!");
         setSize(530,400);
         setLocationRelativeTo(null);
@@ -60,29 +56,27 @@ public class entrar extends JFrame{
 
         canvas = new JPanel();
         canvas.setLayout(new GridLayout(3,2,10,10));
-        l1 = new JLabel("Selecione o seu ponto de interesse hot:", SwingConstants.CENTER);
+        l1 = new JLabel("Introduza o seu nome:", SwingConstants.CENTER);
         l1.setBackground(Color.gray);
         l1.setOpaque(true);
         canvas.add(l1);
 
-        //alterar em função dos ficheiros de objeto
-        String[] items = {"Aqui vamos ler", "os locais registados"};
-        fromC = new JComboBox<>(items);
-        canvas.add(fromC);
+         n1= new JTextField(10);
+        canvas.add(n1);
 
-        l2 = new JLabel("Máximo a gastar:", SwingConstants.CENTER);
+        l2 = new JLabel("Intoduza o seu email:", SwingConstants.CENTER);
         l2.setBackground(Color.gray);
         l2.setOpaque(true);
         canvas.add(l2);
 
-        number1 = new JTextField(10);
-        canvas.add(number1);
+        n2 = new JTextField(10);
+        canvas.add(n2);
 
         l3 = new JLabel("");
         canvas.add(l3);
 
-        b1 = new JButton("Calcula viagem");
-        b1.addActionListener(new BtnCalcula());
+        b1 = new JButton("Registar");
+        b1.addActionListener(new BtnRegista());
         canvas.add(b1);
 
         canvas.setOpaque(false);
@@ -124,7 +118,8 @@ public class entrar extends JFrame{
     }
 
     public static void main(String args[]) {
-        new entrar();
+        new registo();
     }
 
 }
+

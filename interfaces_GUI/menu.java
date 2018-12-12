@@ -7,18 +7,25 @@ import java.awt.event.ActionListener;
 
 
 public class menu extends JFrame{
-    private JFrame menu;
-    private JPanel canvas;
     private JButton b1, b2, b3, b4;
     private JLabel l1;
     private JComboBox<String> fromC;
 
-    //O botao de criar viagem e so mostrado depois de registar ou fazer login
-    //So depois do registo ou do login e que se escolhe o hot e o custo maximo para se criar a viagem
+
 
     private void entrar(ActionEvent evt) {
         this.setVisible(false);
         new entrar().setVisible(true);
+    }
+
+    private void locaispopulares(ActionEvent evt) {
+        this.setVisible(false);
+        new locaispopulares().setVisible(true);
+    }
+
+    private void registo(ActionEvent evt) {
+        this.setVisible(false);
+        new registo().setVisible(true);
     }
 
     private class ButaoEntrar implements ActionListener {
@@ -77,7 +84,7 @@ public class menu extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //aqui temos de ter uma funçao para registar (eu faço)
+                registo(e);
             }
         });
 
@@ -89,7 +96,7 @@ public class menu extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //aqui temos de ter uma funçao para imprimir os locais populares
+                locaispopulares(e);
             }
         });
 
