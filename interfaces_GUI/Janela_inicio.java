@@ -10,7 +10,7 @@ public class Janela_inicio extends JFrame {
 
     public Janela_inicio() {
         setTitle("A sua viagem de sonho!");
-        setSize(600,600);
+        setSize(530,400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 

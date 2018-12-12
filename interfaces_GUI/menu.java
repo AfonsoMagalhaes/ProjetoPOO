@@ -11,15 +11,31 @@ public class menu extends JFrame{
     private JPanel canvas;
     private JButton b1, b2, b3, b4;
     private JLabel l1;
+    private JComboBox<String> fromC;
 
-    //Ter uma combobox com os utilizadores ja inscritos pra fazer o login
     //O botao de criar viagem e so mostrado depois de registar ou fazer login
     //So depois do registo ou do login e que se escolhe o hot e o custo maximo para se criar a viagem
 
+    private void entrar(ActionEvent evt) {
+        this.setVisible(false);
+        new entrar().setVisible(true);
+    }
+
+    private class ButaoEntrar implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //temos de alterar o 2 pelo numero de utilizadores registados
+            for (int i=0;i<2;i++){
+                if(fromC.getSelectedIndex()==i){
+                    entrar(e);
+                }
+            }
+        }
+    }
 
     public menu() {
         setTitle("A sua viagem de sonho!");
-        setSize(600, 600);
+        setSize(530,400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -37,7 +53,7 @@ public class menu extends JFrame{
 
         l1 =new JLabel("<html><h1><strong><b><font color=\"black\">A sua viagem de sonho!</font></b></strong></h1><hr></html>");
 
-        l1.setBackground(Color.cyan);
+        l1.setBackground(Color.GRAY);
         l1.setOpaque(true);
 
 
@@ -45,6 +61,15 @@ public class menu extends JFrame{
 
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        //alterar em função dos ficheiros de objeto
+        String[] items = {"Aqui vamos ler", "os nomes registados"};
+        fromC = new JComboBox<>(items);
+
+
+
+        b2 = new JButton("Entrar");
+        b2.addActionListener(new ButaoEntrar());
+
 
         b1=new JButton("Registo");
 
@@ -56,16 +81,7 @@ public class menu extends JFrame{
             }
         });
 
-        b2 = new JButton("Criar Viagem");
 
-        b2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //aqui depois tenho de fazer outro menu que peço ao utilizador para meter coisas
-                //faz as tu as funçoes que depois vão ser utilizadas
-            }
-        });
 
         b3 = new JButton("Locais mais populares");
 
@@ -87,9 +103,10 @@ public class menu extends JFrame{
             }
         });
 
-        background.add(b1, gbc);
+        background.add(fromC, gbc);
         background.add(b2, gbc);
-        background.add(b3,gbc);
+        background.add(b3, gbc);
+        background.add(b1,gbc);
         background.add(b4, gbc);
 
         gbc.weighty = 1;
@@ -100,38 +117,9 @@ public class menu extends JFrame{
     }
 
 
-
-//    public menu() {
-//
-//
-//        setTitle("A sua viagem de sonho!");
-//        setSize(600, 600);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//        butao1 = new JButton("Sign up");
-//        butao3 = new JButton("Locais mais populares");
-//
-//        String[] opcoes = {"Introduzir preferências", "Introduzir montante máximo"};
-//
-//        butao2 = new JButton("Calcular Viagem");
-//
-//        Image img = Toolkit.getDefaultToolkit().createImage("background.jpg");
-//        canvas.drawImage(img, 0, 0, null);
-//
-//        canvas = new JPanel();
-//        canvas.setLayout(new BorderLayout());
-//
-//        //canvas.add(img,BorderLayout.NORTH);
-//        canvas.add(butao1, BorderLayout.SOUTH);
-//
-//        this.add(canvas);
-//        this.setVisible(true);
-//    }
-
-
     public static void main(String[] args) {
         new menu();
     }
 
-} //
+}
 

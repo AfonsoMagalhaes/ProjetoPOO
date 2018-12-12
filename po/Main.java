@@ -57,6 +57,7 @@ public class Main extends JFrame{
                 } else if (tab[0].equals("Bar")){
                     pinteresse.add(new Bar(tab[1],tab[2],Float.parseFloat(tab[3]),Float.parseFloat(tab[4]), Float.parseFloat(tab[5])));
                 } else if(st.equals("\n")){
+                    System.out.println(nome);
                     Local l = new Local(nome, x, y);
                     l.setP_interesse(pinteresse);
                     locais.add(l);
@@ -202,7 +203,7 @@ public class Main extends JFrame{
     public static void main(String[] args){
         Main viagem = new Main();
         viagem.leficheiro();
-        //viagem.printInicial();
+
 
         System.out.println("LISTA LOCAIS");
         for(Local tmp : viagem.locais)

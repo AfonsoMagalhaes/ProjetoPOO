@@ -40,7 +40,7 @@ public class Local implements Serializable {
     @Override
     public String toString() {
 
-        return "[Local] Cidade: "+cidade+ ", "+"Pontos de Interesse: "+p_interesse+", "+"Coordenadas: "+X+","+Y+";";
+        return "[Local] Cidade: "+cidade+ ", "+"Coordenadas: "+X+","+Y+";";
     }
 }
 
