@@ -14,6 +14,7 @@ public class Main extends JFrame{
 
     private static ArrayList<Mestrado> mestrado;
     private static ArrayList<Licenciatura> licenciatura;
+    private static ArrayList<Pessoa> lista_comunidade;
     private static ArrayList<Local> locais;
     private static ArrayList<Local> museus;
     private float deslocacao;
@@ -23,6 +24,7 @@ public class Main extends JFrame{
         this.licenciatura = new ArrayList<>();
         this.locais = new ArrayList<>();
         this.museus = new ArrayList<>();
+        this.lista_comunidade = new ArrayList<>();
     }
 
     public void leficheiro() {
@@ -199,6 +201,25 @@ public class Main extends JFrame{
     /*public void printRegisto(){
 
     }*/
+
+    public static boolean registo(String nome, String email, boolean mestrado){
+        //verifica se a pessoa já está registada
+        for(Pessoa tmp : lista_comunidade)
+            if(tmp.getNome().equalsIgnoreCase(nome)){
+                return false;
+            }
+        if(mestrado==false) {
+            Pessoa novo = new Licenciatura(email, nome);
+            lista_comunidade.add(novo);
+        }
+        else{
+            Pessoa novo = new Mestrado(email, nome);
+            lista_comunidade.add(novo);
+        }
+
+        return true;
+    }
+
 
     public static void main(String[] args){
         Main viagem = new Main();

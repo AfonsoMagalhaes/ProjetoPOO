@@ -25,7 +25,7 @@ public class visualizarViagem extends JFrame {
 
 
         setLayout(new GridLayout());
-        JLabel background=new JLabel(new ImageIcon(this.getClass().getResource("Menu.jpg")));
+        JLabel background=new JLabel(new ImageIcon(this.getClass().getResource("bagagem.jpg")));
 
         add(background);
 

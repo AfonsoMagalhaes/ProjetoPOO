@@ -1,100 +1,14 @@
-Local;Lisboa;112483;194793;
-Museu;Torre de Belém;9h-20h;20;0;
-Museu;Mosteiro dos Jerónimos;9h-21h;15;0;
-Museu;Castelo de São Jorge;9h-22h;13;0;
+2
+Local;Lisboa;112483;194793
+Museu;Torre de Belém;9h-20h;20;0;asd
+Museu;Mosteiro dos Jerónimos;9h-21h;15;0;ad
+Museu;Castelo de São Jorge;9h-22h;13;0;asd
 
 Local;Vila Nova de Gaia;158902;462323;
-Museu;Real Companhia Velha;
-Museu;Porto Augusto's;
-Museu;Miradouro da Serra do Pilar;
+Museu;Real Companhia Velha;9h-22h;13;0;asd
+Museu;Porto Augusto's;9h-20h;20;0;asd
+Museu;Miradouro da Serra do Pilar;9h-21h;15;0;asd
 
-Local;Porto;159025;465955;
-Ponte Luís I;
-Torre dos Clérigos;
-Livraria Lello;
 
-Local;Évora;219597;177050;
-Capela dos Ossos;
-Templo Romano de Evora;
-Sé Catedral de Évora;
 
-Local;Beja;224066;117126;
-Castelo de Beja;
-po.Museu Rainha D Leonor;
-Ruínas Romanas de Pisões;
-
-Local;Faro;217209;5897;
-Ria Formosa;
-Ilha da Barreta;
-Ilha de Tavira;
-
-Local;Leiria;142030;308642;
-Castelo de Leiria;
-Rio Lis;
-Sé de Leiria;
-
-Local;Braga;174835;508841;
-Bom Jesus do Monte;
-Sé de Braga;
-po.Parque Nacional da Peneda;
-
-Local;Amadora;104178;199700;
-Palácio Nacional de Queluz;
-po.Parque florestal de Monsanto;
-kidZania;
-
-Local;Coimbra;174543;360038;
-Sé Velha;
-Portugal do Pequenitos;
-Igreja de Santa Cruz;
-
-Local;Setúbal;134422;173977;
-po.Parque natural da Arrábida;
-Serra da Arrábida;
-Praia de Galapinhos;
-
-Local;Funchal;90000;90000;
-Jardim Botanico da Madeira;
-Mercado dos lavradores;
-po.Parque de Santa Catarina;
-
-Local;Almada;111115;190991
-Santuario nacional de Cristo Rei;
-Ponte 25 de Abril;
-Fragata D Fernando II;
-
-Local;Cacém;116000;189000;
-Palácio Nacional da Pena;
-Cabo da Roca;
-Castelo dos Mouros;
-
-Local;Queluz;115000;190000;
-Palácio Nacional de Queluz;
-Fabrica da Pólvora;
-Matinha de Queluz;
-
-Local;Viseu;218985;410177;
-Sé de Viseu;
-po.Museu de Grão Vasco;
-Praia de Mangualde;
-
-Local;Barreiro;117516;187682;
-Cais das Colunas;
-Ponta dos Corvos;
-Quinta da Fidalga;
-
-Local;Odivelas;108950;203039;
-po.Museu Nacional do Traje;
-Mosteiro de São Dinis;
-po.Museu Nacional do Teatro e da Dança;
-
-Local;Aveiro;157117;408437;
-Costa Nova do Prado;
-Praia da Barra;
-Farol de Aveiro;
-
-Local;Rio Tinto;160000;466000;
-Igreja matriz;
-Nucleo de Fundevila;
-po.Parque Urbano dos Amores;
 

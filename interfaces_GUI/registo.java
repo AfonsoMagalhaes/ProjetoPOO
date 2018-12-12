@@ -1,5 +1,7 @@
 package interfaces_GUI;
 
+import po.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,8 +12,9 @@ public class registo extends JFrame{
     private JPanel canvas;
 
     private JButton b1, b2, b3;
-    private JLabel l1,l2,l3;
+    private JLabel l1,l2,l3,l4,l5;
     private JTextField n1,n2;
+    private JComboBox<String> fromC;
 
 
 
@@ -25,13 +28,32 @@ public class registo extends JFrame{
         new menu().setVisible(true);
     }
 
-    private class BtnRegista implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            entrar(e);
+    private void BtnRegista(ActionEvent e) {
+            String nome,email;
+            boolean mestrado;
+            boolean registado;
+            nome=n1.getText();
+            email=n2.getText();
+            if(fromC.getSelectedIndex()==1){
+                mestrado=true;
 
-        }
+            } else{
+                mestrado=false;
+
+            }
+
+            registado=Main.registo(nome,email,mestrado);
+            System.out.println(registado);
+            if(!registado){
+                JOptionPane.showMessageDialog(null,"O utilizador já existe","ERRO",1);
+
+            } else{
+                this.setVisible(false);
+                entrar(e);
+            }
+
     }
+
 
     public registo(){
         setTitle("A sua viagem de sonho!");
@@ -52,10 +74,8 @@ public class registo extends JFrame{
         gbc.anchor = GridBagConstraints.CENTER;
 
 
-
-
         canvas = new JPanel();
-        canvas.setLayout(new GridLayout(3,2,10,10));
+        canvas.setLayout(new GridLayout(4,2,10,10));
         l1 = new JLabel("Introduza o seu nome:", SwingConstants.CENTER);
         l1.setBackground(Color.gray);
         l1.setOpaque(true);
@@ -63,6 +83,8 @@ public class registo extends JFrame{
 
          n1= new JTextField(10);
         canvas.add(n1);
+
+
 
         l2 = new JLabel("Intoduza o seu email:", SwingConstants.CENTER);
         l2.setBackground(Color.gray);
@@ -72,16 +94,38 @@ public class registo extends JFrame{
         n2 = new JTextField(10);
         canvas.add(n2);
 
+        l4 = new JLabel("Selecione o grau do curso:",SwingConstants.CENTER);
+        l4.setBackground(Color.gray);
+        l4.setOpaque(true);
+        canvas.add(l4);
+
+        String[] items = {"Licenciatura", "Mestrado"};
+        fromC = new JComboBox<>(items);
+
+        canvas.add(fromC);
+
+
         l3 = new JLabel("");
         canvas.add(l3);
 
         b1 = new JButton("Registar");
-        b1.addActionListener(new BtnRegista());
+        b1.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BtnRegista(e);
+            }
+        });
         canvas.add(b1);
 
         canvas.setOpaque(false);
 
         background.add(canvas,gbc);
+
+
+
+
+
 
         gbc.anchor = GridBagConstraints.SOUTH;
 
