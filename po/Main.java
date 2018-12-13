@@ -74,11 +74,8 @@ public class Main extends JFrame{
     public void escreve_ficheirobj() throws IOException {
         try {
             ObjectOutputStream oolic = new ObjectOutputStream(new FileOutputStream("licenciatura.txt"));
-            oolic.writeObject(licenciatura);
+            oolic.writeObject(lista_comunidade);
             oolic.close();
-            ObjectOutputStream oomes = new ObjectOutputStream(new FileOutputStream("mestrado.txt"));
-            oomes.writeObject(mestrado);
-            oomes.close();
             ObjectOutputStream oolocais = new ObjectOutputStream(new FileOutputStream("locais.txt"));
             oolocais.writeObject(locais);
             oolocais.close();
@@ -111,9 +108,9 @@ public class Main extends JFrame{
 
         if (ficheiroLocais.exists()) {
             try {
-                oilocais = new ObjectInputStream(new BufferedInputStream(new FileInputStream("locais.txt")));
-                locais = (ArrayList)oimuseus.readObject();
-                oimuseus.close();
+                ObjectInputStream oilocais = new ObjectInputStream(new BufferedInputStream(new FileInputStream("locais.txt")));
+                locais = (ArrayList)oilocais.readObject();
+                oilocais.close();
             } catch (ClassNotFoundException var7) {
                 var7.printStackTrace();
             }
