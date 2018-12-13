@@ -1,12 +1,14 @@
 package interfaces_GUI;
 
+import po.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class entrar extends JFrame{
-
+public class Entrar extends JFrame{
+    private Main m;
     private JPanel canvas;
 
     private JButton b1, b2, b3;
@@ -24,7 +26,7 @@ public class entrar extends JFrame{
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
-        new menu().setVisible(true);
+//        new Menu(m, this).setVisible(true);
     }
 
     private class BtnCalcula implements ActionListener {
@@ -37,7 +39,7 @@ public class entrar extends JFrame{
         }
     }
 
-    public entrar(){
+    private void init(){
         setTitle("A sua viagem de sonho!");
         setSize(530,400);
         setLocationRelativeTo(null);
@@ -123,8 +125,18 @@ public class entrar extends JFrame{
         this.setVisible(true);
     }
 
-    public static void main(String args[]) {
-        new entrar();
+    public Entrar(Main m, Registo j){
+        this.m = m;
+        init();
     }
+
+    public Entrar(Main m){
+        this.m = m;
+        init();
+    }
+
+//    public static void main(String args[]) {
+//        new Entrar();
+//    }
 
 }

@@ -1,12 +1,16 @@
 package interfaces_GUI;
 
+import po.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class menu extends JFrame{
+public class Menu extends JFrame{
+    private janelaInicio j;
+    private Main m;
     private JButton b1, b2, b3, b4;
     private JLabel l1;
     private JComboBox<String> fromC;
@@ -15,17 +19,17 @@ public class menu extends JFrame{
 
     private void entrar(ActionEvent evt) {
         this.setVisible(false);
-        new entrar().setVisible(true);
+        new Entrar(m).setVisible(true);
     }
 
     private void locaispopulares(ActionEvent evt) {
         this.setVisible(false);
-        new locaispopulares().setVisible(true);
+        new locaisPopulares().setVisible(true);
     }
 
-    private void registo(ActionEvent evt) {
+    private void Registo(ActionEvent evt) {
         this.setVisible(false);
-        new registo().setVisible(true);
+        new Registo(m).setVisible(true);
     }
 
     private class ButaoEntrar implements ActionListener {
@@ -40,7 +44,10 @@ public class menu extends JFrame{
         }
     }
 
-    public menu() {
+    public Menu(Main m) {
+        this.m = m;
+        this.j = j;
+
         setTitle("A sua viagem de sonho!");
         setSize(530,400);
         setLocationRelativeTo(null);
@@ -84,7 +91,7 @@ public class menu extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                registo(e);
+                Registo(e);
             }
         });
 
@@ -124,9 +131,9 @@ public class menu extends JFrame{
     }
 
 
-    public static void main(String[] args) {
-        new menu();
-    }
+//    public static void main(String[] args) {
+//        new Menu();
+//    }
 
 }
 

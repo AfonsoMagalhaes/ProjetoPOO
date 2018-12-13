@@ -9,4 +9,9 @@ public class Mestrado extends Pessoa implements Serializable{
         super(nome, email);
     }
 
+    @Override
+    public boolean isMestrado() {
+        return true;
+    }
+
 }

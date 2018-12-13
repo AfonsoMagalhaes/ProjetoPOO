@@ -1,14 +1,20 @@
 package interfaces_GUI;
 
+import po.Local;
+import po.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Janela_inicio extends JFrame {
+public class janelaInicio extends JFrame {
+    private Main m;
     private JButton b1;
 
-    public Janela_inicio() {
+    public janelaInicio(Main m) {
+        this.m = m;
+
         setTitle("A sua viagem de sonho!");
         setSize(530,400);
         setLocationRelativeTo(null);
@@ -50,13 +56,19 @@ public class Janela_inicio extends JFrame {
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
-        new menu().setVisible(true);
+        new Menu(m).setVisible(true);
+    }
+
+    private void teste() {
+        for(Local l: m.getLocais()) {
+            System.out.println(l);
+        }
     }
 
 
 
-    public static void main(String args[]) {
-        new Janela_inicio();
-    }
+//    public static void main(String args[]) {
+//        new Janela_inicio();
+//    }
 
 }

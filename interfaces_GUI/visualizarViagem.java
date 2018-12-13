@@ -1,5 +1,7 @@
 package interfaces_GUI;
 
+import po.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +16,8 @@ public class visualizarViagem extends JFrame {
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
-        new menu().setVisible(true);
+        Main m;
+//        new Menu(m, this).setVisible(true);
     }
 
     public visualizarViagem(){

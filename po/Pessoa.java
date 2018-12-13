@@ -32,4 +32,6 @@ abstract class Pessoa  implements Serializable {
     public String toString(){
         return "\n-Nome: " + nome + "\n-E-mail: " + email;
     }
+
+    public abstract boolean isMestrado();
 }

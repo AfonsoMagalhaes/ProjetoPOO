@@ -7,10 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class registo extends JFrame{
+public class Registo extends JFrame{
 
     private JPanel canvas;
-
+    private Main m;
     private JButton b1, b2, b3;
     private JLabel l1,l2,l3,l4,l5;
     private JTextField n1,n2;
@@ -20,12 +20,12 @@ public class registo extends JFrame{
 
     private void entrar(ActionEvent evt) {
         this.setVisible(false);
-        new entrar().setVisible(true);
+        new Entrar(m,this).setVisible(true);
     }
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
-        new menu().setVisible(true);
+//        new Menu(m, this).setVisible(true);
     }
 
     private void BtnRegista(ActionEvent e) {
@@ -50,7 +50,7 @@ public class registo extends JFrame{
     }
 
 
-    public registo(){
+    public Registo(Main m){
         setTitle("A sua viagem de sonho!");
         setSize(530,400);
         setLocationRelativeTo(null);
@@ -156,9 +156,9 @@ public class registo extends JFrame{
         this.setVisible(true);
     }
 
-    public static void main(String args[]) {
-        new registo();
-    }
+//    public static void main(String args[]) {
+//        new Registo();
+//    }
 
 }
 

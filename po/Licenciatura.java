@@ -10,4 +10,9 @@ public class Licenciatura extends Pessoa implements Serializable{
 
     }
 
+    @Override
+    public boolean isMestrado() {
+        return false;
+    }
+
 }

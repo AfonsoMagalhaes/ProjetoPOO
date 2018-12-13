@@ -1,12 +1,14 @@
 package interfaces_GUI;
 
+import po.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class locaispopulares extends JFrame {
-
+public class locaisPopulares extends JFrame {
+    private Main m;
     private JPanel canvas;
 
     private JButton b2, b3;
@@ -14,10 +16,11 @@ public class locaispopulares extends JFrame {
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
-        new menu().setVisible(true);
+//        new Menu(m, this).setVisible(true);
     }
 
-    public locaispopulares(){
+    public locaisPopulares(){
+        this.m = m;
         setTitle("A sua viagem de sonho!");
         setSize(530,400);
         setLocationRelativeTo(null);
@@ -103,6 +106,6 @@ public class locaispopulares extends JFrame {
     }
 
     public static void main(String args[]) {
-        new locaispopulares();
+        new locaisPopulares();
     }
 }
