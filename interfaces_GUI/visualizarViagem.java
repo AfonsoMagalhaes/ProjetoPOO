@@ -9,18 +9,15 @@ import java.awt.event.ActionListener;
 
 public class visualizarViagem extends JFrame {
 
+    private final Entrar j;
     private JPanel canvas;
-
+    private Main m;
     private JButton b2, b3;
     private JLabel l1;
 
-    private void iniciaMenu(ActionEvent evt) {
-        this.setVisible(false);
-        Main m;
-//        new Menu(m, this).setVisible(true);
-    }
-
-    public visualizarViagem(){
+    public visualizarViagem(Main m, Entrar j) {
+        this.m = m;
+        this.j = j;
         setTitle("A sua viagem de sonho!");
         setSize(530,400);
         setLocationRelativeTo(null);
@@ -82,7 +79,13 @@ public class visualizarViagem extends JFrame {
         this.setVisible(true);
     }
 
-    public static void main(String args[]) {
-        new visualizarViagem();
+    private void iniciaMenu(ActionEvent evt) {
+        this.setVisible(false);
+
+        new Menu(m).setVisible(true);
     }
+
+//    public static void main(String args[]) {
+//        new visualizarViagem();
+//    }
 }
