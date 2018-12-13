@@ -4,9 +4,7 @@ import interfaces_GUI.Janela_inicio;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -72,21 +70,66 @@ public class Main extends JFrame{
         }
     }
 
-    /*public void escreve_ficheirobj(){
 
-    }*/
+    public void escreve_ficheirobj() throws IOException {
+        try {
+            ObjectOutputStream oolic = new ObjectOutputStream(new FileOutputStream("licenciatura.txt"));
+            oolic.writeObject(licenciatura);
+            oolic.close();
+            ObjectOutputStream oomes = new ObjectOutputStream(new FileOutputStream("mestrado.txt"));
+            oomes.writeObject(mestrado);
+            oomes.close();
+            ObjectOutputStream oolocais = new ObjectOutputStream(new FileOutputStream("locais.txt"));
+            oolocais.writeObject(locais);
+            oolocais.close();
+            ObjectOutputStream oomuseus = new ObjectOutputStream(new FileOutputStream("museus.txt"));
+            oomuseus.writeObject(museus);
+            oomuseus.close();
+        } catch (FileNotFoundException var5) {
+            System.out.println("File not found");
+        } catch (IOException var6) {
+            System.out.println("Error initializing stream");
+        }
 
-    /*public void le_ficheiroobj(){
+    }
 
-    }*/
+    public void le_ficheiroobj() throws IOException {
+        File ficheiroLicenciatura = new File("licenciatura.txt");
+        File ficheiroMestrado = new File("mestrado.txt");
+        File ficheiroLocais = new File("locais.txt");
+        File ficheiroMuseus = new File("museus.txt");
+        ObjectInputStream oimuseus;
+        if (ficheiroLicenciatura.exists()) {
+            try {
+                ObjectInputStream oilic = new ObjectInputStream(new BufferedInputStream(new FileInputStream("licenciatura.txt")));
+                lista_comunidade = (ArrayList)oilic.readObject();
+                oilic.close();
+            } catch (ClassNotFoundException var9) {
+                var9.printStackTrace();
+            }
+        }
 
-    /*public ArrayList<Local> ordena_locais_crescente(Local[] viagem){
+        if (ficheiroLocais.exists()) {
+            try {
+                oilocais = new ObjectInputStream(new BufferedInputStream(new FileInputStream("locais.txt")));
+                locais = (ArrayList)oimuseus.readObject();
+                oimuseus.close();
+            } catch (ClassNotFoundException var7) {
+                var7.printStackTrace();
+            }
+        }
 
-    }*/ //vai ordenar os locais de cada viagem por ordem crescente
+        if (ficheiroMuseus.exists()) {
+            try {
+                oimuseus = new ObjectInputStream(new BufferedInputStream(new FileInputStream("museus.txt")));
+                museus = (ArrayList)oimuseus.readObject();
+                oimuseus.close();
+            } catch (ClassNotFoundException var6) {
+                var6.printStackTrace();
+            }
+        }
 
-    /*public ArrayList<Local> ordena_locais_decrescente(Local[] viagem){
-
-    }*/ //vai ordenar os locais de cada viagem por ordem decrescente
+    }
 
     public float custo_local(Local local){
         int custo=0;
