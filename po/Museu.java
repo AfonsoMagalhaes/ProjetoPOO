@@ -18,4 +18,9 @@ public class Museu extends P_Interesse{
     public void setTematica(String tematica){
         this.tematica=tematica;
     }
+
+    @Override
+    public String getTipo(){
+        return "museu";
+    }
 }

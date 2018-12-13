@@ -15,5 +15,8 @@ public class Bar extends P_Interesse {
         this.classificacao=classificacao;
     }
 
-
+    @Override
+    public String getTipo(){
+        return "bar";
+    }
 }

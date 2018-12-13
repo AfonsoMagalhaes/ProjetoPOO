@@ -18,4 +18,11 @@ public class Universidade extends P_Interesse {
     public void setCursos(){
 
     }
+
+    @Override
+    public String getTipo(){
+        return "universidade";
+    }
 }
+
+

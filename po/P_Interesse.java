@@ -1,6 +1,6 @@
 package po;
 
-public class P_Interesse{
+abstract public class P_Interesse{
     private String nome;
     private String horario;
     float entrada, custoextra;
@@ -43,4 +43,6 @@ public class P_Interesse{
     public String toString(){
         return "\n-Nome: " + nome + "\n-Horário: " + horario + "\n";
     }
+
+    public abstract String getTipo();
 }

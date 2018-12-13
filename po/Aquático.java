@@ -24,4 +24,9 @@ public class Aquático extends Diversões {
     public void setAnimais(boolean animais) {
         this.animais = animais;
     }
+
+    @Override
+    public String getTipo(){
+        return "aquático";
+    }
 }

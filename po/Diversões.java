@@ -15,4 +15,9 @@ public class Diversões extends Parque {
         this.equipamentos = equipamentos;
     }
 
+    @Override
+    public String getTipo(){
+        return "diversões";
+    }
+
 }
