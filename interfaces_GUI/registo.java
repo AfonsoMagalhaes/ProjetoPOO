@@ -34,16 +34,11 @@ public class registo extends JFrame{
             boolean registado;
             nome=n1.getText();
             email=n2.getText();
-            if(fromC.getSelectedIndex()==1){
-                mestrado=true;
-
-            } else{
-                mestrado=false;
-
-            }
+            mestrado = fromC.getSelectedIndex() == 1;
 
             registado=Main.registo(nome,email,mestrado);
             System.out.println(registado);
+
             if(!registado){
                 JOptionPane.showMessageDialog(null,"O utilizador já existe","ERRO",1);
 

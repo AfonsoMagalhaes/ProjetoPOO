@@ -12,16 +12,14 @@ import java.util.ArrayList;
 
 public class Main extends JFrame{
 
-    private static ArrayList<Mestrado> mestrado;
-    private static ArrayList<Licenciatura> licenciatura;
+
     private static ArrayList<Pessoa> lista_comunidade;
     private static ArrayList<Local> locais;
     private static ArrayList<Local> museus;
     private float deslocacao;
 
     public Main() {
-        this.mestrado = new ArrayList<>();
-        this.licenciatura = new ArrayList<>();
+
         this.locais = new ArrayList<>();
         this.museus = new ArrayList<>();
         this.lista_comunidade = new ArrayList<>();
@@ -190,30 +188,24 @@ public class Main extends JFrame{
 
     } //Ponto 5 do projeto
 
-    public void add_lic(Licenciatura pessoa){
-        licenciatura.add(pessoa);
-    } //Não sei se e preciso para quando fizeres o registo meter a pessoa na lista
 
-    public void add_mes(Mestrado pessoa){
-        mestrado.add(pessoa);
-    } //Não sei se e preciso para quando fizeres o registo meter a pessoa na lista
-
-    /*public void printRegisto(){
-
-    }*/
 
     public static boolean registo(String nome, String email, boolean mestrado){
         //verifica se a pessoa já está registada
-        for(Pessoa tmp : lista_comunidade)
+        for(Pessoa tmp : lista_comunidade){
+            System.out.println(tmp.getNome());
             if(tmp.getNome().equalsIgnoreCase(nome)){
                 return false;
             }
+        }
         if(mestrado==false) {
-            Pessoa novo = new Licenciatura(email, nome);
+            System.out.println(email);
+            System.out.println(nome);
+            Pessoa novo = new Licenciatura(nome, email);
             lista_comunidade.add(novo);
         }
         else{
-            Pessoa novo = new Mestrado(email, nome);
+            Pessoa novo = new Mestrado(nome, email);
             lista_comunidade.add(novo);
         }
 

@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class Mestrado extends Pessoa implements Serializable{
 
 
-    public Mestrado(String email, String nome) {
-        super(email, nome);
+    public Mestrado(String nome, String email) {
+        super(nome, email);
     }
 
 }
