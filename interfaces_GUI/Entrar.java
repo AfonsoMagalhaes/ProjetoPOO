@@ -3,6 +3,7 @@ package interfaces_GUI;
 
 import po.Local;
 import po.Main;
+import po.pInteresse;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +21,8 @@ public class Entrar extends JFrame{
     private int custo;
 
     private JButton b1, b2, b3;
-    private JLabel l1,l2,l3;
-    private JComboBox<String> fromC;
+    private JLabel l1, l2, l3, l4;
+    private JComboBox<String> fromC, pti;
     private JTextField number1;
 
 
@@ -49,8 +50,19 @@ public class Entrar extends JFrame{
         this.m = m;
         this.menu = menu;
         mestrado = menu.getMestrado();
-
         init();
+    }
+
+    private void mudaCombo(ActionEvent event) {
+        ArrayList<Local> listaLocais = m.getLocais();
+        ArrayList<ArrayList<pInteresse>> aux = new ArrayList<>();
+
+        for (Local tmp : listaLocais) {
+            if (tmp.getCidade() == fromC.getActionCommand()) {
+                aux.add(tmp.getPInteresse());
+            }
+        }
+        pti = new JComboBox(aux.toArray());
     }
 
     private void init() {
@@ -73,13 +85,9 @@ public class Entrar extends JFrame{
 
 
         canvas = new JPanel();
-        canvas.setLayout(new GridLayout(3, 2, 10, 10));
+        canvas.setLayout(new GridLayout(4, 2, 10, 10));
 
-        if (mestrado == true) {
-            l1 = new JLabel("Ponto de interesse a evitar:", SwingConstants.CENTER);
-        } else {
-            l1 = new JLabel("Ponto de interesse a não perder:", SwingConstants.CENTER);
-        }
+        l1 = new JLabel("Escolha a cidade do seu pi:", SwingConstants.CENTER);
 
         l1.setBackground(Color.gray);
         l1.setOpaque(true);
@@ -91,7 +99,47 @@ public class Entrar extends JFrame{
             locais.add(tmp.getCidade());
         }
         fromC = new JComboBox(locais.toArray());
+//        fromC.addActionListener(new ActionListener(){
+//            public void actionPerformed(ActionEvent event){
+//                mudaCombo(event);
+//            }
+//
+//        });
         canvas.add(fromC);
+
+        if (mestrado == true) {
+            l2 = new JLabel("Ponto de interesse a evitar:", SwingConstants.CENTER);
+        } else {
+            l2 = new JLabel("Ponto de interesse a não perder:", SwingConstants.CENTER);
+        }
+
+        l2.setBackground(Color.gray);
+        l2.setOpaque(true);
+        canvas.add(l2);
+
+
+        //________________________________________________________________________________________________________________
+
+
+       /* ArrayList<String> aux=new ArrayList<>();
+
+        for (Local tmp : listaLocais) {
+            if(tmp.getCidade()==fromC.getActionCommand()){
+                aux.add(tmp.getPInteresse());
+            }
+        }
+        pti = new JComboBox(aux.toArray());
+        */
+
+
+        //deixei isto so para funcionar, mas é para usar o que está comentado em cima
+        pti = new JComboBox(locais.toArray());
+
+
+        canvas.add(pti);
+
+        //_________________________________________________________________________________________________________________
+
 
         l2 = new JLabel("Máximo a gastar:", SwingConstants.CENTER);
         l2.setBackground(Color.gray);

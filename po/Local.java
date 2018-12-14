@@ -22,8 +22,10 @@ public class Local implements Serializable {
     }
 
     public ArrayList<pInteresse> getPInteresse() {
+
         return pInteresse;
     }
+
 
     public void setPInteresse(ArrayList<pInteresse> pInteresse) {
         this.pInteresse = pInteresse;

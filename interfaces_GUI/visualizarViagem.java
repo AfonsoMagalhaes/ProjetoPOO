@@ -21,18 +21,26 @@ public class visualizarViagem extends JFrame {
     private int custo;
     private ArrayList<Local[]> viagens;
 
+
     public visualizarViagem(Main m, Entrar j) {
         this.m = m;
         this.j = j;
+
+        viagens = new ArrayList<>();
         mestrado = j.getMestrado();
         hot = j.getHot();
         custo = j.getCusto();
+
+        m.escreveMaisVotado(hot);
+
+
         System.out.println(mestrado);
         System.out.println(hot);
         System.out.println(custo);
 //        if(mestrado==true) {
 //            viagens = m.criaViagensMes(custo, hot);
 //        } else {
+//            m.escreveMaisVotado(hot);
 //            viagens = m.criaViagensLic(custo, hot);
 //        }
 //aqui da erro a chamar, os meus valores tao bem, foi o print que te mandei

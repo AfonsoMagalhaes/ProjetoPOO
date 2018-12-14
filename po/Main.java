@@ -4,9 +4,11 @@ package po;
 import interfaces_GUI.janelaInicio;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class Main extends JFrame{
@@ -15,16 +17,18 @@ public class Main extends JFrame{
     private static ArrayList<Aluno> listaAlunos;
     private static ArrayList<Local> locais;
     private static ArrayList<pInteresse> pinteresse;
-    private static List maisVotados;
+    private static ArrayList<String> maisVotados;
     private float deslocacao;
 
     public Main() throws IOException {
 
         this.locais = new ArrayList<>();
         this.listaAlunos = new ArrayList<>();
+        this.maisVotados = new ArrayList<>();
 
         leFicheiro();
         leFicheiroObj();
+        leLescolhidoObj();
         for(Local tmp : locais)
             System.out.println(tmp.toString()+"\n");
         for (Aluno aluno : listaAlunos) {
@@ -51,7 +55,7 @@ public class Main extends JFrame{
         }
         escreveFicheiroObj();
         return true;
-    }
+    }   //regista o aluno
 
     public void leFicheiro() {
         BufferedReader br = null;
@@ -90,11 +94,11 @@ public class Main extends JFrame{
         } catch (IOException e) {
             System.out.println("Excepcao a carregar ficheiro txt: " + e);
         }
-    }
+    }   //le o ficheiro de texto dos locais
 
     public void escreveFicheiroObj() throws IOException {
         try {
-            ObjectOutputStream walunos = new ObjectOutputStream(new FileOutputStream("alunosobj.txt"));
+            ObjectOutputStream walunos = new ObjectOutputStream(new FileOutputStream("alunos.data"));
             walunos.writeObject(listaAlunos);
             walunos.close();
         } catch (FileNotFoundException var5) {
@@ -103,13 +107,13 @@ public class Main extends JFrame{
             System.out.println("Error initializing stream");
         }
 
-    }
+    }   //adiciona ao ficheiro de objeto
 
     public void leFicheiroObj() throws IOException {
-        File ficheiroAlunos = new File("alunosobj.txt");
+        File ficheiroAlunos = new File("alunos.data");
         if (ficheiroAlunos.exists()) {
             try {
-                ObjectInputStream ralunos = new ObjectInputStream(new BufferedInputStream(new FileInputStream("alunosobj.txt")));
+                ObjectInputStream ralunos = new ObjectInputStream(new BufferedInputStream(new FileInputStream("alunos.data")));
                 listaAlunos = (ArrayList) ralunos.readObject();
                 ralunos.close();
             } catch (ClassNotFoundException var9) {
@@ -117,8 +121,38 @@ public class Main extends JFrame{
             }
         }
 
-    }
+    }   //le o ficheiro de obejtos dos alunos
 
+    public void escreveLescolhidosObj() {
+        try {
+            ObjectOutputStream lEscolhidos = new ObjectOutputStream(new FileOutputStream("locaisEscolhidos.data"));
+            lEscolhidos.writeObject(maisVotados);
+            lEscolhidos.close();
+        } catch (FileNotFoundException var5) {
+            System.out.println("File not found");
+        } catch (IOException var6) {
+            System.out.println("Error initializing stream");
+        }
+    }   //atualiza a lista nos ficheiros de objeto
+
+    public void leLescolhidoObj() throws IOException {
+        File fLescolhidos = new File("locaisEscolhidos.data");
+        if (fLescolhidos.exists()) {
+            try {
+                ObjectInputStream lEscolhidos = new ObjectInputStream(new BufferedInputStream(new FileInputStream("locaisEscolhidos.data")));
+                maisVotados = (ArrayList) lEscolhidos.readObject();
+                lEscolhidos.close();
+            } catch (ClassNotFoundException var9) {
+                var9.printStackTrace();
+            }
+        }
+    } //Le os pi escolhidos anteriormente
+
+    public void escreveMaisVotado(String pInteresse) {
+
+        maisVotados.add(pInteresse);
+        escreveLescolhidosObj();
+    } //adiciona o pI votado à lista
 
     public float custoTotal(Local local) {
         int custo=0;
@@ -237,11 +271,54 @@ public class Main extends JFrame{
 
     public ArrayList<Local> getLocais() {
         return locais;
-    }
+    }   //obtem lista dos locais
+
+    public ArrayList<String> getMaisVotados() {
+        int max1 = 0;
+        int max2 = 0;
+        int max3 = 0;
+        int curr = 0;
+        String pi1 = null;
+        String pi2 = null;
+        String pi3 = null;
+        Set<String> unique = new HashSet<String>(maisVotados);
+
+        for (String key : unique) {
+            curr = Collections.frequency(maisVotados, key);
+            if (max3 < curr) {
+                if (max2 < curr) {
+                    if (max1 < curr) {
+                        max3 = max2;
+                        pi3 = pi2;
+                        max2 = max1;
+                        pi2 = pi1;
+                        max1 = curr;
+                        pi1 = key;
+                    } else {
+                        max3 = max2;
+                        pi3 = pi2;
+                        max2 = curr;
+                        pi2 = key;
+                    }
+                } else {
+                    max3 = curr;
+                    pi3 = key;
+                }
+            }
+        }
+
+        ArrayList<String> resultado = new ArrayList<>();
+        resultado.add(pi1);
+        resultado.add(pi2);
+        resultado.add(pi3);
+
+
+        return resultado;
+    }   //obtem lista dos locais mais votados
 
     public ArrayList<Aluno> getAlunos() {
         return listaAlunos;
-    }
+    }   //obtem lista dos alunos
 
     public void addAluno(Aluno aluno) {
         listaAlunos.add(aluno);
