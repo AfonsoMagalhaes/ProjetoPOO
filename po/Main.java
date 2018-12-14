@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Main extends JFrame{
 
 
-    private static ArrayList<Aluno> listaComunidade;
+    private static ArrayList<Aluno> listaAlunos;
     private static ArrayList<Local> locais;
     private static ArrayList<pInteresse> pinteresse;
     private float deslocacao;
@@ -19,7 +19,7 @@ public class Main extends JFrame{
     public Main() throws IOException {
 
         this.locais = new ArrayList<>();
-        this.listaComunidade = new ArrayList<>();
+        this.listaAlunos = new ArrayList<>();
 
         leFicheiro();
         registo("Afonso","afonso@gmail.com", false);
@@ -28,15 +28,15 @@ public class Main extends JFrame{
         leFicheiroObj();
         for(Local tmp : locais)
             System.out.println(tmp.toString()+"\n");
-        for (Aluno aluno : listaComunidade) {
+        for (Aluno aluno : listaAlunos) {
             System.out.println(aluno.toString());
         }
         new janelaInicio(this).setVisible(true);
     }
 
-    public static boolean registo(String nome, String email, boolean mestrado) {
+    public boolean registo(String nome, String email, boolean mestrado) throws IOException {
         //verifica se a pessoa já está registada
-        for (Aluno tmp : listaComunidade) {
+        for (Aluno tmp : listaAlunos) {
             System.out.println(tmp.getNome());
             if (tmp.getNome().equalsIgnoreCase(nome)) {
                 return false;
@@ -44,12 +44,13 @@ public class Main extends JFrame{
         }
         if (mestrado == false) {
             Aluno novo = new Licenciatura(nome, email);
-            listaComunidade.add(novo);
+            listaAlunos.add(novo);
         } else {
             Aluno novo = new Mestrado(nome, email);
-            listaComunidade.add(novo);
+            novo.isMestrado();
+            listaAlunos.add(novo);
         }
-
+        escreveFicheiroObj();
         return true;
     }
 
@@ -95,7 +96,7 @@ public class Main extends JFrame{
     public void escreveFicheiroObj() throws IOException {
         try {
             ObjectOutputStream walunos = new ObjectOutputStream(new FileOutputStream("alunosobj.txt"));
-            walunos.writeObject(listaComunidade);
+            walunos.writeObject(listaAlunos);
             walunos.close();
         } catch (FileNotFoundException var5) {
             System.out.println("File not found");
@@ -110,7 +111,7 @@ public class Main extends JFrame{
         if (ficheiroAlunos.exists()) {
             try {
                 ObjectInputStream ralunos = new ObjectInputStream(new BufferedInputStream(new FileInputStream("alunosobj.txt")));
-                listaComunidade = (ArrayList)ralunos.readObject();
+                listaAlunos = (ArrayList) ralunos.readObject();
                 ralunos.close();
             } catch (ClassNotFoundException var9) {
                 var9.printStackTrace();
@@ -238,8 +239,12 @@ public class Main extends JFrame{
         return locais;
     }
 
+    public ArrayList<Aluno> getAlunos() {
+        return listaAlunos;
+    }
+
     public void addAluno(Aluno aluno) {
-        listaComunidade.add(aluno);
+        listaAlunos.add(aluno);
     }
 
     public static void main(String[] args) throws IOException {

@@ -1,11 +1,14 @@
 package interfaces_GUI;
 
+
+import po.Aluno;
 import po.Main;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class Menu extends JFrame{
@@ -13,8 +16,7 @@ public class Menu extends JFrame{
     private Main m;
     private JButton b1, b2, b3, b4;
     private JLabel l1;
-    private JComboBox<String> fromC;
-
+    private JComboBox<ArrayList> fromC;
 
 
     private void entrar(ActionEvent evt) {
@@ -74,9 +76,12 @@ public class Menu extends JFrame{
 
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        //alterar em função dos ficheiros de objeto
-        String[] items = {"Aqui vamos ler", "os nomes registados"};
-        fromC = new JComboBox<>(items);
+        ArrayList<Aluno> listaAlunos = m.getAlunos();
+        ArrayList<String> alunos = new ArrayList<String>();
+        for (Aluno tmp : listaAlunos) {
+            alunos.add(tmp.getNome());
+        }
+        fromC = new JComboBox(alunos.toArray());
 
 
 
@@ -127,6 +132,8 @@ public class Menu extends JFrame{
 
 
         this.setVisible(true);
+
+
     }
 
 

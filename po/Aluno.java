@@ -2,7 +2,7 @@ package po;
 
 import java.io.Serializable;
 
-abstract class Aluno implements Serializable {
+public abstract class Aluno implements Serializable {
     private String nome;
     private String email;
 

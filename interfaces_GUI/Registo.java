@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Registo extends JFrame{
 
@@ -15,39 +16,9 @@ public class Registo extends JFrame{
     private JLabel l1,l2,l3,l4,l5;
     private JTextField n1,n2;
     private JComboBox<String> fromC;
+    private String nome, email;
+    private boolean mestrado;
 
-
-
-    private void entrar(ActionEvent evt) {
-        this.setVisible(false);
-        new Entrar(m,this).setVisible(true);
-    }
-
-    private void iniciaMenu(ActionEvent evt) {
-        this.setVisible(false);
-        new Menu(m).setVisible(true);
-    }
-
-    private void BtnRegista(ActionEvent e) {
-            String nome,email;
-            boolean mestrado;
-            boolean registado;
-            nome=n1.getText();
-            email=n2.getText();
-            mestrado = fromC.getSelectedIndex() == 1;
-
-            registado=Main.registo(nome,email,mestrado);
-            System.out.println(registado);
-
-            if(!registado){
-                JOptionPane.showMessageDialog(null,"O utilizador já existe","ERRO",1);
-
-            } else{
-                this.setVisible(false);
-                entrar(e);
-            }
-
-    }
 
 
     public Registo(Main m){
@@ -109,7 +80,11 @@ public class Registo extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                BtnRegista(e);
+                try {
+                    BtnRegista(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
         canvas.add(b1);
@@ -157,9 +132,38 @@ public class Registo extends JFrame{
         this.setVisible(true);
     }
 
-//    public static void main(String args[]) {
-//        new Registo();
-//    }
+    private void iniciaMenu(ActionEvent evt) {
+        this.setVisible(false);
+        new Menu(m).setVisible(true);
+    }
+
+    private void Entrar(ActionEvent evt) {
+        this.setVisible(false);
+        new Entrar(m, this).setVisible(true);
+    }
+
+    private void BtnRegista(ActionEvent e) throws IOException {
+        boolean registado;
+        nome = n1.getText();
+        email = n2.getText();
+        mestrado = fromC.getSelectedIndex() == 1;
+
+        registado = m.registo(nome, email, mestrado);
+        System.out.println(registado);
+
+        if (!registado) {
+            JOptionPane.showMessageDialog(null, "O utilizador já existe", "ERRO", 1);
+
+        } else {
+            this.setVisible(false);
+            Entrar(e);
+        }
+
+    }
+
+    public boolean getMestrado() {
+        return mestrado;
+    }
 
 }
 
