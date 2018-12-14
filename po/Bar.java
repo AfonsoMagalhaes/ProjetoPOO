@@ -1,6 +1,6 @@
 package po;
 
-public class Bar extends P_Interesse {
+public class Bar extends pInteresse {
     private float classificacao;
     public Bar(String nome, String horario,float entrada, float custoextra, float classificacao){
         super(nome,horario, entrada, custoextra);

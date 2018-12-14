@@ -1,11 +1,11 @@
 package po;
 
-abstract public class P_Interesse{
+abstract public class pInteresse {
     private String nome;
     private String horario;
     float entrada, custoextra;
 
-    public P_Interesse(String nome, String horario, float entrada, float custoextra) {
+    public pInteresse(String nome, String horario, float entrada, float custoextra) {
         this.nome = nome;
         this.horario = horario;
         this.entrada = entrada;

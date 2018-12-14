@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class Main extends JFrame{
 
 
-    private static ArrayList<Pessoa> listaComunidade;
+    private static ArrayList<Aluno> listaComunidade;
     private static ArrayList<Local> locais;
-    private static ArrayList<P_Interesse> pinteresse;
+    private static ArrayList<pInteresse> pinteresse;
     private float deslocacao;
 
     public Main() throws IOException {
@@ -21,20 +21,39 @@ public class Main extends JFrame{
         this.locais = new ArrayList<>();
         this.listaComunidade = new ArrayList<>();
 
-        leficheiro();
+        leFicheiro();
         registo("Afonso","afonso@gmail.com", false);
         registo("David","david@gmail.com", true);
-        escreveFicheirobj();
-        leFicheiroobj();
+        escreveFicheiroObj();
+        leFicheiroObj();
         for(Local tmp : locais)
             System.out.println(tmp.toString()+"\n");
-        for(Pessoa aluno: listaComunidade){
+        for (Aluno aluno : listaComunidade) {
             System.out.println(aluno.toString());
         }
         new janelaInicio(this).setVisible(true);
     }
 
-    public void leficheiro() {
+    public static boolean registo(String nome, String email, boolean mestrado) {
+        //verifica se a pessoa já está registada
+        for (Aluno tmp : listaComunidade) {
+            System.out.println(tmp.getNome());
+            if (tmp.getNome().equalsIgnoreCase(nome)) {
+                return false;
+            }
+        }
+        if (mestrado == false) {
+            Aluno novo = new Licenciatura(nome, email);
+            listaComunidade.add(novo);
+        } else {
+            Aluno novo = new Mestrado(nome, email);
+            listaComunidade.add(novo);
+        }
+
+        return true;
+    }
+
+    public void leFicheiro() {
         BufferedReader br = null;
         FileReader fr = null;
         String st;
@@ -46,7 +65,7 @@ public class Main extends JFrame{
             while ((st = br.readLine()) != null) {
                 String[] tab = st.split(";");
                 if (tab[0].equals("Local")) {
-                    pinteresse = new ArrayList<P_Interesse>();
+                    pinteresse = new ArrayList<pInteresse>();
                     x = Integer.parseInt(tab[2]);
                     y = Integer.parseInt(tab[3]);
                     nome = tab[1];
@@ -64,7 +83,7 @@ public class Main extends JFrame{
                     pinteresse.add(new Bar(tab[1],tab[2],Float.parseFloat(tab[3]),Float.parseFloat(tab[4]), Float.parseFloat(tab[5])));
                 } else if(st.equals("x")){
                     Local l = new Local(nome, x, y);
-                    l.setP_interesse(pinteresse);
+                    l.setPInteresse(pinteresse);
                     locais.add(l);
                 } else{continue;}
             }
@@ -73,7 +92,7 @@ public class Main extends JFrame{
         }
     }
 
-    public void escreveFicheirobj() throws IOException {
+    public void escreveFicheiroObj() throws IOException {
         try {
             ObjectOutputStream walunos = new ObjectOutputStream(new FileOutputStream("alunosobj.txt"));
             walunos.writeObject(listaComunidade);
@@ -86,7 +105,7 @@ public class Main extends JFrame{
 
     }
 
-    public void leFicheiroobj() throws IOException {
+    public void leFicheiroObj() throws IOException {
         File ficheiroAlunos = new File("alunosobj.txt");
         if (ficheiroAlunos.exists()) {
             try {
@@ -100,31 +119,41 @@ public class Main extends JFrame{
 
     }
 
-    public float custoCocal(Local local){
+    public float custoTotal(Local local) {
         int custo=0;
-        for(P_Interesse i :local.getPInteresse()){
+        for (pInteresse i : local.getPInteresse()) {
                     custo+=i.getEntrada()+i.getCustoextra();// alterar de novo os atributos dos pontos de interesse
         }
         return custo;
     } // custo de um local
 
-    public double distanciaCocais(Local local1, Local local2){
+    public double distanciasTotais(Local local1, Local local2) {
         return Math.sqrt(Math.pow(local1.getX()-local2.getX(),2)+Math.pow(local1.getY()-local2.getY(),2));
     } //Distância entre 2 locais
 
     public int deslocaçãoLocais(Local local1, Local local2){ //custo por km no ficheiro de texto(inicio)
-        return (int) (distanciaCocais(local1, local2)*this.deslocacao);
+        return (int) (distanciasTotais(local1, local2) * this.deslocacao);
     } //Custo da deslocação entre 2 locais
 
     public float custoViagem(Local[] viagem){
-        return custoCocal(viagem[0])+custoCocal(viagem[1])+custoCocal(viagem[3])+ deslocaçãoLocais(viagem[0], viagem[1])+ deslocaçãoLocais(viagem[1], viagem[2]);
+        return custoTotal(viagem[0]) + custoTotal(viagem[1]) + custoTotal(viagem[3]) + deslocaçãoLocais(viagem[0], viagem[1]) + deslocaçãoLocais(viagem[1], viagem[2]);
     } //Calcula o custo da viagem
 
-    public Local pinteresseHot(String hot){
+    public Local localEvitar(String hot) {
         Local x = null;
         for(Local l: locais){
-            for(P_Interesse i : l.getPInteresse()){
-                if(hot.equals(i.getNome())){
+            if (hot.equals(l.getCidade())) {
+                x = l;
+            }
+        }
+        return x;
+    } //Vai buscar do local a evitar
+
+    public Local pInteresseHot(String hot) {
+        Local x = null;
+        for(Local l: locais){
+            for (pInteresse i : l.getPInteresse()) {
+                if (hot.equals(i.getNome())) {
                     x = l;
                 }
             }
@@ -132,47 +161,15 @@ public class Main extends JFrame{
         return x;
     } //Vai buscar o local do ponto de interesse hot
 
-    public Local localEvitar(String hot){
-        Local x = null;
-        for(Local l: locais){
-            if(hot.equals(l.getCidade())){
-                x=l;
-            }
-        }
-        return x;
-    } //Vai buscar do local a evitar
-
     public boolean museu(Local l){
-        ArrayList<P_Interesse> pontosinteresse = l.getPInteresse();
-        for(P_Interesse pi: pontosinteresse){
+        ArrayList<pInteresse> pontosinteresse = l.getPInteresse();
+        for (pInteresse pi : pontosinteresse) {
             if(pi.getTipo()=="museu"){
                 return true;
             }
         }
         return false;
     } // Verifica se o local tem um museu
-
-    public ArrayList<Local[]> criaViagensLic(int custo, String hot){
-        ArrayList<Local[]> viagens = new ArrayList<>();
-        Local[] viagem = new Local[3];
-        viagem[0] = pinteresseHot(hot);
-        for(Local m: locais) {
-            if(museu(m)==true && m.getCidade()!=viagem[0].getCidade()) {
-                viagem[1]=m;
-                for (Local l : locais) {
-                    if (l.getCidade().equals(m.getCidade()) || l.getCidade().equals(viagem[0].getCidade())) {
-                        continue;
-                    } else {
-                        viagem[2] = l;
-                        if (custoViagem(viagem) <= custo) {
-                            viagens.add(viagem);
-                        }
-                    }
-                }
-            }
-        }
-        return viagens;
-    } //Cria lista das viagens que satisfazem o custo máximo e o ponto de interesse
 
     public ArrayList<Local[]> criaViagensMes(int custo, String hot){
         ArrayList<Local[]> viagens = new ArrayList<>();
@@ -208,38 +205,40 @@ public class Main extends JFrame{
         return viagens;
     } //Cria lista das viagens que satisfazem o custo máximo e o local a evitar
 
-    public String viagemCelecionada(Local[] viagem){
-        return "Viagem(custo: " + custoViagem(viagem) + ")\nLocais:\n" + viagem[0].toString() + "\n" + viagem[1].toString() + "\n" + viagem[2].toString() + "\n" +
-                "Distâncias:\n" + viagem[0] + "a" + viagem[1] + " - " + distanciaCocais(viagem[0], viagem[1]) + "\n" + viagem[1] + "a" + viagem[2] + " - " + distanciaCocais(viagem[1], viagem[2]) + "\n" +
-                "Custos:\n" + viagem[0] + " - " + custoCocal(viagem[0]) + "\n" + viagem[1] + " - " + custoCocal(viagem[1]) + "\n" + viagem[2] + " - " + custoCocal(viagem[2]);
-
-    } //Ponto 5 do projeto
-
-    public static boolean registo(String nome, String email, boolean mestrado){
-        //verifica se a pessoa já está registada
-        for(Pessoa tmp : listaComunidade){
-            System.out.println(tmp.getNome());
-            if(tmp.getNome().equalsIgnoreCase(nome)){
-                return false;
+    public ArrayList<Local[]> criaViagensLic(int custo, String hot) {
+        ArrayList<Local[]> viagens = new ArrayList<>();
+        Local[] viagem = new Local[3];
+        viagem[0] = pInteresseHot(hot);
+        for (Local m : locais) {
+            if (museu(m) == true && m.getCidade() != viagem[0].getCidade()) {
+                viagem[1] = m;
+                for (Local l : locais) {
+                    if (l.getCidade().equals(m.getCidade()) || l.getCidade().equals(viagem[0].getCidade())) {
+                        continue;
+                    } else {
+                        viagem[2] = l;
+                        if (custoViagem(viagem) <= custo) {
+                            viagens.add(viagem);
+                        }
+                    }
+                }
             }
         }
-        if(mestrado==false) {
-            Pessoa novo = new Licenciatura(nome, email);
-            listaComunidade.add(novo);
-        }
-        else{
-            Pessoa novo = new Mestrado(nome, email);
-            listaComunidade.add(novo);
-        }
+        return viagens;
+    } //Cria lista das viagens que satisfazem o custo máximo e o ponto de interesse
 
-        return true;
-    }
+    public String viagemCelecionada(Local[] viagem){
+        return "Viagem(custo: " + custoViagem(viagem) + ")\nLocais:\n" + viagem[0].toString() + "\n" + viagem[1].toString() + "\n" + viagem[2].toString() + "\n" +
+                "Distâncias:\n" + viagem[0] + "a" + viagem[1] + " - " + distanciasTotais(viagem[0], viagem[1]) + "\n" + viagem[1] + "a" + viagem[2] + " - " + distanciasTotais(viagem[1], viagem[2]) + "\n" +
+                "Custos:\n" + viagem[0] + " - " + custoTotal(viagem[0]) + "\n" + viagem[1] + " - " + custoTotal(viagem[1]) + "\n" + viagem[2] + " - " + custoTotal(viagem[2]);
+
+    } //Ponto 5 do projeto
 
     public ArrayList<Local> getLocais() {
         return locais;
     }
 
-    public void addAluno(Pessoa aluno){
+    public void addAluno(Aluno aluno) {
         listaComunidade.add(aluno);
     }
 

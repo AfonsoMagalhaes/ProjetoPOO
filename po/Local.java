@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class Local implements Serializable {
     private String cidade;
-    private ArrayList<P_Interesse> p_interesse;
+    private ArrayList<pInteresse> pInteresse;
     private int X;
     private  int Y;
 
     public Local (String cidade, int X,int Y){
         this.cidade=cidade;
-        this.p_interesse = new ArrayList<>();
+        this.pInteresse = new ArrayList<>();
         this.X=X;
         this.Y=Y;
     }
@@ -21,11 +21,12 @@ public class Local implements Serializable {
         return cidade;
     }
 
-    public ArrayList<P_Interesse> getPInteresse(){
-        return p_interesse;
+    public ArrayList<pInteresse> getPInteresse() {
+        return pInteresse;
     }
-    public void setP_interesse(ArrayList<P_Interesse> p_interesse){
-        this.p_interesse=p_interesse;
+
+    public void setPInteresse(ArrayList<pInteresse> pInteresse) {
+        this.pInteresse = pInteresse;
     }
 
 
@@ -40,7 +41,7 @@ public class Local implements Serializable {
     @Override
     public String toString() {
 
-        return "[Local] Cidade: "+cidade+ "; " + "Coordenadas: "+X+","+Y+";" + "Pontos de Interesse: " + p_interesse;
+        return "[Local] Cidade: " + cidade + "; " + "Coordenadas: " + X + "," + Y + ";" + "Pontos de Interesse: " + pInteresse;
     }
 }
 

@@ -9,13 +9,13 @@ import java.awt.event.ActionListener;
 
 public class visualizarViagem extends JFrame {
 
-    private final entrar j;
+    private final Entrar j;
     private JPanel canvas;
     private Main m;
     private JButton b2, b3;
     private JLabel l1;
 
-    public visualizarViagem(Main m, entrar j) {
+    public visualizarViagem(Main m, Entrar j) {
         this.m = m;
         this.j = j;
         setTitle("A sua viagem de sonho!");
@@ -82,7 +82,7 @@ public class visualizarViagem extends JFrame {
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
 
-        new menu(m).setVisible(true);
+        new Menu(m).setVisible(true);
     }
 
 //    public static void main(String args[]) {

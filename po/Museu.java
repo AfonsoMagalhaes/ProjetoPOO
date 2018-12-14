@@ -1,6 +1,6 @@
 package po;
 
-public class Museu extends P_Interesse{
+public class Museu extends pInteresse {
     private String tematica;
     public Museu(String nome, String horario, float entrada, float custoextra, String tematica){
         super(nome,horario, entrada, custoextra);

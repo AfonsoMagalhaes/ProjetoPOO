@@ -2,11 +2,11 @@ package po;
 
 import java.io.Serializable;
 
-abstract class Pessoa  implements Serializable {
+abstract class Aluno implements Serializable {
     private String nome;
     private String email;
 
-    public Pessoa(String nome, String email){
+    public Aluno(String nome, String email) {
         this.email = email;
         this.nome = nome;
     }
