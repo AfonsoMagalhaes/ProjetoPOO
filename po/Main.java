@@ -4,6 +4,7 @@ package po;
 import interfaces_GUI.janelaInicio;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ public class Main extends JFrame{
     private static ArrayList<Aluno> listaAlunos;
     private static ArrayList<Local> locais;
     private static ArrayList<pInteresse> pinteresse;
+    private static List maisVotados;
     private float deslocacao;
 
     public Main() throws IOException {
@@ -118,6 +120,7 @@ public class Main extends JFrame{
         }
 
     }
+
 
     public float custoTotal(Local local) {
         int custo=0;
@@ -245,6 +248,7 @@ public class Main extends JFrame{
     public void addAluno(Aluno aluno) {
         listaAlunos.add(aluno);
     }
+
 
     public static void main(String[] args) throws IOException {
         Main viagem = new Main();
