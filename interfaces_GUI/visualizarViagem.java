@@ -14,10 +14,16 @@ public class visualizarViagem extends JFrame {
     private Main m;
     private JButton b2, b3;
     private JLabel l1;
+    private boolean mestrado;
+    private String hot;
+    private int custo;
 
     public visualizarViagem(Main m, Entrar j) {
         this.m = m;
         this.j = j;
+        mestrado = j.getMestrado();
+        hot = j.getHot();
+        custo = j.getCusto();
         setTitle("A sua viagem de sonho!");
         setSize(530,400);
         setLocationRelativeTo(null);

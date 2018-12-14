@@ -37,7 +37,6 @@ public class Main extends JFrame{
     public boolean registo(String nome, String email, boolean mestrado) throws IOException {
         //verifica se a pessoa já está registada
         for (Aluno tmp : listaAlunos) {
-            System.out.println(tmp.getNome());
             if (tmp.getNome().equalsIgnoreCase(nome)) {
                 return false;
             }
