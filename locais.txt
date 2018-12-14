@@ -1,4 +1,4 @@
-2
+0
 Local;Lisboa;112483;194793
 Museu;Torre de Belém;9h-20h;20;0;asd
 Museu;Mosteiro dos Jerónimos;9h-21h;15;0;ad
@@ -12,10 +12,10 @@ x
 Local;Coimbra;151212;465454;
 Museu;Real Companhia Velha;9h-22h;13;0;asd
 Museu;Porto Augusto's;9h-20h;20;0;asd
-Museu;Miradouro da Serra do Pilar;9h-21h;30;0;asd
+Museu;Miradouro da Serra do Pilar;9h-21h;10;0;asd
 x
 Local;Braga;156565;469898;
 Museu;Real Companhia Velha;9h-22h;13;0;asd
 Museu;Porto Augusto's;9h-20h;20;0;asd
-Museu;Miradouro da Serra do Pilar;9h-21h;30;0;asd
+Museu;Miradouro da Serra do Pilar;9h-21h;15;0;asd
 x

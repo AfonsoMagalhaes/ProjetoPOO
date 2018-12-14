@@ -14,7 +14,7 @@ public class Main extends JFrame{
     private static ArrayList<Aluno> listaAlunos;
     private static ArrayList<Local> locais;
     private static ArrayList<pInteresse> pinteresse;
-    private float deslocacao;
+    private float deslocacao; //meti a 0 se nao o custo era muito grande, depois vejo um valor pra isto
 
     public Main() throws IOException {
 
@@ -23,10 +23,14 @@ public class Main extends JFrame{
 
         leFicheiro();
         leFicheiroObj();
-        for(Local tmp : locais)
+        /*for(Local tmp : locais)
             System.out.println(tmp.toString()+"\n");
         for (Aluno aluno : listaAlunos) {
             System.out.println(aluno.toString());
+        }*/
+        ArrayList<Local[]> viagens = criaViagensLic(200, "Torre de Belém");
+        for(Local[] v: viagens){
+            System.out.println(v[0] + "||" + v[1] + "||" + v[2] + "\n");
         }
         new janelaInicio(this).setVisible(true);
     }
@@ -134,7 +138,7 @@ public class Main extends JFrame{
     } //Custo da deslocação entre 2 locais
 
     public float custoViagem(Local[] viagem){
-        return custoTotal(viagem[0]) + custoTotal(viagem[1]) + custoTotal(viagem[3]) + deslocaçãoLocais(viagem[0], viagem[1]) + deslocaçãoLocais(viagem[1], viagem[2]);
+        return custoTotal(viagem[0]) + custoTotal(viagem[1]) + custoTotal(viagem[2]) + deslocaçãoLocais(viagem[0], viagem[1]) + deslocaçãoLocais(viagem[1], viagem[2]);
     } //Calcula o custo da viagem
 
     public Local localEvitar(String hot) {
@@ -147,27 +151,53 @@ public class Main extends JFrame{
         return x;
     } //Vai buscar do local a evitar
 
-    public Local pInteresseHot(String hot) {
-        Local x = null;
+    public Local localHot(String hot) {
+        Local local = null;
+        loop:
         for(Local l: locais){
             for (pInteresse i : l.getPInteresse()) {
                 if (hot.equals(i.getNome())) {
-                    x = l;
+                    local = l;
+                    break loop;
                 }
             }
         }
-        return x;
+        return local;
     } //Vai buscar o local do ponto de interesse hot
 
     public boolean museu(Local l){
         ArrayList<pInteresse> pontosinteresse = l.getPInteresse();
         for (pInteresse pi : pontosinteresse) {
-            if(pi.getTipo()=="museu"){
+            if(pi.getTipo().equals("museu")){
                 return true;
             }
         }
         return false;
     } // Verifica se o local tem um museu
+
+    public boolean compararViagens(Local[] viagem1, Local[] viagem2){
+        for(int i=0; i<3; i++){
+            boolean locais_iguais=false;
+            for(int j=0; j<3; j++){
+                if(viagem1[i].getCidade().equals(viagem2[j].getCidade())){
+                    locais_iguais=true;
+                }
+            }
+            if(locais_iguais==false){
+                return false;
+            }
+        }
+        return true;
+    } //Veririfca se as viagens são iguais
+
+    public boolean compararViagemComLista(Local[] viagem, ArrayList<Local[]> viagens){
+        for(Local[] v: viagens){
+            if(compararViagens(viagem, v)== true){
+                return true;
+            }
+        }
+        return false;
+    }//Verifica se uma viagem ja existe numa lsita de viagens
 
     public ArrayList<Local[]> criaViagensMes(int custo, String hot){
         ArrayList<Local[]> viagens = new ArrayList<>();
@@ -189,7 +219,7 @@ public class Main extends JFrame{
                                     continue;
                                 } else {
                                     viagem[2] = l2;
-                                    if (custoViagem(viagem) <= custo) {
+                                    if (custoViagem(viagem) <= custo && compararViagemComLista(viagem, viagens)==false) {
                                         viagens.add(viagem);
                                     }
                                 }
@@ -206,16 +236,16 @@ public class Main extends JFrame{
     public ArrayList<Local[]> criaViagensLic(int custo, String hot) {
         ArrayList<Local[]> viagens = new ArrayList<>();
         Local[] viagem = new Local[3];
-        viagem[0] = pInteresseHot(hot);
+        viagem[0] = localHot(hot);
         for (Local m : locais) {
-            if (museu(m) == true && m.getCidade() != viagem[0].getCidade()) {
+            if (museu(m) == true && !(m.getCidade().equals(viagem[0].getCidade()))) {
                 viagem[1] = m;
                 for (Local l : locais) {
                     if (l.getCidade().equals(m.getCidade()) || l.getCidade().equals(viagem[0].getCidade())) {
                         continue;
                     } else {
                         viagem[2] = l;
-                        if (custoViagem(viagem) <= custo) {
+                        if (custoViagem(viagem) <= custo  && compararViagemComLista(viagem, viagens)==false) {
                             viagens.add(viagem);
                         }
                     }
@@ -242,6 +272,14 @@ public class Main extends JFrame{
 
     public void addAluno(Aluno aluno) {
         listaAlunos.add(aluno);
+    }
+
+    public ArrayList<pInteresse> getPInteresse(Local l){
+        ArrayList<pInteresse> pInteresses = new ArrayList<>();
+        for(pInteresse pi: l.getPInteresse()){
+            pInteresses.add(pi);
+        }
+        return pInteresses;
     }
 
     public static void main(String[] args) throws IOException {
