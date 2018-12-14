@@ -21,12 +21,19 @@ public class visualizarViagem extends JFrame {
     private int custo;
     private ArrayList<Local[]> viagens;
 
+
     public visualizarViagem(Main m, Entrar j) {
         this.m = m;
         this.j = j;
+
+        viagens = new ArrayList<>();
         mestrado = j.getMestrado();
         hot = j.getHot();
         custo = j.getCusto();
+
+        m.escreveMaisVotado(hot);
+
+
         System.out.println(mestrado);
         System.out.println(hot);
         System.out.println(custo);
@@ -35,6 +42,7 @@ public class visualizarViagem extends JFrame {
         } else {
             viagens = m.criaViagensLic(custo, hot);
         }
+
 
         setTitle("A sua viagem de sonho!");
         setSize(530,400);

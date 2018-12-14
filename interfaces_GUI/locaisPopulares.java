@@ -6,13 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class locaisPopulares extends JFrame {
     private Main m;
     private JPanel canvas;
-
+    private ArrayList<String> maisVotados;
     private JButton b2, b3;
-    private JLabel l1;
+    private JLabel l1, l2, l3;
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
@@ -21,6 +22,10 @@ public class locaisPopulares extends JFrame {
 
     public locaisPopulares(Main m){
         this.m = m;
+        maisVotados = new ArrayList<>();
+        maisVotados = m.getMaisVotados();
+//        System.out.println(Arrays.toString(new ArrayList[]{maisVotados}));
+
         setTitle("A sua viagem de sonho!");
         setSize(530,400);
         setLocationRelativeTo(null);
@@ -56,20 +61,17 @@ public class locaisPopulares extends JFrame {
         canvas.setLayout(new GridLayout(3,2,10,10));
 
 
-
-
-
-        //aqui temos de chamar a função que calcula e imprimir os dados;
-
-
-
-
-
-
-
-        l1 = new JLabel("LOCAL 1", SwingConstants.CENTER);
+        l1 = new JLabel(maisVotados.get(0), SwingConstants.CENTER);
         l1.setOpaque(true);
         background.add(l1,gbc);
+
+        l2 = new JLabel(maisVotados.get(1), SwingConstants.CENTER);
+        l2.setOpaque(true);
+        background.add(l2, gbc);
+
+        l3 = new JLabel(maisVotados.get(2), SwingConstants.CENTER);
+        l3.setOpaque(true);
+        background.add(l3, gbc);
 
         gbc.anchor = GridBagConstraints.SOUTH;
 
