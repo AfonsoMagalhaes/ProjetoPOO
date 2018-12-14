@@ -41,7 +41,7 @@ abstract public class P_Interesse{
     public void setCustoextra(float custoextra){this.custoextra=custoextra;}
 
     public String toString(){
-        return "\n-Nome: " + nome + "\n-Horário: " + horario + "\n";
+        return "\n-Nome: " + nome + ", -Horário: " + horario + ", -Entrada: " +  entrada + ", -Custo Extra: " + custoextra;
     }
 
     public abstract String getTipo();

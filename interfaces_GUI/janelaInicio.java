@@ -56,7 +56,7 @@ public class janelaInicio extends JFrame {
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
-        new Menu(m).setVisible(true);
+        new menu(m).setVisible(true);
     }
 
     private void teste() {

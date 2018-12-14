@@ -16,18 +16,21 @@ public class Main extends JFrame{
     private static ArrayList<P_Interesse> pinteresse;
     private float deslocacao;
 
-    public Main() {
+    public Main() throws IOException {
 
         this.locais = new ArrayList<>();
         this.listaComunidade = new ArrayList<>();
 
         leficheiro();
-
-
-        System.out.println("LISTA LOCAIS");
+        registo("Afonso","afonso@gmail.com", false);
+        registo("David","david@gmail.com", true);
+        escreveFicheirobj();
+        leFicheiroobj();
         for(Local tmp : locais)
-            System.out.println(tmp.toString());
-
+            System.out.println(tmp.toString()+"\n");
+        for(Pessoa aluno: listaComunidade){
+            System.out.println(aluno.toString());
+        }
         new janelaInicio(this).setVisible(true);
     }
 
@@ -59,8 +62,7 @@ public class Main extends JFrame{
                     pinteresse.add(new Aquático(tab[1],tab[2], Float.parseFloat(tab[3]),Float.parseFloat(tab[4]), Integer.parseInt(tab[5]), Boolean.parseBoolean(tab[6])));
                 } else if (tab[0].equals("Bar")){
                     pinteresse.add(new Bar(tab[1],tab[2],Float.parseFloat(tab[3]),Float.parseFloat(tab[4]), Float.parseFloat(tab[5])));
-                } else if(st.equals("\n")){
-                    System.out.println(nome);
+                } else if(st.equals("x")){
                     Local l = new Local(nome, x, y);
                     l.setP_interesse(pinteresse);
                     locais.add(l);
@@ -71,14 +73,11 @@ public class Main extends JFrame{
         }
     }
 
-    public void escreveCicheirobj() throws IOException {
+    public void escreveFicheirobj() throws IOException {
         try {
-            ObjectOutputStream walunos = new ObjectOutputStream(new FileOutputStream("alunos.txt"));
+            ObjectOutputStream walunos = new ObjectOutputStream(new FileOutputStream("alunosobj.txt"));
             walunos.writeObject(listaComunidade);
             walunos.close();
-            ObjectOutputStream wlocais = new ObjectOutputStream(new FileOutputStream("locais.txt"));
-            wlocais.writeObject(locais);
-            wlocais.close();
         } catch (FileNotFoundException var5) {
             System.out.println("File not found");
         } catch (IOException var6) {
@@ -87,26 +86,15 @@ public class Main extends JFrame{
 
     }
 
-    public void leCicheiroobj() throws IOException {
-        File ficheiroAlunos = new File("alunos.txt");
-        File ficheiroLocais = new File("locais.txt");
+    public void leFicheiroobj() throws IOException {
+        File ficheiroAlunos = new File("alunosobj.txt");
         if (ficheiroAlunos.exists()) {
             try {
-                ObjectInputStream ralunos = new ObjectInputStream(new BufferedInputStream(new FileInputStream("alunos.txt")));
+                ObjectInputStream ralunos = new ObjectInputStream(new BufferedInputStream(new FileInputStream("alunosobj.txt")));
                 listaComunidade = (ArrayList)ralunos.readObject();
                 ralunos.close();
             } catch (ClassNotFoundException var9) {
                 var9.printStackTrace();
-            }
-        }
-
-        if (ficheiroLocais.exists()) {
-            try {
-                ObjectInputStream rlocais = new ObjectInputStream(new BufferedInputStream(new FileInputStream("locais.txt")));
-                locais = (ArrayList)rlocais.readObject();
-                rlocais.close();
-            } catch (ClassNotFoundException var7) {
-                var7.printStackTrace();
             }
         }
 
@@ -236,8 +224,6 @@ public class Main extends JFrame{
             }
         }
         if(mestrado==false) {
-            System.out.println(email);
-            System.out.println(nome);
             Pessoa novo = new Licenciatura(nome, email);
             listaComunidade.add(novo);
         }
@@ -257,7 +243,7 @@ public class Main extends JFrame{
         listaComunidade.add(aluno);
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         Main viagem = new Main();
     }
 

@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class Menu extends JFrame{
+public class menu extends JFrame{
     private janelaInicio j;
     private Main m;
     private JButton b1, b2, b3, b4;
@@ -19,17 +19,17 @@ public class Menu extends JFrame{
 
     private void entrar(ActionEvent evt) {
         this.setVisible(false);
-        new Entrar(m).setVisible(true);
+        new entrar(m).setVisible(true);
     }
 
     private void locaispopulares(ActionEvent evt) {
         this.setVisible(false);
-        new locaisPopulares().setVisible(true);
+        new locaispopulares().setVisible(true);
     }
 
     private void Registo(ActionEvent evt) {
         this.setVisible(false);
-        new Registo(m).setVisible(true);
+        new registo(m).setVisible(true);
     }
 
     private class ButaoEntrar implements ActionListener {
@@ -44,7 +44,7 @@ public class Menu extends JFrame{
         }
     }
 
-    public Menu(Main m) {
+    public menu(Main m) {
         this.m = m;
         this.j = j;
 

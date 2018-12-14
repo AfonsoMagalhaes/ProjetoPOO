@@ -3,12 +3,9 @@ Local;Lisboa;112483;194793
 Museu;Torre de Belém;9h-20h;20;0;asd
 Museu;Mosteiro dos Jerónimos;9h-21h;15;0;ad
 Museu;Castelo de São Jorge;9h-22h;13;0;asd
-
+x
 Local;Vila Nova de Gaia;158902;462323;
 Museu;Real Companhia Velha;9h-22h;13;0;asd
 Museu;Porto Augusto's;9h-20h;20;0;asd
 Museu;Miradouro da Serra do Pilar;9h-21h;15;0;asd
-
-
-
-
+x

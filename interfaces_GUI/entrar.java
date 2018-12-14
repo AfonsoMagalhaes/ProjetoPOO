@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Entrar extends JFrame{
+public class entrar extends JFrame{
     private Main m;
     private JPanel canvas;
 
@@ -19,7 +19,7 @@ public class Entrar extends JFrame{
 
     private void visualizarViagem(ActionEvent evt) {
         this.setVisible(false);
-        new visualizarViagem().setVisible(true);
+        new visualizarViagem(m,this).setVisible(true);
     }
 
 
@@ -125,12 +125,12 @@ public class Entrar extends JFrame{
         this.setVisible(true);
     }
 
-    public Entrar(Main m, Registo j){
+    public entrar(Main m, registo j){
         this.m = m;
         init();
     }
 
-    public Entrar(Main m){
+    public entrar(Main m){
         this.m = m;
         init();
     }
