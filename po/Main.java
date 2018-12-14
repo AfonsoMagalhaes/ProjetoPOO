@@ -22,9 +22,6 @@ public class Main extends JFrame{
         this.listaAlunos = new ArrayList<>();
 
         leFicheiro();
-        registo("Afonso","afonso@gmail.com", false);
-        registo("David","david@gmail.com", true);
-        escreveFicheiroObj();
         leFicheiroObj();
         for(Local tmp : locais)
             System.out.println(tmp.toString()+"\n");
@@ -228,7 +225,7 @@ public class Main extends JFrame{
         return viagens;
     } //Cria lista das viagens que satisfazem o custo máximo e o ponto de interesse
 
-    public String viagemCelecionada(Local[] viagem){
+    public String viagemSelecionada(Local[] viagem){
         return "Viagem(custo: " + custoViagem(viagem) + ")\nLocais:\n" + viagem[0].toString() + "\n" + viagem[1].toString() + "\n" + viagem[2].toString() + "\n" +
                 "Distâncias:\n" + viagem[0] + "a" + viagem[1] + " - " + distanciasTotais(viagem[0], viagem[1]) + "\n" + viagem[1] + "a" + viagem[2] + " - " + distanciasTotais(viagem[1], viagem[2]) + "\n" +
                 "Custos:\n" + viagem[0] + " - " + custoTotal(viagem[0]) + "\n" + viagem[1] + " - " + custoTotal(viagem[1]) + "\n" + viagem[2] + " - " + custoTotal(viagem[2]);
