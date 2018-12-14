@@ -149,7 +149,7 @@ public class Registo extends JFrame{
         mestrado = fromC.getSelectedIndex() == 1;
 
         registado = m.registo(nome, email, mestrado);
-        System.out.println(registado);
+
 
         if (!registado) {
             JOptionPane.showMessageDialog(null, "O utilizador já existe", "ERRO", 1);

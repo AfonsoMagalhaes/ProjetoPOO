@@ -17,34 +17,9 @@ public class Menu extends JFrame{
     private JButton b1, b2, b3, b4;
     private JLabel l1;
     private JComboBox<ArrayList> fromC;
+    private ArrayList<Aluno> listaAlunos;
+    private boolean mestrado;
 
-
-    private void entrar(ActionEvent evt) {
-        this.setVisible(false);
-        new Entrar(m).setVisible(true);
-    }
-
-    private void locaispopulares(ActionEvent evt) {
-        this.setVisible(false);
-        new locaisPopulares(m).setVisible(true);
-    }
-
-    private void Registo(ActionEvent evt) {
-        this.setVisible(false);
-        new Registo(m).setVisible(true);
-    }
-
-    private class ButaoEntrar implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //temos de alterar o 2 pelo numero de utilizadores registados
-            for (int i=0;i<2;i++){
-                if(fromC.getSelectedIndex()==i){
-                    entrar(e);
-                }
-            }
-        }
-    }
 
     public Menu(Main m) {
         this.m = m;
@@ -76,7 +51,7 @@ public class Menu extends JFrame{
 
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        ArrayList<Aluno> listaAlunos = m.getAlunos();
+        listaAlunos = m.getAlunos();
         ArrayList<String> alunos = new ArrayList<String>();
         for (Aluno tmp : listaAlunos) {
             alunos.add(tmp.getNome());
@@ -136,10 +111,46 @@ public class Menu extends JFrame{
 
     }
 
+    private void locaispopulares(ActionEvent evt) {
+        this.setVisible(false);
+        new locaisPopulares(m).setVisible(true);
+    }
 
-//    public static void main(String[] args) {
-//        new Menu();
-//    }
+    private void Registo(ActionEvent evt) {
+        this.setVisible(false);
+        new Registo(m).setVisible(true);
+    }
+
+    private void Entrar(ActionEvent evt) {
+        for (Aluno tmp : listaAlunos) {
+            if (tmp.getNome().equalsIgnoreCase((String) fromC.getSelectedItem())) {
+                if (tmp.isMestrado() == true) {
+                    mestrado = true;
+                }
+            } else {
+                mestrado = false;
+            }
+        }
+
+
+        this.setVisible(false);
+        new Entrar(m, this).setVisible(true);
+    }
+
+    public boolean getMestrado() {
+        return mestrado;
+    }
+
+    private class ButaoEntrar implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            for (int i = 0; i < 2; i++) {
+                if (fromC.getSelectedIndex() == i) {
+                    Entrar(e);
+                }
+            }
+        }
+    }
 
 }
 
