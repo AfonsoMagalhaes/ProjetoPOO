@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class locaispopulares extends JFrame {
+public class locaisPopulares extends JFrame {
     private Main m;
     private JPanel canvas;
 
@@ -16,10 +16,10 @@ public class locaispopulares extends JFrame {
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
-//        new Menu(m, this).setVisible(true);
+        new Menu(m).setVisible(true);
     }
 
-    public locaispopulares(){
+    public locaisPopulares(Main m){
         this.m = m;
         setTitle("A sua viagem de sonho!");
         setSize(530,400);
@@ -105,7 +105,7 @@ public class locaispopulares extends JFrame {
         this.setVisible(true);
     }
 
-    public static void main(String args[]) {
-        new locaispopulares();
-    }
+//    public static void main(String args[]) {
+//        new locaisPopulares();
+//    }
 }

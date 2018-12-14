@@ -7,7 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class entrar extends JFrame{
+public class Entrar extends JFrame{
+    private Registo j;
     private Main m;
     private JPanel canvas;
 
@@ -26,7 +27,7 @@ public class entrar extends JFrame{
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
-//        new Menu(m, this).setVisible(true);
+        new Menu(m).setVisible(true);
     }
 
     private class BtnCalcula implements ActionListener {
@@ -125,12 +126,13 @@ public class entrar extends JFrame{
         this.setVisible(true);
     }
 
-    public entrar(Main m, registo j){
+    public Entrar(Main m, Registo j){
         this.m = m;
+        this.j =j;
         init();
     }
 
-    public entrar(Main m){
+    public Entrar(Main m){
         this.m = m;
         init();
     }
