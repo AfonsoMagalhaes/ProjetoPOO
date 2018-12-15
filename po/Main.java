@@ -18,8 +18,12 @@ public class Main extends JFrame{
     private static ArrayList<Local> locais;
     private static ArrayList<pInteresse> pinteresse;
     private static ArrayList<String> maisVotados;
-    private float deslocacao; //meti a 0 se nao o custo era muito grande, depois vejo um valor pra isto
+    private float deslocacao;
 
+    /** Cria uma aplicação de suporte ao planeamento de viagens
+     * @
+     * @throws IOException
+     */
     public Main() throws IOException {
 
         this.locais = new ArrayList<>();
@@ -104,7 +108,7 @@ public class Main extends JFrame{
         } catch (IOException e) {
             System.out.println("Excepcao a carregar ficheiro txt: " + e);
         }
-    }   //le o ficheiro de texto dos locais
+    }   //le o ficheiro de texto dos locais e pontos de interesse
 
     public void escreveFicheiroObj() throws IOException {
         try {
@@ -185,13 +189,13 @@ public class Main extends JFrame{
     } //Calcula o custo da viagem
 
     public Local localEvitar(String hot) {
-        Local x = null;
+        Local local = null;
         for(Local l: locais){
             if (hot.equals(l.getCidade())) {
-                x = l;
+                local = l;
             }
         }
-        return x;
+        return local;
     } //Vai buscar do local a evitar
 
     public Local localHot(String hot) {
@@ -303,7 +307,7 @@ public class Main extends JFrame{
                 "Distâncias:\n" + viagem[0] + "a" + viagem[1] + " - " + distanciasTotais(viagem[0], viagem[1]) + "\n" + viagem[1] + "a" + viagem[2] + " - " + distanciasTotais(viagem[1], viagem[2]) + "\n" +
                 "Custos:\n" + viagem[0] + " - " + custoTotal(viagem[0]) + "\n" + viagem[1] + " - " + custoTotal(viagem[1]) + "\n" + viagem[2] + " - " + custoTotal(viagem[2]);
 
-    } //Ponto 5 do projeto
+    } //Devolve a viagem selecionada pelo aluno
 
     public ArrayList<Local> getLocais() {
         return locais;
@@ -358,7 +362,7 @@ public class Main extends JFrame{
 
     public void addAluno(Aluno aluno) {
         listaAlunos.add(aluno);
-    }
+    } //adiciona aluno a lista de alunos
 
     public ArrayList<String> getPInteresse(Local l) {
         ArrayList<String> pInteresses = new ArrayList<>();
@@ -366,7 +370,21 @@ public class Main extends JFrame{
             pInteresses.add(pi.getNome());
         }
         return pInteresses;
-    }
+    } //devolve a lista dos pontos de interesse de um local
+
+    public String getLocal(String pi){
+        String local=null;
+        loop:
+        for(Local l: locais){
+            for(pInteresse p: l.getPInteresse()){
+                if(p.getNome().equals(pi)){
+                    local=l.getCidade();
+                    break loop;
+                }
+            }
+        }
+        return local;
+    } //Recebe um ponto de interesse e devolve o local a que ele pertence
 
     public static void main(String[] args) throws IOException {
         Main viagem = new Main();
