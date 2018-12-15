@@ -95,6 +95,7 @@ public class Main extends JFrame{
                     locais.add(l);
                 } else{continue;}
             }
+//            System.out.println(locais.toString());
         } catch (IOException e) {
             System.out.println("Excepcao a carregar ficheiro txt: " + e);
         }

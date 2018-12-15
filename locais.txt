@@ -10,19 +10,19 @@ Museu;Porto Augusto's;9h-20h;20;0;Vinho
 Museu;Miradouro da Serra do Pilar;9h-21h;15;0;Paisagem
 x
 Local;Porto;159025;465955;
-Ponte Luís I;9h-22h;13;0;Rio
-Torre dos Clérigos;9h-20h;20;0;Igreja
-Livraria Lello;9h-22h;13;0;Livros
+Museu;Ponte Luís I;9h-22h;13;0;Rio
+Museu;Torre dos Clérigos;9h-20h;20;0;Igreja
+Museu;Livraria Lello;9h-22h;13;0;Livros
 x
 Local;Évora;219597;177050;
-Capela dos Ossos;9h-20h;20;0;Capela
-Templo Romano de Evora;9h-22h;13;0;Ruinas
-Sé Catedral de Évora;9h-20h;20;0;Igreja
+Museu;Capela dos Ossos;9h-20h;20;0;Capela
+Museu;Templo Romano de Evora;9h-22h;13;0;Ruinas
+Museu;Sé Catedral de Évora;9h-20h;20;0;Igreja
 x
 Local;Beja;224066;117126;
-Castelo de Beja;9h-20h;20;0;teste
-po.Museu Rainha D Leonor;9h-22h;13;0;teste
-Ruínas Romanas de Pisões;9h-20h;20;0;teste
+Museu;Castelo de Beja;9h-20h;20;0;teste
+Museu;Museu Rainha D Leonor;9h-22h;13;0;teste
+Museu;Ruínas Romanas de Pisões;9h-20h;20;0;teste
 x
 Local;Faro;217209;5897;
 Ria Formosa;9h-20h;20;0;teste

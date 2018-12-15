@@ -1,6 +1,6 @@
 package interfaces_GUI;
 
-import po.Local;
+
 import po.Main;
 
 import javax.swing.*;
@@ -59,16 +59,6 @@ public class janelaInicio extends JFrame {
         new Menu(m).setVisible(true);
     }
 
-    private void teste() {
-        for(Local l: m.getLocais()) {
-            System.out.println(l);
-        }
-    }
 
-
-
-//    public static void main(String args[]) {
-//        new Janela_inicio();
-//    }
 
 }
