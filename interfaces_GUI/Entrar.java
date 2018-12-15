@@ -14,7 +14,6 @@ public class Entrar extends JFrame{
     private Registo j;
     private Main m;
     private Menu menu;
-    private JPanel canvas;
     private boolean mestrado;
     private String hot;
     private int custo;
@@ -41,7 +40,11 @@ public class Entrar extends JFrame{
         this.m = m;
         this.j = j;
         mestrado = j.getMestrado();
-        init();
+        if (mestrado == true) {
+            initMes();
+        } else {
+            initLic();
+        }
 
     }
 
@@ -49,12 +52,16 @@ public class Entrar extends JFrame{
         this.m = m;
         this.menu = menu;
         mestrado = menu.getMestrado();
-        init();
+        if (mestrado == true) {
+            initMes();
+        } else {
+            initLic();
+        }
     }
 
-    private void init() {
+    private void initLic() {
         setTitle("A sua viagem de sonho!");
-        setSize(530, 400);
+        setSize(900, 620);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -68,17 +75,14 @@ public class Entrar extends JFrame{
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.WEST;
 
 
-        canvas = new JPanel();
-        canvas.setLayout(new GridLayout(4, 2, 10, 10));
+        l1 = new JLabel("Escolha a cidade do seu pi:", SwingConstants.RIGHT);
+        l1.setFont(new Font("Serif", Font.BOLD, 17));
 
-        l1 = new JLabel("Escolha a cidade do seu pi:", SwingConstants.CENTER);
-
-        l1.setBackground(Color.gray);
-        l1.setOpaque(true);
-        canvas.add(l1);
+        gbc.insets = new Insets(0, 600, 0, 0);
+        background.add(l1, gbc);
 
         ArrayList<Local> listaLocais = m.getLocais();
         ArrayList<String> locais = new ArrayList<String>();
@@ -87,55 +91,49 @@ public class Entrar extends JFrame{
         }
         fromC = new JComboBox(locais.toArray());
         fromC.addActionListener(new mudaCombo());
-        canvas.add(fromC);
 
-        if (mestrado == true) {
-            l2 = new JLabel("Ponto de interesse a evitar:", SwingConstants.CENTER);
-        } else {
-            l2 = new JLabel("Ponto de interesse a não perder:", SwingConstants.CENTER);
-        }
 
-        l2.setBackground(Color.gray);
-        l2.setOpaque(true);
-        canvas.add(l2);
+        gbc.insets = new Insets(5, 600, 0, 0);
+        background.add(fromC, gbc);
 
+        l2 = new JLabel("Ponto de interesse a não perder:", SwingConstants.RIGHT);
+
+        l2.setFont(new Font("Serif", Font.BOLD, 17));
+        gbc.insets = new Insets(40, 600, 0, 0);
+        background.add(l2, gbc);
 
         ArrayList<String> aux = new ArrayList<>();
-
         for (Local tmp : listaLocais) {
             if (tmp.getCidade().equalsIgnoreCase("Lisboa")) {
                 aux = m.getPInteresse(tmp);
             }
         }
         pti = new JComboBox(aux.toArray());
-        canvas.add(pti);
+        gbc.insets = new Insets(5, 600, 0, 0);
+        background.add(pti, gbc);
+        l2 = new JLabel("Máximo a gastar:", SwingConstants.RIGHT);
 
+        l2.setFont(new Font("Serif", Font.BOLD, 17));
 
-
-
-        l2 = new JLabel("Máximo a gastar:", SwingConstants.CENTER);
-        l2.setBackground(Color.gray);
-        l2.setOpaque(true);
-        canvas.add(l2);
+        gbc.insets = new Insets(40, 600, 0, 0);
+        background.add(l2, gbc);
 
         number1 = new JTextField(10);
-        canvas.add(number1);
+        gbc.insets = new Insets(5, 600, 0, 0);
+        background.add(number1, gbc);
 
-        l3 = new JLabel("");
-        canvas.add(l3);
 
-        b1 = new JButton("Calcula viagem");
+        b1 = new JButton("Calcular viagem");
         b1.addActionListener(new BtnCalcula());
-        canvas.add(b1);
+        gbc.insets = new Insets(40, 600, 0, 0);
+        background.add(b1, gbc);
 
-        canvas.setOpaque(false);
-
-        background.add(canvas, gbc);
+        
 
         gbc.anchor = GridBagConstraints.SOUTH;
 
 
-        gbc.insets = new Insets(50, 0, 0, 0);
+        gbc.insets = new Insets(80, 600, 0, 0);
         b2 = new JButton("Voltar");
         b2.addActionListener(new ActionListener() {
 
@@ -148,7 +146,91 @@ public class Entrar extends JFrame{
 
         background.add(b2, gbc);
 
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(0, 600, 0, 0);
+        b3 = new JButton("Sair");
+
+        b3.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        background.add(b3, gbc);
+
+
+        this.setVisible(true);
+    }
+
+    private void initMes() {
+        setTitle("A sua viagem de sonho!");
+        setSize(900, 620);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+
+        setLayout(new GridLayout());
+        JLabel background = new JLabel(new ImageIcon(this.getClass().getResource("Menu.jpg")));
+
+        add(background);
+
+        background.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.WEST;
+
+
+        l1 = new JLabel("Escolha a cidade a evitar:", SwingConstants.RIGHT);
+        l1.setFont(new Font("Serif", Font.BOLD, 17));
+        gbc.insets = new Insets(0, 600, 0, 0);
+        background.add(l1, gbc);
+
+        ArrayList<Local> listaLocais = m.getLocais();
+        ArrayList<String> locais = new ArrayList<String>();
+        for (Local tmp : listaLocais) {
+            locais.add(tmp.getCidade());
+        }
+        fromC = new JComboBox(locais.toArray());
+        gbc.insets = new Insets(5, 600, 0, 0);
+        background.add(fromC, gbc);
+
+
+        l2 = new JLabel("Máximo a gastar:", SwingConstants.RIGHT);
+        l2.setFont(new Font("Serif", Font.BOLD, 17));
+
+        gbc.insets = new Insets(40, 600, 0, 0);
+        background.add(l2, gbc);
+
+        number1 = new JTextField(10);
+        gbc.insets = new Insets(5, 600, 0, 0);
+        background.add(number1, gbc);
+
+
+        b1 = new JButton("Calcular viagem");
+        b1.addActionListener(new BtnCalcula());
+        gbc.insets = new Insets(40, 600, 0, 0);
+        background.add(b1, gbc);
+
+
+        gbc.anchor = GridBagConstraints.SOUTH;
+
+
+        gbc.insets = new Insets(80, 600, 0, 0);
+        b2 = new JButton("Voltar");
+        b2.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                iniciaMenu(e);
+            }
+        });
+
+
+        background.add(b2, gbc);
+
+        gbc.insets = new Insets(0, 600, 0, 0);
         b3 = new JButton("Sair");
 
         b3.addActionListener(new ActionListener() {
@@ -200,7 +282,11 @@ public class Entrar extends JFrame{
     private class BtnCalcula implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            hot = (String) fromC.getSelectedItem();
+            if (mestrado == false) {
+                hot = (String) pti.getSelectedItem();
+            } else {
+                hot = (String) fromC.getSelectedItem();
+            }
             custo = Integer.parseInt(number1.getText());
             visualizarViagem(e);
 

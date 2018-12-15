@@ -31,17 +31,32 @@ public class visualizarViagem extends JFrame {
         hot = j.getHot();
         custo = j.getCusto();
 
-        m.escreveMaisVotado(hot);
+
 
 
         System.out.println(mestrado);
         System.out.println(hot);
         System.out.println(custo);
         if(mestrado==true) {
-            viagens = m.criaViagensMes(custo, hot);
+            System.out.println("Vai calcular a viagem:");
+            ArrayList<Local[]> viagens = m.criaViagensMes(custo, hot);
+            for (Local[] v : viagens) {
+                System.out.println(v[0] + "\n\n" + v[1] + "\n\n" + v[2] + "\n");
+            }
         } else {
-            viagens = m.criaViagensLic(custo, hot);
+            m.escreveMaisVotado(hot);
+            System.out.println("Vai calcular a viagem:");
+            ArrayList<Local[]> viagens = m.criaViagensLic(custo, hot);
+            for (Local[] v : viagens) {
+                System.out.println(v[0] + "\n\n" + v[1] + "\n\n" + v[2] + "\n");
+            }
         }
+
+
+
+
+
+
 
 
         setTitle("A sua viagem de sonho!");
@@ -109,7 +124,4 @@ public class visualizarViagem extends JFrame {
         new Menu(m).setVisible(true);
     }
 
-//    public static void main(String args[]) {
-//        new visualizarViagem();
-//    }
 }

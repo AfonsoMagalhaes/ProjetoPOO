@@ -13,7 +13,7 @@ public class locaisPopulares extends JFrame {
     private JPanel canvas;
     private ArrayList<String> maisVotados;
     private JButton b2, b3;
-    private JLabel l1, l2, l3;
+    private JLabel l1, l4, l2, l3;
 
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
@@ -27,13 +27,13 @@ public class locaisPopulares extends JFrame {
 //        System.out.println(Arrays.toString(new ArrayList[]{maisVotados}));
 
         setTitle("A sua viagem de sonho!");
-        setSize(530,400);
+        setSize(900, 620);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
         setLayout(new GridLayout());
-        JLabel background=new JLabel(new ImageIcon(this.getClass().getResource("Menu.jpg")));
+        JLabel background = new JLabel(new ImageIcon(this.getClass().getResource("img.jpg")));
 
         add(background);
 
@@ -43,40 +43,44 @@ public class locaisPopulares extends JFrame {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
 
 
+        gbc.anchor = GridBagConstraints.WEST;
 
-        gbc.anchor = GridBagConstraints.NORTH;
-
-        l1 =new JLabel("<html><h1><strong><b><font color=\"black\">OS LOCAIS MAIS POPULARES SÃO:</font></b></strong></h1><hr></html>");
-
-        l1.setBackground(Color.GRAY);
-        l1.setOpaque(true);
+        l4 = new JLabel("<html><u>Locais mais populares</u></html>");
+        l4.setFont(new Font("Serif", Font.BOLD, 40));
 
 
-        background.add(l1, gbc);
+        gbc.insets = new Insets(0, 400, 0, 0);
+        background.add(l4, gbc);
 
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.WEST;
 
 
         canvas = new JPanel();
         canvas.setLayout(new GridLayout(3,2,10,10));
 
+        gbc.insets = new Insets(10, 400, 0, 0);
+        l1 = new JLabel("1. " + maisVotados.get(0), SwingConstants.CENTER);
 
-        l1 = new JLabel(maisVotados.get(0), SwingConstants.CENTER);
-        l1.setOpaque(true);
+        l1.setFont(new Font("Serif", Font.PLAIN, 40));
+
         background.add(l1,gbc);
 
-        l2 = new JLabel(maisVotados.get(1), SwingConstants.CENTER);
-        l2.setOpaque(true);
+        l2 = new JLabel("2. " + maisVotados.get(1), SwingConstants.CENTER);
+
+        l2.setFont(new Font("Serif", Font.PLAIN, 32));
+
         background.add(l2, gbc);
 
-        l3 = new JLabel(maisVotados.get(2), SwingConstants.CENTER);
-        l3.setOpaque(true);
+        l3 = new JLabel("3. " + maisVotados.get(2), SwingConstants.CENTER);
+
+        l3.setFont(new Font("Serif", Font.PLAIN, 25));
+
         background.add(l3, gbc);
 
         gbc.anchor = GridBagConstraints.SOUTH;
 
 
-        gbc.insets = new Insets(50, 0, 0, 0);
+        gbc.insets = new Insets(100, 400, 0, 0);
         b2 = new JButton("Voltar");
         b2.addActionListener(new ActionListener() {
 
@@ -89,7 +93,7 @@ public class locaisPopulares extends JFrame {
 
         background.add(b2,gbc);
 
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(0, 400, 0, 0);
         b3= new JButton("Sair");
 
         b3.addActionListener(new ActionListener() {

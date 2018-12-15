@@ -33,14 +33,14 @@ public class Main extends JFrame{
         leFicheiro();
         leFicheiroObj();
         leLescolhidoObj();
-        for(Local tmp : locais) {
+        /*for (Local tmp : locais) {
             ArrayList<String> pinteresses = getPInteresse(tmp);
-            for(String pi: pinteresses){
+            for (String pi : pinteresses) {
                 System.out.println(pi);
             }
             System.out.println("\n");
         }
-        /*for (Aluno aluno : listaAlunos) {
+        for (Aluno aluno : listaAlunos) {
             System.out.println(aluno.toString());
         }
         ArrayList<Local[]> viagens = criaViagensLic(200, "Torre de Belém");
@@ -105,6 +105,7 @@ public class Main extends JFrame{
                     locais.add(l);
                 } else{continue;}
             }
+//            System.out.println(locais.toString());
         } catch (IOException e) {
             System.out.println("Excepcao a carregar ficheiro txt: " + e);
         }
