@@ -24,7 +24,7 @@ public class Registo extends JFrame{
     public Registo(Main m){
         this.m=m;
         setTitle("A sua viagem de sonho!");
-        setSize(530,400);
+        setSize(900, 620);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -38,32 +38,28 @@ public class Registo extends JFrame{
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.WEST;
 
 
         canvas = new JPanel();
         canvas.setLayout(new GridLayout(4,2,10,10));
-        l1 = new JLabel("Introduza o seu nome:", SwingConstants.CENTER);
-        l1.setBackground(Color.gray);
-        l1.setOpaque(true);
+        l1 = new JLabel("Introduza o seu nome:", SwingConstants.RIGHT);
+        l1.setFont(new Font("Serif", Font.BOLD, 17));
         canvas.add(l1);
 
          n1= new JTextField(10);
         canvas.add(n1);
 
 
-
-        l2 = new JLabel("Intoduza o seu email:", SwingConstants.CENTER);
-        l2.setBackground(Color.gray);
-        l2.setOpaque(true);
+        l2 = new JLabel("Intoduza o seu email:", SwingConstants.RIGHT);
+        l2.setFont(new Font("Serif", Font.BOLD, 17));
         canvas.add(l2);
 
         n2 = new JTextField(10);
         canvas.add(n2);
 
-        l4 = new JLabel("Selecione o grau do curso:",SwingConstants.CENTER);
-        l4.setBackground(Color.gray);
-        l4.setOpaque(true);
+        l4 = new JLabel("Selecione o grau do curso:", SwingConstants.RIGHT);
+        l4.setFont(new Font("Serif", Font.BOLD, 17));
         canvas.add(l4);
 
         String[] items = {"Licenciatura", "Mestrado"};
@@ -90,7 +86,7 @@ public class Registo extends JFrame{
         canvas.add(b1);
 
         canvas.setOpaque(false);
-
+        gbc.insets = new Insets(0, 400, 0, 0);
         background.add(canvas,gbc);
 
 
@@ -101,7 +97,7 @@ public class Registo extends JFrame{
         gbc.anchor = GridBagConstraints.SOUTH;
 
 
-        gbc.insets = new Insets(50, 0, 0, 0);
+        gbc.insets = new Insets(100, 500, 0, 0);
         b2 = new JButton("Voltar");
         b2.addActionListener(new ActionListener() {
 
@@ -114,7 +110,7 @@ public class Registo extends JFrame{
 
         background.add(b2,gbc);
 
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(0, 500, 200, 0);
         b3= new JButton("Sair");
 
         b3.addActionListener(new ActionListener() {
