@@ -16,7 +16,7 @@ public class janelaInicio extends JFrame {
         this.m = m;
 
         setTitle("A sua viagem de sonho!");
-        setSize(530,400);
+        setSize(600, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 

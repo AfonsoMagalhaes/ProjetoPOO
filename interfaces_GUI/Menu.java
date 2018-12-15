@@ -25,7 +25,7 @@ public class Menu extends JFrame{
         this.m = m;
 
         setTitle("A sua viagem de sonho!");
-        setSize(530,400);
+        setSize(900, 620);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -40,14 +40,18 @@ public class Menu extends JFrame{
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.anchor = GridBagConstraints.NORTH;
-
+        gbc.insets = new Insets(0, 500, 0, 0);
         l1 =new JLabel("<html><h1><strong><b><font color=\"black\">A sua viagem de sonho!</font></b></strong></h1><hr></html>");
 
         l1.setBackground(Color.GRAY);
-        l1.setOpaque(true);
-
-
+//        l1.setOpaque(true);
         background.add(l1, gbc);
+
+        JPanel aux = new JPanel();
+        aux.setLayout(new GridLayout(1, 2, 10, 10));
+        aux.setOpaque(false);
+
+
 
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -57,12 +61,17 @@ public class Menu extends JFrame{
             alunos.add(tmp.getNome());
         }
         fromC = new JComboBox(alunos.toArray());
+        aux.add(fromC);
 
-
+        gbc.insets = new Insets(30, 500, 0, 0);
 
         b2 = new JButton("Entrar");
         b2.addActionListener(new ButaoEntrar());
+        aux.add(b2);
+        background.add(aux, gbc);
 
+
+        gbc.insets = new Insets(20, 500, 0, 0);
 
         b1=new JButton("Registo");
 
@@ -73,8 +82,8 @@ public class Menu extends JFrame{
                 Registo(e);
             }
         });
-
-
+        background.add(b1, gbc);
+        gbc.insets = new Insets(0, 500, 0, 0);
 
         b3 = new JButton("Locais mais populares");
 
@@ -85,6 +94,7 @@ public class Menu extends JFrame{
                 locaispopulares(e);
             }
         });
+        background.add(b3, gbc);
 
         b4 = new JButton("Sair");
 
@@ -95,19 +105,13 @@ public class Menu extends JFrame{
                 System.exit(0);
             }
         });
-
-        background.add(fromC, gbc);
-        background.add(b2, gbc);
-        background.add(b3, gbc);
-        background.add(b1,gbc);
+        gbc.insets = new Insets(0, 500, 200, 0);
         background.add(b4, gbc);
 
         gbc.weighty = 1;
 
 
-
         this.setVisible(true);
-
 
     }
 
@@ -144,8 +148,8 @@ public class Menu extends JFrame{
     private class ButaoEntrar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (int i = 0; i < 2; i++) {
-                if (fromC.getSelectedIndex() == i) {
+            for (Aluno tmp : listaAlunos) {
+                if (tmp.getNome().equalsIgnoreCase((String) fromC.getSelectedItem())) {
                     Entrar(e);
                 }
             }
