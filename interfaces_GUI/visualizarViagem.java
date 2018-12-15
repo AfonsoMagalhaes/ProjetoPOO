@@ -11,48 +11,26 @@ import java.util.ArrayList;
 
 public class visualizarViagem extends JFrame {
 
-    private final Entrar j;
-    private JPanel canvas;
+    private escolheViagem j;
     private Main m;
-    private JButton b2, b3, b1;
+    private JButton b2, b3;
     private JLabel l1;
-    private JLabel local1, local2, local3;
+    private JLabel local1, local2, local3, dist;
     private JLabel pi11, pi12, pi13, pi21, pi22, pi23, pi31, pi32, pi33;
-    private boolean mestrado;
-    private String hot;
+    private String escolha;
+    private String[] tab;
     private int custo;
     private ArrayList<Local[]> viagens;
 
 
-    public visualizarViagem(Main m, Entrar j) {
+    public visualizarViagem(Main m, escolheViagem j) {
         this.m = m;
         this.j = j;
 
         viagens = new ArrayList<>();
-        mestrado = j.getMestrado();
-        hot = j.getHot();
-        custo = j.getCusto();
+        escolha = j.getEscolha();
 
-
-
-
-        System.out.println(mestrado);
-        System.out.println(hot);
-        System.out.println(custo);
-        if(mestrado==true) {
-            System.out.println("Vai calcular a viagem:");
-            ArrayList<Local[]> viagens = m.criaViagensMes(custo, hot);
-            for (Local[] v : viagens) {
-                System.out.println(v[0] + "\n\n" + v[1] + "\n\n" + v[2] + "\n");
-            }
-        } else {
-            m.escreveMaisVotado(hot);
-            System.out.println("Vai calcular a viagem:");
-            ArrayList<Local[]> viagens = m.criaViagensLic(custo, hot);
-            for (Local[] v : viagens) {
-                System.out.println(v[0] + "\n\n" + v[1] + "\n\n" + v[2] + "\n");
-            }
-        }
+        tab = escolha.split(", ");
 
 
         setTitle("A sua viagem de sonho!");
@@ -77,145 +55,168 @@ public class visualizarViagem extends JFrame {
         background.add(l1, gbc);
 
         //faz grid
-        JPanel local = new JPanel();
-        local.setLayout(new GridLayout(1, 4, 10, 10));
-        local.setOpaque(false);
         JPanel pis = new JPanel();
-        pis.setLayout(new GridLayout(3, 1, 10, 10));
+        pis.setLayout(new GridLayout(3, 1, 5, 5));
         pis.setOpaque(false);
 
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        local1 = new JLabel("Local1");
+        local1 = new JLabel(tab[0] + "   " + m.getCustoLocal(tab[0]) + "€");
         local1.setFont(new Font("Serif", Font.BOLD, 17));
-        local.add(local1);
+        gbc.insets = new Insets(20, 330, 0, 0);
+        background.add(local1, gbc);
 
-        local1 = new JLabel("custo total");
-        local1.setFont(new Font("Serif", Font.BOLD, 17));
-        local.add(local1);
+        JPanel aux1 = new JPanel();
+        aux1.setLayout(new GridLayout(1, 2, 10, 10));
+        aux1.setOpaque(false);
 
-        pi11 = new JLabel("pi1");
+        ArrayList<String> pI = new ArrayList<>();
+        pI = m.getPInteresseS(tab[0]);
+
+        pi11 = new JLabel(pI.get(0));
         pis.add(pi11);
-        pi12 = new JLabel("pi12");
+        pi12 = new JLabel(pI.get(1));
         pis.add(pi12);
-        pi13 = new JLabel("pi13");
+        pi13 = new JLabel(pI.get(2));
         pis.add(pi13);
 
-        local.add(pis);
+        aux1.add(pis);
 
-        pi11 = new JLabel("custo1");
-        pis.add(pi11);
-        pi12 = new JLabel("custo2");
-        pis.add(pi12);
-        pi13 = new JLabel("custo3");
-        pis.add(pi13);
 
-        local.add(pis);
+        JPanel pis123 = new JPanel();
+        pis123.setLayout(new GridLayout(3, 1, 5, 5));
+        pis123.setOpaque(false);
 
-        gbc.insets = new Insets(30, 400, 0, 0);
-        background.add(local, gbc);
+        ArrayList<Float> pICusto = new ArrayList<>();
+        pICusto = m.getPIntCusto(tab[0]);
+
+        pi11 = new JLabel(pICusto.get(0) + "€");
+        pis123.add(pi11);
+        pi12 = new JLabel(pICusto.get(1) + "€");
+        pis123.add(pi12);
+        pi13 = new JLabel(pICusto.get(2) + "€");
+        pis123.add(pi13);
+
+        aux1.add(pis123);
+
+        gbc.insets = new Insets(10, 400, 0, 0);
+        background.add(aux1, gbc);
+
+
+
 
 
         //2
 
         //faz grid
-        JPanel local2 = new JPanel();
-        local2.setLayout(new GridLayout(1, 4, 10, 10));
-        local2.setOpaque(false);
+
         JPanel pis2 = new JPanel();
-        pis2.setLayout(new GridLayout(3, 1, 10, 10));
+        pis2.setLayout(new GridLayout(3, 1, 5, 5));
         pis2.setOpaque(false);
 
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        local1 = new JLabel("Local1");
-        local1.setFont(new Font("Serif", Font.BOLD, 17));
-        local2.add(local1);
-
-        local1 = new JLabel("custo total");
-        local1.setFont(new Font("Serif", Font.BOLD, 17));
-        local2.add(local1);
-
-        pi21 = new JLabel("pi1");
-        pis2.add(pi21);
-        pi22 = new JLabel("pi12");
-        pis2.add(pi22);
-        pi23 = new JLabel("pi13");
-        pis2.add(pi23);
-
-        local2.add(pis2);
-
-        pi21 = new JLabel("custo1");
-        pis2.add(pi21);
-        pi22 = new JLabel("custo2");
-        pis2.add(pi22);
-        pi23 = new JLabel("custo3");
-        pis2.add(pi23);
-
-        local2.add(pis2);
-
-
+        local2 = new JLabel(tab[1] + "   " + m.getCustoLocal(tab[1]) + "€");
+        local2.setFont(new Font("Serif", Font.BOLD, 17));
+        gbc.insets = new Insets(40, 330, 0, 0);
         background.add(local2, gbc);
+
+
+        JPanel aux2 = new JPanel();
+        aux2.setLayout(new GridLayout(1, 2, 10, 10));
+        aux2.setOpaque(false);
+
+        pI = m.getPInteresseS(tab[1]);
+        pi21 = new JLabel(pI.get(0));
+        pis2.add(pi21);
+        pi22 = new JLabel(pI.get(1));
+        pis2.add(pi22);
+        pi23 = new JLabel(pI.get(2));
+        pis2.add(pi23);
+
+        aux2.add(pis2);
+
+        JPanel pis2b = new JPanel();
+        pis2b.setLayout(new GridLayout(3, 1, 0, 0));
+        pis2b.setOpaque(false);
+
+
+        pICusto = m.getPIntCusto(tab[1]);
+
+        pi21 = new JLabel(pICusto.get(0) + "€");
+        pis2b.add(pi21);
+        pi22 = new JLabel(pICusto.get(1) + "€");
+        pis2b.add(pi22);
+        pi23 = new JLabel(pICusto.get(2) + "€");
+        pis2b.add(pi23);
+
+        aux2.add(pis2b);
+
+        gbc.insets = new Insets(10, 400, 0, 0);
+        background.add(aux2, gbc);
+
+
+
 
 
         //3
 
         //faz grid
-        JPanel local3 = new JPanel();
-        local3.setLayout(new GridLayout(1, 4, 10, 10));
-        local3.setOpaque(false);
         JPanel pis3 = new JPanel();
-        pis3.setLayout(new GridLayout(3, 1, 10, 10));
+        pis3.setLayout(new GridLayout(3, 1));
         pis3.setOpaque(false);
 
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        local1 = new JLabel("Local1");
-        local1.setFont(new Font("Serif", Font.BOLD, 17));
-        local3.add(local1);
-
-        local1 = new JLabel("custo total");
-        local1.setFont(new Font("Serif", Font.BOLD, 17));
-        local3.add(local1);
-
-        pi21 = new JLabel("pi1");
-        pis3.add(pi21);
-        pi22 = new JLabel("pi12");
-        pis3.add(pi22);
-        pi23 = new JLabel("pi13");
-        pis3.add(pi23);
-
-        local3.add(pis3);
-
-        pi21 = new JLabel("custo1");
-        pis3.add(pi21);
-        pi22 = new JLabel("custo2");
-        pis3.add(pi22);
-        pi23 = new JLabel("custo3");
-        pis3.add(pi23);
-
-        local3.add(pis3);
-
-
+        local3 = new JLabel(tab[2] + "   " + m.getCustoLocal(tab[2]) + "€");
+        local3.setFont(new Font("Serif", Font.BOLD, 17));
+        gbc.insets = new Insets(40, 330, 0, 0);
         background.add(local3, gbc);
 
+        JPanel aux3 = new JPanel();
+        aux3.setLayout(new GridLayout(1, 2, 10, 10));
+        aux3.setOpaque(false);
 
-        gbc.insets = new Insets(100, 400, 0, 0);
+        pI = m.getPInteresseS(tab[2]);
+        pi21 = new JLabel(pI.get(0));
+        pis3.add(pi21);
+        pi22 = new JLabel(pI.get(1));
+        pis3.add(pi22);
+        pi23 = new JLabel(pI.get(2));
+        pis3.add(pi23);
 
-        b1 = new JButton("Ordenar por custo");
-        b1.addActionListener(new ActionListener() {
+        aux3.add(pis3);
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                iniciaMenu(e);
-            }
-        });
+        JPanel pis3b = new JPanel();
+        pis3b.setLayout(new GridLayout(3, 1, 0, 0));
+        pis3b.setOpaque(false);
 
-        background.add(b1, gbc);
-        b2 = new JButton("Voltar");
+        pICusto = m.getPIntCusto(tab[2]);
+
+        pi21 = new JLabel(pICusto.get(0) + "€");
+        pis3b.add(pi21);
+        pi22 = new JLabel(pICusto.get(1) + "€");
+        pis3b.add(pi22);
+        pi23 = new JLabel(pICusto.get(2) + "€");
+        pis3b.add(pi23);
+
+        aux3.add(pis3b);
+        gbc.insets = new Insets(10, 400, 0, 0);
+        background.add(aux3, gbc);
+
+
+        dist = new JLabel("Distancia total: " + (int) m.distancia3Locais(tab[0], tab[1], tab[2]) + "km");
+        dist.setFont(new Font("Serif", Font.BOLD, 17));
+        gbc.insets = new Insets(30, 330, 0, 0);
+        background.add(dist, gbc);
+
+        gbc.insets = new Insets(50, 400, 0, 0);
+
+
+        b2 = new JButton("Menu principal");
         b2.addActionListener(new ActionListener() {
 
             @Override
@@ -224,10 +225,10 @@ public class visualizarViagem extends JFrame {
             }
         });
 
+
+        background.add(b2, gbc);
+
         gbc.insets = new Insets(0, 400, 0, 0);
-        background.add(b2,gbc);
-
-
         b3= new JButton("Sair");
 
         b3.addActionListener(new ActionListener() {

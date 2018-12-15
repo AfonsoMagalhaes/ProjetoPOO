@@ -24,9 +24,9 @@ public class Entrar extends JFrame{
     private JTextField number1;
 
 
-    private void visualizarViagem(ActionEvent evt) {
+    private void escolheViagem(ActionEvent evt) {
         this.setVisible(false);
-        new visualizarViagem(m,this).setVisible(true);
+        new escolheViagem(m, this).setVisible(true);
     }
 
 
@@ -288,7 +288,7 @@ public class Entrar extends JFrame{
                 hot = (String) fromC.getSelectedItem();
             }
             custo = Integer.parseInt(number1.getText());
-            visualizarViagem(e);
+            escolheViagem(e);
 
         }
     }
