@@ -1,21 +1,101 @@
 0
-Local;Lisboa;112483;194793
-Museu;Torre de Belém;9h-20h;20;0;asd
-Museu;Mosteiro dos Jerónimos;9h-21h;15;0;ad
-Museu;Castelo de São Jorge;9h-22h;13;0;asd
+Local;Lisboa;112483;194793;
+Museu;Torre de Belém;9h-20h;20;0;Arte;
+Museu;Mosteiro dos Jerónimos;9h-21h;15;0;Arte;
+Museu;Castelo de São Jorge;9h-22h;13;0;Guerra;
 x
 Local;Vila Nova de Gaia;158902;462323;
-Museu;Real Companhia Velha;9h-22h;13;0;asd
-Museu;Porto Augusto's;9h-20h;20;0;asd
-Museu;Miradouro da Serra do Pilar;9h-21h;30;0;asd
+Museu;Real Companhia Velha;9h-22h;13;0;Vinho
+Museu;Porto Augusto's;9h-20h;20;0;Vinho
+Museu;Miradouro da Serra do Pilar;9h-21h;15;0;Paisagem
 x
-Local;Coimbra;151212;465454;
-Museu;Real Companhia Velha;9h-22h;13;0;asd
-Museu;Porto Augusto's;9h-20h;20;0;asd
-Museu;Miradouro da Serra do Pilar;9h-21h;10;0;asd
+Local;Porto;159025;465955;
+Parque Cultural;Ponte Luís I;9h-22h;13;0;Rio
+Museu;Torre dos Clérigos;9h-20h;20;0;Igreja
+Universidade;Livraria Lello;9h-22h;13;0;Livros
 x
-Local;Braga;156565;469898;
-Museu;Real Companhia Velha;9h-22h;13;0;asd
-Museu;Porto Augusto's;9h-20h;20;0;asd
-Museu;Miradouro da Serra do Pilar;9h-21h;15;0;asd
+Local;Évora;219597;177050;
+Parque Cultural;Capela dos Ossos;9h-20h;20;0;Capela
+Museu;Templo Romano de Evora;9h-22h;13;0;Ruinas
+Museu;Sé Catedral de Évora;9h-20h;20;0;Igreja
+x
+Local;Beja;224066;117126;
+Museu;Castelo de Beja;9h-20h;20;0;teste
+Museu;Museu Rainha D Leonor;9h-22h;13;0;teste
+Parque Cultural;Ruínas Romanas de Pisões;9h-20h;20;0;teste
+x
+Local;Faro;217209;5897;
+Parque Cultural;Ria Formosa;9h-20h;20;0;teste
+Parque Cultural;Ilha da Barreta;9h-22h;13;0;teste
+Parque Cultural;Ilha de Tavira;9h-21h;15;0;teste
+x
+Local;Leiria;142030;308642;
+Museu;Castelo de Leiria;9h-20h;20;0;teste
+Parque Aquático;Rio Lis;9h-20h;20;0;teste
+Museu;Sé de Leiria;9h-22h;13;0;teste
+x
+Local;Braga;174835;508841;
+Parque Cultural;Bom Jesus do Monte;9h-22h;13;0;teste
+Museu;Sé de Braga;9h-20h;20;0;teste
+Parque Cultural;Parque Nacional da Peneda;9h-21h;15;0;teste
+x
+Local;Amadora;104178;199700;
+Museu;Palácio Nacional de Queluz;9h-21h;15;0;teste
+Parque Diversões;Parque florestal de Monsanto;9h-20h;20;0;teste
+Parque Diversões;kidZania;9h-22h;13;0;teste
+x
+Local;Coimbra;174543;360038;
+Museu;Sé Velha;9h-22h;13;0;teste
+Parque Diversões;Portugal do Pequenitos;9h-20h;20;0;teste
+Museu;Igreja de Santa Cruz;9h-21h;15;0;teste
+x
+Local;Setúbal;134422;173977;
+Parque Diversões;Parque natural da Arrábida;9h-22h;13;0;teste
+Parque Cultural;Serra da Arrábida;9h-20h;20;0;teste
+Parque Cultural;Praia de Galapinhos;9h-20h;20;0;teste
+x
+Local;Funchal;90000;90000;
+Parque Cultural;Jardim Botanico da Madeira;9h-21h;15;0;teste
+Parque Cultural;Mercado dos lavradores;9h-20h;20;0;teste
+Parque Cultural;Parque de Santa Catarina;9h-21h;15;0;teste
+x
+Local;Almada;111115;190991
+Museu;Santuario nacional de Cristo Rei;9h-22h;13;0;teste
+Museu;Ponte 25 de Abril;9h-20h;20;0;teste
+Parque Cultural;Fragata D Fernando II;9h-21h;15;0;teste
+x
+Local;Cacém;116000;189000;
+Universidade;Palácio Nacional da Pena;9h-20h;20;0;teste
+Parque Cultural;Cabo da Roca;9h-22h;13;0;teste
+Museu;Castelo dos Mouros;9h-21h;15;0;teste
+x
+Local;Queluz;115000;190000;
+Universidade;Palácio Nacional de Queluz;9h-22h;13;0;teste
+Museu;Fabrica da Pólvora;9h-20h;20;0;teste
+Parque Cultural;Matinha de Queluz;9h-21h;15;0;teste
+x
+Local;Viseu;218985;410177;
+Museu;Sé de Viseu;9h-20h;20;0;teste
+Museu;Museu de Grão Vasco;9h-20h;20;0;teste
+Parque Cultural;Praia de Mangualde;9h-22h;13;0;teste
+x
+Local;Barreiro;117516;187682;
+Parque Cultural;Cais das Colunas;9h-22h;13;0;teste
+Parque Cultural;Ponta dos Corvos;9h-20h;20;0;teste
+Parque Cultural;Quinta da Fidalga;9h-21h;15;0;teste
+x
+Local;Odivelas;108950;203039;
+Museu;.Museu Nacional do Traje;9h-20h;20;0;teste
+Museu;Mosteiro de São Dinis;9h-20h;20;0;teste
+Museu;Museu Nacional do Teatro e da Dança;9h-22h;13;0;teste
+x
+Local;Aveiro;157117;408437;
+Museu;Costa Nova do Prado;9h-21h;15;0;teste
+Parque Cultural;Praia da Barra;9h-20h;20;0;teste
+Museu;Farol de Aveiro;9h-22h;13;0;teste
+x
+Local;Rio Tinto;160000;466000;
+Museu;Igreja matriz;9h-22h;13;0;teste
+Museu;Nucleo de Fundevila;9h-20h;20;0;teste
+Parque Cultural;Parque Urbano dos Amores;9h-20h;20;0;teste
 x
