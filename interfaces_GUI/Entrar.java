@@ -3,7 +3,6 @@ package interfaces_GUI;
 
 import po.Local;
 import po.Main;
-import po.pInteresse;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,18 +52,6 @@ public class Entrar extends JFrame{
         init();
     }
 
-    private void mudaCombo(ActionEvent event) {
-        ArrayList<Local> listaLocais = m.getLocais();
-        ArrayList<ArrayList<pInteresse>> aux = new ArrayList<>();
-
-        for (Local tmp : listaLocais) {
-            if (tmp.getCidade() == fromC.getActionCommand()) {
-                aux.add(tmp.getPInteresse());
-            }
-        }
-        pti = new JComboBox(aux.toArray());
-    }
-
     private void init() {
         setTitle("A sua viagem de sonho!");
         setSize(530, 400);
@@ -99,12 +86,7 @@ public class Entrar extends JFrame{
             locais.add(tmp.getCidade());
         }
         fromC = new JComboBox(locais.toArray());
-//        fromC.addActionListener(new ActionListener(){
-//            public void actionPerformed(ActionEvent event){
-//                mudaCombo(event);
-//            }
-//
-//        });
+        fromC.addActionListener(new mudaCombo());
         canvas.add(fromC);
 
         if (mestrado == true) {
@@ -118,27 +100,17 @@ public class Entrar extends JFrame{
         canvas.add(l2);
 
 
-        //________________________________________________________________________________________________________________
-
-
-       /* ArrayList<String> aux=new ArrayList<>();
+        ArrayList<String> aux = new ArrayList<>();
 
         for (Local tmp : listaLocais) {
-            if(tmp.getCidade()==fromC.getActionCommand()){
-                aux.add(tmp.getPInteresse());
+            if (tmp.getCidade().equalsIgnoreCase("Lisboa")) {
+                aux = m.getPInteresse(tmp);
             }
         }
         pti = new JComboBox(aux.toArray());
-        */
-
-
-        //deixei isto so para funcionar, mas é para usar o que está comentado em cima
-        pti = new JComboBox(locais.toArray());
-
-
         canvas.add(pti);
 
-        //_________________________________________________________________________________________________________________
+
 
 
         l2 = new JLabel("Máximo a gastar:", SwingConstants.CENTER);
@@ -191,6 +163,26 @@ public class Entrar extends JFrame{
 
 
         this.setVisible(true);
+    }
+
+    private class mudaCombo implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            ArrayList<Local> listaLocais = m.getLocais();
+            ArrayList<String> aux = new ArrayList<>();
+            String cidade = fromC.getSelectedItem().toString();
+            System.out.println(cidade);
+
+            for (Local tmp : listaLocais) {
+                if (tmp.getCidade().equals(cidade)) {
+                    System.out.println(tmp.getCidade());
+                    aux = m.getPInteresse(tmp);
+                }
+            }
+            System.out.println(aux.toString());
+            DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel(aux.toArray());
+            pti.setModel(defaultComboBoxModel);
+        }
     }
 
     public boolean getMestrado() {
