@@ -354,10 +354,10 @@ public class Main extends JFrame{
         listaAlunos.add(aluno);
     }
 
-    public ArrayList<pInteresse> getPInteresse(Local l){
-        ArrayList<pInteresse> pInteresses = new ArrayList<>();
+    public ArrayList<String> getPInteresse(Local l) {
+        ArrayList<String> pInteresses = new ArrayList<>();
         for(pInteresse pi: l.getPInteresse()){
-            pInteresses.add(pi);
+            pInteresses.add(pi.getNome());
         }
         return pInteresses;
     }
