@@ -5,7 +5,10 @@ import interfaces_GUI.janelaInicio;
 
 import javax.swing.*;
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class Main extends JFrame{
@@ -205,6 +208,20 @@ public class Main extends JFrame{
         return custo;
     }
 
+    public float getCustoLocal(String local) {
+        float custo = 0;
+
+        for (Local l : locais) {
+            if (local.equals(l.getCidade())) {
+                for (pInteresse i : l.getPInteresse()) {
+                    custo += i.getEntrada() + i.getCustoextra();// alterar de novo os atributos dos pontos de interesse
+                }
+            }
+        }
+
+        return custo;
+    } // custo de um local
+
     /**
      * Calcula a distância em linha reta entre 2 locais, tendo em conta as suas coordenadas x e y.
      * @param local1 Local inicial.
@@ -213,6 +230,42 @@ public class Main extends JFrame{
      */
     public double distanciasTotais(Local local1, Local local2) {
         return Math.sqrt(Math.pow(local1.getX()-local2.getX(),2)+Math.pow(local1.getY()-local2.getY(),2));
+    }
+
+    public double distancia3Locais(String local1, String local2, String local3) {
+        double distA = 0;
+        double distB = 0;
+        double distC = 0;
+        double resultado = 0;
+        ArrayList<Float> pInteresses = new ArrayList<>();
+        Local local1a = null;
+        Local local2a = null;
+        Local local3a = null;
+        for (Local l : locais) {
+            if (local1.equals(l.getCidade())) {
+                local1a = l;
+            }
+            if (local2.equals(l.getCidade())) {
+                local2a = l;
+            }
+            if (local3.equals(l.getCidade())) {
+                local3a = l;
+            }
+        }
+        distA = distanciasTotais(local1a, local2a);
+        System.out.println(distA);
+        distB = distanciasTotais(local1a, local3a);
+        System.out.println(distB);
+        distC = distanciasTotais(local2a, local3a);
+        System.out.println(distC);
+        resultado = distA + distB;
+        if (distA + distC < resultado) {
+            resultado = distA + distC;
+        }
+        if (distB + distC < resultado) {
+            resultado = distB + distC;
+        }
+        return resultado;
     }
 
     /**
@@ -454,6 +507,33 @@ public class Main extends JFrame{
         }
         return pInteresses;
     } //devolve a lista dos pontos de interesse de um local
+
+    public ArrayList<String> getPInteresseS(String local) {
+        ArrayList<String> pInteresses = new ArrayList<>();
+        for (Local l : locais) {
+            if (local.equals(l.getCidade())) {
+                for (pInteresse pi : l.getPInteresse()) {
+                    pInteresses.add(pi.getNome());
+                }
+            }
+        }
+        return pInteresses;
+    } //devolve a lista dos pontos de interesse de um local
+
+
+    public ArrayList<Float> getPIntCusto(String local) {
+        ArrayList<Float> pInteresses = new ArrayList<>();
+        for (Local l : locais) {
+            if (local.equals(l.getCidade())) {
+                for (pInteresse pi : l.getPInteresse()) {
+                    float custo = pi.getEntrada() + pi.getCustoextra();
+                    pInteresses.add(custo);
+                }
+            }
+        }
+        return pInteresses;
+    } //devolve a lista do custo dos pontos de interesse de um local
+
 
     public String getLocal(String pi){
         String local=null;

@@ -11,62 +11,36 @@ import java.util.ArrayList;
 
 public class visualizarViagem extends JFrame {
 
-    private final Entrar j;
-    private JPanel canvas;
+    private escolheViagem j;
     private Main m;
     private JButton b2, b3;
     private JLabel l1;
-    private boolean mestrado;
-    private String hot;
+    private JLabel local1, local2, local3, dist;
+    private JLabel pi11, pi12, pi13, pi21, pi22, pi23, pi31, pi32, pi33;
+    private String escolha;
+    private String[] tab;
     private int custo;
     private ArrayList<Local[]> viagens;
 
 
-    public visualizarViagem(Main m, Entrar j) {
+    public visualizarViagem(Main m, escolheViagem j) {
         this.m = m;
         this.j = j;
 
         viagens = new ArrayList<>();
-        mestrado = j.getMestrado();
-        hot = j.getHot();
-        custo = j.getCusto();
+        escolha = j.getEscolha();
 
-
-
-
-        System.out.println(mestrado);
-        System.out.println(hot);
-        System.out.println(custo);
-        if(mestrado==true) {
-            System.out.println("Vai calcular a viagem:");
-            ArrayList<Local[]> viagens = m.criaViagensMes(custo, hot);
-            for (Local[] v : viagens) {
-                System.out.println(v[0] + "\n\n" + v[1] + "\n\n" + v[2] + "\n");
-            }
-        } else {
-            m.escreveMaisVotado(hot);
-            System.out.println("Vai calcular a viagem:");
-            ArrayList<Local[]> viagens = m.criaViagensLic(custo, hot);
-            for (Local[] v : viagens) {
-                System.out.println(v[0] + "\n\n" + v[1] + "\n\n" + v[2] + "\n");
-            }
-        }
-
-
-
-
-
-
+        tab = escolha.split(", ");
 
 
         setTitle("A sua viagem de sonho!");
-        setSize(530,400);
+        setSize(900, 620);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
         setLayout(new GridLayout());
-        JLabel background=new JLabel(new ImageIcon(this.getClass().getResource("bagagem.jpg")));
+        JLabel background = new JLabel(new ImageIcon(this.getClass().getResource("img.jpg")));
 
         add(background);
 
@@ -74,21 +48,175 @@ public class visualizarViagem extends JFrame {
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+
+        gbc.insets = new Insets(0, 400, 0, 0);
+        l1 = new JLabel("<html><h1><strong><b><font color=\"black\">A sua viagem</font></b></strong></h1><hr></html>");
+        background.add(l1, gbc);
+
+        //faz grid
+        JPanel pis = new JPanel();
+        pis.setLayout(new GridLayout(3, 1, 5, 5));
+        pis.setOpaque(false);
+
         gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        local1 = new JLabel(tab[0] + "   " + m.getCustoLocal(tab[0]) + "€");
+        local1.setFont(new Font("Serif", Font.BOLD, 17));
+        gbc.insets = new Insets(20, 330, 0, 0);
+        background.add(local1, gbc);
+
+        JPanel aux1 = new JPanel();
+        aux1.setLayout(new GridLayout(1, 2, 10, 10));
+        aux1.setOpaque(false);
+
+        ArrayList<String> pI = new ArrayList<>();
+        pI = m.getPInteresseS(tab[0]);
+
+        pi11 = new JLabel(pI.get(0));
+        pis.add(pi11);
+        pi12 = new JLabel(pI.get(1));
+        pis.add(pi12);
+        pi13 = new JLabel(pI.get(2));
+        pis.add(pi13);
+
+        aux1.add(pis);
 
 
-        canvas = new JPanel();
-        canvas.setLayout(new GridLayout(3,2,10,10));
+        JPanel pis123 = new JPanel();
+        pis123.setLayout(new GridLayout(3, 1, 5, 5));
+        pis123.setOpaque(false);
 
-        l1 = new JLabel("Locais:\n", SwingConstants.CENTER);
-        l1.setOpaque(true);
-        background.add(l1,gbc);
+        ArrayList<Float> pICusto = new ArrayList<>();
+        pICusto = m.getPIntCusto(tab[0]);
 
-        gbc.anchor = GridBagConstraints.SOUTH;
+        pi11 = new JLabel(pICusto.get(0) + "€");
+        pis123.add(pi11);
+        pi12 = new JLabel(pICusto.get(1) + "€");
+        pis123.add(pi12);
+        pi13 = new JLabel(pICusto.get(2) + "€");
+        pis123.add(pi13);
+
+        aux1.add(pis123);
+
+        gbc.insets = new Insets(10, 400, 0, 0);
+        background.add(aux1, gbc);
 
 
-        gbc.insets = new Insets(50, 0, 0, 0);
-        b2 = new JButton("Voltar");
+
+
+
+        //2
+
+        //faz grid
+
+        JPanel pis2 = new JPanel();
+        pis2.setLayout(new GridLayout(3, 1, 5, 5));
+        pis2.setOpaque(false);
+
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        local2 = new JLabel(tab[1] + "   " + m.getCustoLocal(tab[1]) + "€");
+        local2.setFont(new Font("Serif", Font.BOLD, 17));
+        gbc.insets = new Insets(40, 330, 0, 0);
+        background.add(local2, gbc);
+
+
+        JPanel aux2 = new JPanel();
+        aux2.setLayout(new GridLayout(1, 2, 10, 10));
+        aux2.setOpaque(false);
+
+        pI = m.getPInteresseS(tab[1]);
+        pi21 = new JLabel(pI.get(0));
+        pis2.add(pi21);
+        pi22 = new JLabel(pI.get(1));
+        pis2.add(pi22);
+        pi23 = new JLabel(pI.get(2));
+        pis2.add(pi23);
+
+        aux2.add(pis2);
+
+        JPanel pis2b = new JPanel();
+        pis2b.setLayout(new GridLayout(3, 1, 0, 0));
+        pis2b.setOpaque(false);
+
+
+        pICusto = m.getPIntCusto(tab[1]);
+
+        pi21 = new JLabel(pICusto.get(0) + "€");
+        pis2b.add(pi21);
+        pi22 = new JLabel(pICusto.get(1) + "€");
+        pis2b.add(pi22);
+        pi23 = new JLabel(pICusto.get(2) + "€");
+        pis2b.add(pi23);
+
+        aux2.add(pis2b);
+
+        gbc.insets = new Insets(10, 400, 0, 0);
+        background.add(aux2, gbc);
+
+
+
+
+
+        //3
+
+        //faz grid
+        JPanel pis3 = new JPanel();
+        pis3.setLayout(new GridLayout(3, 1));
+        pis3.setOpaque(false);
+
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        local3 = new JLabel(tab[2] + "   " + m.getCustoLocal(tab[2]) + "€");
+        local3.setFont(new Font("Serif", Font.BOLD, 17));
+        gbc.insets = new Insets(40, 330, 0, 0);
+        background.add(local3, gbc);
+
+        JPanel aux3 = new JPanel();
+        aux3.setLayout(new GridLayout(1, 2, 10, 10));
+        aux3.setOpaque(false);
+
+        pI = m.getPInteresseS(tab[2]);
+        pi21 = new JLabel(pI.get(0));
+        pis3.add(pi21);
+        pi22 = new JLabel(pI.get(1));
+        pis3.add(pi22);
+        pi23 = new JLabel(pI.get(2));
+        pis3.add(pi23);
+
+        aux3.add(pis3);
+
+        JPanel pis3b = new JPanel();
+        pis3b.setLayout(new GridLayout(3, 1, 0, 0));
+        pis3b.setOpaque(false);
+
+        pICusto = m.getPIntCusto(tab[2]);
+
+        pi21 = new JLabel(pICusto.get(0) + "€");
+        pis3b.add(pi21);
+        pi22 = new JLabel(pICusto.get(1) + "€");
+        pis3b.add(pi22);
+        pi23 = new JLabel(pICusto.get(2) + "€");
+        pis3b.add(pi23);
+
+        aux3.add(pis3b);
+        gbc.insets = new Insets(10, 400, 0, 0);
+        background.add(aux3, gbc);
+
+
+        dist = new JLabel("Distancia total: " + (int) m.distancia3Locais(tab[0], tab[1], tab[2]) + "km");
+        dist.setFont(new Font("Serif", Font.BOLD, 17));
+        gbc.insets = new Insets(30, 330, 0, 0);
+        background.add(dist, gbc);
+
+        gbc.insets = new Insets(50, 400, 0, 0);
+
+
+        b2 = new JButton("Menu principal");
         b2.addActionListener(new ActionListener() {
 
             @Override
@@ -98,9 +226,9 @@ public class visualizarViagem extends JFrame {
         });
 
 
-        background.add(b2,gbc);
+        background.add(b2, gbc);
 
-        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.insets = new Insets(0, 400, 0, 0);
         b3= new JButton("Sair");
 
         b3.addActionListener(new ActionListener() {

@@ -58,20 +58,22 @@ public class locaisPopulares extends JFrame {
         canvas = new JPanel();
         canvas.setLayout(new GridLayout(3,2,10,10));
 
+        gbc.insets = new Insets(50, 400, 0, 0);
+
+
+        l1 = new JLabel("1. " + maisVotados.get(0) + ", " + m.getLocal(maisVotados.get(0)), SwingConstants.CENTER);
+
+        l1.setFont(new Font("Serif", Font.PLAIN, 35));
+
+        background.add(l1, gbc);
+
+        l2 = new JLabel("2. " + maisVotados.get(1) + ", " + m.getLocal(maisVotados.get(1)), SwingConstants.CENTER);
+
+        l2.setFont(new Font("Serif", Font.PLAIN, 30));
         gbc.insets = new Insets(10, 400, 0, 0);
-        l1 = new JLabel("1. " + maisVotados.get(0), SwingConstants.CENTER);
-
-        l1.setFont(new Font("Serif", Font.PLAIN, 40));
-
-        background.add(l1,gbc);
-
-        l2 = new JLabel("2. " + maisVotados.get(1), SwingConstants.CENTER);
-
-        l2.setFont(new Font("Serif", Font.PLAIN, 32));
-
         background.add(l2, gbc);
 
-        l3 = new JLabel("3. " + maisVotados.get(2), SwingConstants.CENTER);
+        l3 = new JLabel("3. " + maisVotados.get(2) + ", " + m.getLocal(maisVotados.get(2)), SwingConstants.CENTER);
 
         l3.setFont(new Font("Serif", Font.PLAIN, 25));
 

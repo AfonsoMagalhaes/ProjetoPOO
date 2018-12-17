@@ -43,8 +43,6 @@ public class Menu extends JFrame{
         gbc.insets = new Insets(0, 500, 0, 0);
         l1 =new JLabel("<html><h1><strong><b><font color=\"black\">A sua viagem de sonho!</font></b></strong></h1><hr></html>");
 
-        l1.setBackground(Color.GRAY);
-//        l1.setOpaque(true);
         background.add(l1, gbc);
 
         JPanel aux = new JPanel();
