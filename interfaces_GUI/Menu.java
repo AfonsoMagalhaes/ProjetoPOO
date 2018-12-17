@@ -11,6 +11,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
+/**
+ * Classe que apresenta o menu incial
+ */
 class Menu extends JFrame {
     private Main m;
     private JComboBox<ArrayList> fromC;
@@ -18,6 +21,9 @@ class Menu extends JFrame {
     private boolean mestrado;
 
 
+    /**
+     * @param m recebe todas as funções do main
+     */
     Menu(Main m) {
         this.m = m;
 
@@ -45,7 +51,6 @@ class Menu extends JFrame {
         JPanel aux = new JPanel();
         aux.setLayout(new GridLayout(1, 2, 10, 10));
         aux.setOpaque(false);
-
 
 
         gbc.anchor = GridBagConstraints.CENTER;
@@ -92,16 +97,25 @@ class Menu extends JFrame {
 
     }
 
+    /**
+     * chama a janela para apresentar os locais mais populares
+     */
     private void locaispopulares() {
         this.setVisible(false);
         new locaisPopulares(m).setVisible(true);
     }
 
+    /**
+     * Chama a função de registo dos utilizadores
+     */
     private void Registo() {
         this.setVisible(false);
         new Registo(m).setVisible(true);
     }
 
+    /**
+     * chama o menu de entrada onde o utilizador escolhe a viagem
+     */
     private void Entrar() {
         for (Aluno tmp : listaAlunos) {
             if (tmp.getNome().equalsIgnoreCase((String) fromC.getSelectedItem())) {
@@ -118,10 +132,16 @@ class Menu extends JFrame {
         new Entrar(m, this).setVisible(true);
     }
 
+    /**
+     * @return devolve true caso o aluno seja de mestrado ou false caso seja de licenciatura
+     */
     boolean getMestrado() {
         return mestrado;
     }
 
+    /**
+     * chama a função Entrar verificando se o utilizador está ou não presente na lista de utilizadores
+     */
     private class ButaoEntrar implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

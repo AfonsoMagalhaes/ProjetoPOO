@@ -6,9 +6,15 @@ import po.Main;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Janela inicial apresentada ao utilizador
+ */
 public class janelaInicio extends JFrame {
     private Main m;
 
+    /**
+     * @param m recebe as funções todas presentes no main
+     */
     public janelaInicio(Main m) {
         this.m = m;
 
@@ -45,11 +51,13 @@ public class janelaInicio extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Chama a janela do menu
+     */
     private void iniciaMenu() {
         this.setVisible(false);
         new Menu(m).setVisible(true);
     }
-
 
 
 }

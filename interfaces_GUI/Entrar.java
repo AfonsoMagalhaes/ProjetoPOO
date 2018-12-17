@@ -23,6 +23,12 @@ class Entrar extends JFrame {
     private JTextField number1;
 
 
+    /**
+     * Esta função é chamada depois de ser feito o registo
+     *
+     * @param m contem todas as funçoes do Main
+     * @param j contem todos os dados referentes à janela de registo
+     */
     Entrar(Main m, Registo j) {
         this.m = m;
         mestrado = j.getMestrado();
@@ -35,6 +41,11 @@ class Entrar extends JFrame {
     }
 
 
+    /**
+     * Esta função é chamada depois de carregar em entrar no Menu
+     * @param m recebe todas as funçoes do main
+     * @param menu  recebe todos os dados relativos ao menu (se é mestrado ou não)
+     */
     Entrar(Main m, Menu menu) {
         this.m = m;
         mestrado = menu.getMestrado();
@@ -45,6 +56,11 @@ class Entrar extends JFrame {
         }
     }
 
+    /**
+     * Esta função vai escolher verificar primeiro se é possivel criar viagem com o montante introduzido
+     * Transmite função de erro caso não seja
+     * Caso seja possivel, chama a janela seguinte e envia os parametros
+     */
     private void escolheViagem() {
         ArrayList<Local[]> viagens;
 
@@ -62,6 +78,9 @@ class Entrar extends JFrame {
         }
     }
 
+    /**
+     * função para voltar ao menu anterior
+     */
     private void iniciaMenu() {
 
         this.setVisible(false);
@@ -69,6 +88,9 @@ class Entrar extends JFrame {
 
     }
 
+    /**
+     * função chamada caso o utilizador seja de licenciatura
+     */
     private void initLic() {
         setTitle("A sua viagem de sonho!");
         setSize(900, 620);
@@ -138,7 +160,6 @@ class Entrar extends JFrame {
         gbc.insets = new Insets(40, 600, 0, 0);
         background.add(b1, gbc);
 
-        
 
         gbc.anchor = GridBagConstraints.SOUTH;
 
@@ -161,6 +182,9 @@ class Entrar extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * função chamada caso o aluno seja de mestrado
+     */
     private void initMes() {
         setTitle("A sua viagem de sonho!");
         setSize(900, 620);
@@ -233,18 +257,30 @@ class Entrar extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * @return função que devolve true caso seja de mestrado ou false caso não seja
+     */
     boolean getMestrado() {
         return mestrado;
     }
 
+    /**
+     * @return devolve o hot
+     */
     String getHot() {
         return hot;
     }
 
+    /**
+     * @return devolve o custo introduzido pelo utilizador
+     */
     int getCusto() {
         return custo;
     }
 
+    /**
+     * muda o conteudo da comboBox dos pis em função da cidade escolhida
+     */
     private class mudaCombo implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -263,6 +299,9 @@ class Entrar extends JFrame {
         }
     }
 
+    /**
+     * recolhe os dados do utilizador e chama a função para ir para a janela seguinte
+     */
     private class BtnCalcula implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

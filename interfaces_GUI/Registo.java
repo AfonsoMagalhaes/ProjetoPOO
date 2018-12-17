@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
+/**
+ * Janela que permite o registo dos utilizadores
+ */
 class Registo extends JFrame {
 
     private Main m;
@@ -15,6 +18,9 @@ class Registo extends JFrame {
     private boolean mestrado;
 
 
+    /**
+     * @param m todas as funções presentes na Main
+     */
     Registo(Main m) {
         this.m=m;
         setTitle("A sua viagem de sonho!");
@@ -41,7 +47,7 @@ class Registo extends JFrame {
         l1.setFont(new Font("Serif", Font.BOLD, 17));
         canvas.add(l1);
 
-         n1= new JTextField(10);
+        n1= new JTextField(10);
         canvas.add(n1);
 
 
@@ -80,10 +86,6 @@ class Registo extends JFrame {
         background.add(canvas,gbc);
 
 
-
-
-
-
         gbc.anchor = GridBagConstraints.SOUTH;
 
 
@@ -102,20 +104,33 @@ class Registo extends JFrame {
         background.add(b3,gbc);
 
 
-
         this.setVisible(true);
     }
 
+    /**
+     * volta ao menu caso carregue no botão voltar
+     *
+     * @param evt
+     */
     private void iniciaMenu(ActionEvent evt) {
         this.setVisible(false);
         new Menu(m).setVisible(true);
     }
 
+    /**
+     * chama a janela de Entrar enviando os dados recolhidos
+     * @param evt
+     */
     private void Entrar(ActionEvent evt) {
         this.setVisible(false);
         new Entrar(m, this).setVisible(true);
     }
 
+    /**
+     * Regista o utilizador recolhendo os dados inseridos
+     * @param e
+     * @throws IOException
+     */
     private void BtnRegista(ActionEvent e) throws IOException {
         boolean registado;
         String nome = n1.getText();
@@ -135,6 +150,9 @@ class Registo extends JFrame {
 
     }
 
+    /**
+     * @return devolve true caso seja de mestrado ou false caso seja de licenciatura
+     */
     boolean getMestrado() {
         return mestrado;
     }

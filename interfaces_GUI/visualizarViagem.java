@@ -6,11 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * permite visualizar o resultado final da Viagem
+ */
 class visualizarViagem extends JFrame {
 
     private Main m;
 
 
+    /**
+     * @param m funções presentes na classe Main
+     * @param j dados recolhidos na última janela
+     */
     visualizarViagem(Main m, escolheViagem j) {
         this.m = m;
 
@@ -40,6 +47,8 @@ class visualizarViagem extends JFrame {
         JLabel l1 = new JLabel("<html><h1><strong><b><font color=\"black\">A sua viagem</font></b></strong></h1><hr></html>");
         background.add(l1, gbc);
 
+
+        //linha 1 das viagens
         //faz grid
         JPanel pis = new JPanel();
         pis.setLayout(new GridLayout(3, 1, 5, 5));
@@ -88,10 +97,7 @@ class visualizarViagem extends JFrame {
         background.add(aux1, gbc);
 
 
-
-
-
-        //2
+        //linha 2 das viagens
 
         //faz grid
 
@@ -142,10 +148,7 @@ class visualizarViagem extends JFrame {
         background.add(aux2, gbc);
 
 
-
-
-
-        //3
+        //linha 3 das viagens
 
         //faz grid
         JPanel pis3 = new JPanel();
@@ -214,10 +217,12 @@ class visualizarViagem extends JFrame {
         background.add(b3,gbc);
 
 
-
         this.setVisible(true);
     }
 
+    /**
+     * volta ao menu inicial
+     */
     private void iniciaMenu() {
         this.setVisible(false);
 

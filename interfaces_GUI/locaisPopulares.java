@@ -6,9 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Janela que apresenta os locais mais populares
+ */
 class locaisPopulares extends JFrame {
     private Main m;
 
+    /**
+     * @param m recebe todas as funções presentes no main
+     */
     locaisPopulares(Main m) {
         this.m = m;
         ArrayList<String> maisVotados;
@@ -86,10 +92,12 @@ class locaisPopulares extends JFrame {
         background.add(b3,gbc);
 
 
-
         this.setVisible(true);
     }
 
+    /**
+     * volta ao menu inicial
+     */
     private void iniciaMenu() {
         this.setVisible(false);
         new Menu(m).setVisible(true);

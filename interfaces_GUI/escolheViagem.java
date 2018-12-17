@@ -9,12 +9,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * menu que apresenta a janela para escolher uma das viagens possiveis
+ */
 class escolheViagem extends JFrame {
     private Main m;
     private JComboBox<String> fromC;
     private String escolha;
     private ArrayList<Local[]> viagens;
 
+    /**
+     * função chamada para criar a janela
+     *
+     * @param m contem as funções relativas ao main
+     * @param j contem os dados obtidos na janela anterior
+     */
     escolheViagem(Main m, Entrar j) {
         this.m = m;
 
@@ -30,7 +39,6 @@ class escolheViagem extends JFrame {
             m.escreveMaisVotado(hot);
             viagens = m.criaViagensLic(custo, hot);
         }
-
 
 
         setTitle("A sua viagem de sonho!");
@@ -122,20 +130,32 @@ class escolheViagem extends JFrame {
 
     }
 
+    /**
+     * chama a janela de visualizar a Viagem
+     */
     private void visualizarViagem() {
         this.setVisible(false);
         new visualizarViagem(m, this).setVisible(true);
     }
 
+    /**
+     * Chama a janela do menu inicial
+     */
     private void iniciaMenu() {
         this.setVisible(false);
         new Menu(m).setVisible(true);
     }
 
+    /**
+     * @return devolve a escolha feita pelo utilizador
+     */
     String getEscolha() {
         return escolha;
     }
 
+    /**
+     * le a escolha feita pelo utilizador e chama a função para ir para a janela seguinte
+     */
     private class BtnCalcula implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
