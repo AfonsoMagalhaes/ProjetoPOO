@@ -24,7 +24,7 @@ public class locaisPopulares extends JFrame {
         this.m = m;
         maisVotados = new ArrayList<>();
         maisVotados = m.getMaisVotados();
-//        System.out.println(Arrays.toString(new ArrayList[]{maisVotados}));
+
 
         setTitle("A sua viagem de sonho!");
         setSize(900, 620);

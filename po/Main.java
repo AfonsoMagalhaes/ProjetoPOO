@@ -38,12 +38,12 @@ public class Main extends JFrame{
         }
         for (Aluno aluno : listaAlunos) {
             System.out.println(aluno.toString());
-        }*/
+        }
         ArrayList<Local[]> viagens = criaViagensMes(200, "Lisboa");
         ArrayList<Local[]> viagensOrdenadas = ordenaViagens(viagens, true);
         for(Local[] v: viagensOrdenadas){
             System.out.println(viagemString(v));
-        }
+        }*/
         new janelaInicio(this).setVisible(true);
     }
 
@@ -58,7 +58,6 @@ public class Main extends JFrame{
     public boolean registo(String nome, String email, boolean mestrado) throws IOException {
         //verifica se a pessoa já está registada
         for (Aluno tmp : listaAlunos) {
-            System.out.println(tmp.getNome());
             if (tmp.getNome().equalsIgnoreCase(nome)) {
                 return false;
             }
@@ -112,7 +111,7 @@ public class Main extends JFrame{
                     locais.add(l);
                 } else{continue;}
             }
-//            System.out.println(locais.toString());
+
         } catch (IOException e) {
             System.out.println("Excepcao a carregar ficheiro txt: " + e);
         }
@@ -253,11 +252,8 @@ public class Main extends JFrame{
             }
         }
         distA = distanciasTotais(local1a, local2a);
-        System.out.println(distA);
         distB = distanciasTotais(local1a, local3a);
-        System.out.println(distB);
         distC = distanciasTotais(local2a, local3a);
-        System.out.println(distC);
         resultado = distA + distB;
         if (distA + distC < resultado) {
             resultado = distA + distC;

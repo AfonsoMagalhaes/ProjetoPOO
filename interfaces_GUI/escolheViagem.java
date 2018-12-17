@@ -30,23 +30,13 @@ public class escolheViagem extends JFrame {
         custo = j.getCusto();
 
 
-        System.out.println(mestrado);
-        System.out.println(hot);
-        System.out.println(custo);
         if (mestrado == true) {
-            System.out.println("Vai calcular a viagem:");
-            ArrayList<Local[]> viagens = m.criaViagensMes(custo, hot);
-            for (Local[] v : viagens) {
-                System.out.println(v[0] + "\n\n" + v[1] + "\n\n" + v[2] + "\n");
-            }
+            viagens = m.criaViagensMes(custo, hot);
         } else {
             m.escreveMaisVotado(hot);
-            System.out.println("Vai calcular a viagem:");
-            ArrayList<Local[]> viagens = m.criaViagensLic(custo, hot);
-            for (Local[] v : viagens) {
-                System.out.println(v[0] + "\n\n" + v[1] + "\n\n" + v[2] + "\n");
-            }
+            viagens = m.criaViagensLic(custo, hot);
         }
+
 
 
         setTitle("A sua viagem de sonho!");
@@ -66,11 +56,18 @@ public class escolheViagem extends JFrame {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.anchor = GridBagConstraints.NORTH;
 
-        gbc.insets = new Insets(0, 600, 0, 0);
 
+//        String[] items = {"Lisboa, Coimbra, Porto, 100€", "Faro, Viseu, Braga, 90€"};
+//        fromC = new JComboBox<>(items);
+        ArrayList<String> locais = new ArrayList<String>();
 
-        String[] items = {"Lisboa, Coimbra, Porto, 100€", "Faro, Viseu, Braga, 90€"};
-        fromC = new JComboBox<>(items);
+        for (Local[] tmp : viagens) {
+
+            locais.add(m.viagemString(tmp));
+
+        }
+        fromC = new JComboBox(locais.toArray());
+        gbc.insets = new Insets(0, 450, 0, 0);
         background.add(fromC, gbc);
 
 
@@ -79,7 +76,15 @@ public class escolheViagem extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //iniciaMenu(e);
+                ArrayList<Local[]> viagensOrdenadas = m.ordenaViagens(viagens, true);
+                ArrayList<String> locais = new ArrayList<String>();
+
+                for (Local[] tmp : viagensOrdenadas) {
+                    locais.add(m.viagemString(tmp));
+
+                }
+                DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel(locais.toArray());
+                fromC.setModel(defaultComboBoxModel);
             }
         });
         gbc.insets = new Insets(40, 600, 0, 0);

@@ -25,15 +25,29 @@ public class Entrar extends JFrame{
 
 
     private void escolheViagem(ActionEvent evt) {
-        this.setVisible(false);
-        new escolheViagem(m, this).setVisible(true);
+        ArrayList<Local[]> viagens = new ArrayList<>();
+
+        if (mestrado == true) {
+            viagens = m.criaViagensMes(custo, hot);
+        } else {
+            viagens = m.criaViagensLic(custo, hot);
+        }
+
+        if (viagens.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Não existem viagens possíveis para esse valor!", "ERRO", 1);
+        } else {
+            this.setVisible(false);
+            new escolheViagem(m, this).setVisible(true);
+        }
     }
 
 
 
     private void iniciaMenu(ActionEvent evt) {
+
         this.setVisible(false);
         new Menu(m).setVisible(true);
+
     }
 
     public Entrar(Main m, Registo j) {
@@ -253,15 +267,13 @@ public class Entrar extends JFrame{
             ArrayList<Local> listaLocais = m.getLocais();
             ArrayList<String> aux = new ArrayList<>();
             String cidade = fromC.getSelectedItem().toString();
-            System.out.println(cidade);
 
             for (Local tmp : listaLocais) {
                 if (tmp.getCidade().equals(cidade)) {
-                    System.out.println(tmp.getCidade());
                     aux = m.getPInteresse(tmp);
                 }
             }
-            System.out.println(aux.toString());
+
             DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel(aux.toArray());
             pti.setModel(defaultComboBoxModel);
         }
