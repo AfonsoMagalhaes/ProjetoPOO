@@ -51,8 +51,6 @@ class escolheViagem extends JFrame {
         gbc.anchor = GridBagConstraints.NORTH;
 
 
-//        String[] items = {"Lisboa, Coimbra, Porto, 100€", "Faro, Viseu, Braga, 90€"};
-//        fromC = new JComboBox<>(items);
         ArrayList<String> locais = new ArrayList<>();
 
         for (Local[] tmp : viagens) {
@@ -65,8 +63,8 @@ class escolheViagem extends JFrame {
         background.add(fromC, gbc);
 
 
-        JButton ordena = new JButton("Reordena Locais por custo");
-        ordena.addActionListener(e -> {
+        JButton ordenaA = new JButton("Reordenar por ordem ascendente");
+        ordenaA.addActionListener(e -> {
             ArrayList<Local[]> viagensOrdenadas = m.ordenaViagens(viagens, true);
             ArrayList<String> locais1 = new ArrayList<>();
 
@@ -77,13 +75,29 @@ class escolheViagem extends JFrame {
             DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel(locais1.toArray());
             fromC.setModel(defaultComboBoxModel);
         });
-        gbc.insets = new Insets(40, 600, 0, 0);
-        background.add(ordena, gbc);
+        gbc.insets = new Insets(20, 500, 0, 0);
+        background.add(ordenaA, gbc);
+
+        JButton ordenaD = new JButton("Reordenar por ordem descendente");
+        ordenaD.addActionListener(e -> {
+            ArrayList<Local[]> viagensOrdenadas = m.ordenaViagens(viagens, false);
+            ArrayList<String> locais1 = new ArrayList<>();
+
+            for (Local[] tmp : viagensOrdenadas) {
+                locais1.add(m.viagemString(tmp));
+
+            }
+            DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel(locais1.toArray());
+            fromC.setModel(defaultComboBoxModel);
+        });
+
+        gbc.insets = new Insets(0, 500, 0, 0);
+        background.add(ordenaD, gbc);
 
         JButton b1 = new JButton("Calcular viagem");
         b1.addActionListener(new BtnCalcula());
 
-        gbc.insets = new Insets(10, 600, 0, 0);
+        gbc.insets = new Insets(50, 600, 0, 0);
         background.add(b1, gbc);
 
         gbc.anchor = GridBagConstraints.SOUTH;

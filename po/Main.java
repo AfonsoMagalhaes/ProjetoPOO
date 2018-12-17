@@ -23,11 +23,11 @@ public class Main extends JFrame{
     /** Cria uma aplicação de suporte ao planeamento de viagens
      * @throws IOException
      */
-    public Main() throws IOException {
+    private Main() throws IOException {
 
-        this.locais = new ArrayList<>();
-        this.listaAlunos = new ArrayList<>();
-        this.maisVotados = new ArrayList<>();
+        locais = new ArrayList<>();
+        listaAlunos = new ArrayList<>();
+        maisVotados = new ArrayList<>();
 
         leFicheiro();
         leAlunosObj();
@@ -62,7 +62,7 @@ public class Main extends JFrame{
                 return false;
             }
         }
-        if (mestrado == false) {
+        if (!mestrado) {
             Aluno novo = new Licenciatura(nome, email);
             listaAlunos.add(novo);
         } else {
@@ -77,9 +77,8 @@ public class Main extends JFrame{
     /**
      * Lê o ficheiro de texto dos locais e seus pontos de interesse e o preço da deslocação por km.
      */
-    public void leFicheiro() {
-        BufferedReader br = null;
-        FileReader fr = null;
+    private void leFicheiro() {
+        BufferedReader br;
         String st;
         try {
             br = new BufferedReader(new FileReader("locais.txt"));
@@ -89,7 +88,7 @@ public class Main extends JFrame{
             while ((st = br.readLine()) != null) {
                 String[] tab = st.split(";");
                 if (tab[0].equals("Local")) {
-                    pinteresse = new ArrayList<pInteresse>();
+                    pinteresse = new ArrayList<>();
                     x = Integer.parseInt(tab[2]);
                     y = Integer.parseInt(tab[3]);
                     nome = tab[1];
@@ -121,7 +120,7 @@ public class Main extends JFrame{
      * Escreve a lista de alunos num ficheiro de objetos.
      * @throws IOException
      */
-    public void escreveAlunosObj() throws IOException {
+    private void escreveAlunosObj() throws IOException {
         try {
             ObjectOutputStream walunos = new ObjectOutputStream(new FileOutputStream("alunos.data"));
             walunos.writeObject(listaAlunos);
@@ -138,7 +137,7 @@ public class Main extends JFrame{
      * Lê o ficheiro de objetos dos alunos registados para a lista de alunos.
      * @throws IOException
      */
-    public void leAlunosObj() throws IOException {
+    private void leAlunosObj() throws IOException {
         File ficheiroAlunos = new File("alunos.data");
         if (ficheiroAlunos.exists()) {
             try {
@@ -155,7 +154,7 @@ public class Main extends JFrame{
     /**
      * Escreve a lista dos pontos de interesse mais populares num ficheiro de objetos.
      */
-    public void escreveLescolhidosObj() {
+    private void escreveLescolhidosObj() {
         try {
             ObjectOutputStream lEscolhidos = new ObjectOutputStream(new FileOutputStream("locaisEscolhidos.data"));
             lEscolhidos.writeObject(maisVotados);
@@ -171,7 +170,7 @@ public class Main extends JFrame{
      * Lê o ficheiro de objetos dos pontos de interesse mais escolhidos para a lista dos locais mais populares.
      * @throws IOException
      */
-    public void leLescolhidoObj() throws IOException {
+    private void leLescolhidoObj() throws IOException {
         File fLescolhidos = new File("locaisEscolhidos.data");
         if (fLescolhidos.exists()) {
             try {
@@ -199,7 +198,7 @@ public class Main extends JFrame{
      * @param local Local que vamos calcular o custo.
      * @return Custo do local.
      */
-    public float custoTotal(Local local) {
+    private float custoTotal(Local local) {
         int custo=0;
         for (pInteresse i : local.getPInteresse()) {
                     custo+=i.getEntrada()+i.getCustoextra();// alterar de novo os atributos dos pontos de interesse
@@ -227,16 +226,15 @@ public class Main extends JFrame{
      * @param local2 Local final.
      * @return Distância entre os 2 locais.
      */
-    public double distanciasTotais(Local local1, Local local2) {
+    private double distanciasTotais(Local local1, Local local2) {
         return Math.sqrt(Math.pow(local1.getX()-local2.getX(),2)+Math.pow(local1.getY()-local2.getY(),2));
     }
 
     public double distancia3Locais(String local1, String local2, String local3) {
-        double distA = 0;
-        double distB = 0;
-        double distC = 0;
-        double resultado = 0;
-        ArrayList<Float> pInteresses = new ArrayList<>();
+        double distA;
+        double distB;
+        double distC;
+        double resultado;
         Local local1a = null;
         Local local2a = null;
         Local local3a = null;
@@ -270,7 +268,7 @@ public class Main extends JFrame{
      * @param local2 Local final.
      * @return Preço da deslocação entre os 2 locais.
      */
-    public int deslocaçãoLocais(Local local1, Local local2){ //custo por km no ficheiro de texto(inicio)
+    private int deslocaçãoLocais(Local local1, Local local2) { //custo por km no ficheiro de texto(inicio)
         return (int) (distanciasTotais(local1, local2) * deslocacao);
     }
 
@@ -279,7 +277,7 @@ public class Main extends JFrame{
      * @param viagem Vetor com os 3 locais pertences à viagem.
      * @return Custo total da viagem.
      */
-    public float custoViagem(Local[] viagem){
+    private float custoViagem(Local[] viagem) {
         return custoTotal(viagem[0]) + custoTotal(viagem[1]) + custoTotal(viagem[2]) + deslocaçãoLocais(viagem[0], viagem[1]) + deslocaçãoLocais(viagem[1], viagem[2]);
     }
 
@@ -288,7 +286,7 @@ public class Main extends JFrame{
      * @param hot Nome do local.
      * @return Local a evitar.
      */
-    public Local localEvitar(String hot) {
+    private Local localEvitar(String hot) {
         Local local = null;
         for(Local l: locais){
             if (hot.equals(l.getCidade())) {
@@ -303,7 +301,7 @@ public class Main extends JFrame{
      * @param hot Nome do ponto de interesse.
      * @return
      */
-    public Local localHot(String hot) {
+    private Local localHot(String hot) {
         Local local = null;
         loop:
         for(Local l: locais){
@@ -317,7 +315,7 @@ public class Main extends JFrame{
         return local;
     } //Vai buscar o local do ponto de interesse hot
 
-    public boolean existeMuseu(Local l){
+    private boolean existeMuseu(Local l) {
         ArrayList<pInteresse> pontosinteresse = l.getPInteresse();
         for (pInteresse pi : pontosinteresse) {
             if(pi.getTipo().equals("museu")){
@@ -327,7 +325,7 @@ public class Main extends JFrame{
         return false;
     } // Verifica se o local tem um museu
 
-    public boolean compararViagens(Local[] viagem1, Local[] viagem2){
+    private boolean compararViagens(Local[] viagem1, Local[] viagem2) {
         int locais_iguais=0;
         for(int i=0; i<3; i++){
             for(int j=0; j<3; j++){
@@ -336,14 +334,10 @@ public class Main extends JFrame{
                 }
             }
         }
-        if(locais_iguais==3){
-            return true;
-        }else {
-            return false;
-        }
+        return locais_iguais == 3;
     } //Veririfca se as viagens são iguais
 
-    public boolean compararViagemComLista(Local[] viagem, ArrayList<Local[]> viagens){
+    private boolean compararViagemComLista(Local[] viagem, ArrayList<Local[]> viagens) {
         for(Local[] v: viagens){
             if(compararViagens(viagem, v)){
                 return true;
@@ -380,7 +374,7 @@ public class Main extends JFrame{
     public ArrayList<Local[]> criaViagensLic(int custo, String hot) {
         ArrayList<Local[]> viagens = new ArrayList<>();
         for (Local m : locais) {
-            if (existeMuseu(m) == true && !(m.getCidade().equals(localHot(hot).getCidade()))) {
+            if (existeMuseu(m) && !(m.getCidade().equals(localHot(hot).getCidade()))) {
                 for (Local l : locais) {
                     if (!(l.getCidade().equals(m.getCidade())) && !(l.getCidade().equals(localHot(hot).getCidade()))) {
                         Local[] viagem = new Local[3];
@@ -403,7 +397,7 @@ public class Main extends JFrame{
         for(Local[] v: viagens){
             viagensCustos.add(custoViagem(v));
         }
-        if(ordem==true){
+        if (ordem) {
             //ordem crescente
             Collections.sort(viagensCustos);
             for(float custo: viagensCustos){
@@ -449,11 +443,11 @@ public class Main extends JFrame{
         int max1 = 0;
         int max2 = 0;
         int max3 = 0;
-        int curr = 0;
+        int curr;
         String pi1 = null;
         String pi2 = null;
         String pi3 = null;
-        Set<String> unique = new HashSet<String>(maisVotados);
+        Set<String> unique = new HashSet<>(maisVotados);
 
         for (String key : unique) {
             curr = Collections.frequency(maisVotados, key);
