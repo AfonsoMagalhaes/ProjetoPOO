@@ -31,7 +31,7 @@ Parque Cultural;Ilha de Tavira;9h-21h;15;0;teste
 x
 Local;Leiria;30;500;
 Museu;Castelo de Leiria;9h-20h;20;0;teste
-Parque Aquático;Rio Lis;9h-20h;20;0;10;true
+Parque Aquático;Rio Lis;9h-20h;20;0;10;true;2
 Museu;Sé de Leiria;9h-22h;13;0;teste
 x
 Local;Braga;50;700;

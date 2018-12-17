@@ -1,6 +1,5 @@
 package po;
 
-
 import interfaces_GUI.janelaInicio;
 
 import javax.swing.*;
@@ -10,7 +9,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/**
+ * Representa uma plicação de suporte ao planeamento de viagens.
+ */
 public class Main extends JFrame{
 
 
@@ -101,7 +102,7 @@ public class Main extends JFrame{
                 } else if (tab[0].equals("Parque Diversões")){
                     pinteresse.add(new Diversões(tab[1],tab[2],Float.parseFloat(tab[3]),Float.parseFloat(tab[4]), Integer.parseInt(tab[5])));
                 } else if (tab[0].equals("Parque Aquático")){
-                    pinteresse.add(new Aquático(tab[1],tab[2], Float.parseFloat(tab[3]),Float.parseFloat(tab[4]), Integer.parseInt(tab[5]), Boolean.parseBoolean(tab[6])));
+                    pinteresse.add(new Aquático(tab[1],tab[2], Float.parseFloat(tab[3]),Float.parseFloat(tab[4]), Integer.parseInt(tab[5]), Boolean.parseBoolean(tab[6]), Integer.parseInt(tab[7])));
                 } else if (tab[0].equals("Bar")){
                     pinteresse.add(new Bar(tab[1],tab[2],Float.parseFloat(tab[3]),Float.parseFloat(tab[4]), Float.parseFloat(tab[5])));
                 } else if(st.equals("x")){
@@ -184,8 +185,8 @@ public class Main extends JFrame{
     }
 
     /**
-     * Adiciona um ponto de interesse votado a lista de pontos de interesse mais votados
-     * @param pInteresse
+     * Adiciona um ponto de interesse votado a lista de pontos de interesse mais votados.
+     * @param pInteresse ponto de interesse  adicionar a lista.
      */
     public void escreveMaisVotado(String pInteresse) {
 
@@ -206,19 +207,22 @@ public class Main extends JFrame{
         return custo;
     }
 
+    /**
+     * Calcula o custo total de um local, a partir do nome da cidade do mesmo.
+     * @param local Nome da cidade do local.
+     * @return Custo do local.
+     */
     public float getCustoLocal(String local) {
         float custo = 0;
-
         for (Local l : locais) {
             if (local.equals(l.getCidade())) {
-                for (pInteresse i : l.getPInteresse()) {
-                    custo += i.getEntrada() + i.getCustoextra();// alterar de novo os atributos dos pontos de interesse
-                }
+                custo=custoTotal(l);
+                break;
             }
         }
 
         return custo;
-    } // custo de um local
+    }
 
     /**
      * Calcula a distância em linha reta entre 2 locais, tendo em conta as suas coordenadas x e y.
@@ -230,6 +234,13 @@ public class Main extends JFrame{
         return Math.sqrt(Math.pow(local1.getX()-local2.getX(),2)+Math.pow(local1.getY()-local2.getY(),2));
     }
 
+    /**
+     * Compara as distancias a ser percorridas entre os 3 locais e acha a menor delas.
+     * @param local1 Nome da cidade do primeiro local.
+     * @param local2 Nome da cidade do segundo local.
+     * @param local3 Nome da cidade do terceiro local.
+     * @return Menor distância possível a ser percorrida entre os 3 locais.
+     */
     public double distancia3Locais(String local1, String local2, String local3) {
         double distA;
         double distB;
@@ -283,7 +294,7 @@ public class Main extends JFrame{
 
     /**
      * Devolve o local a evitar, escolhido por um aluno de mestrado.
-     * @param hot Nome do local.
+     * @param hot String que contém o nome da cidade do local.
      * @return Local a evitar.
      */
     private Local localEvitar(String hot) {
@@ -297,9 +308,9 @@ public class Main extends JFrame{
     }
 
     /**
-     * Devolve o local do ponto de interesse a não perder, escolhido pelo aluno de licenciatura.
-     * @param hot Nome do ponto de interesse.
-     * @return
+     * Acha o local ao qual pertence um dado ponto de interesse, a partir do seu nome.
+     * @param hot String que contém o nome do ponto de interesse.
+     * @return Local onde se encontra o ponto de interesse dado.
      */
     private Local localHot(String hot) {
         Local local = null;
@@ -313,8 +324,13 @@ public class Main extends JFrame{
             }
         }
         return local;
-    } //Vai buscar o local do ponto de interesse hot
+    }
 
+    /**
+     * Verifica se um certo local contém ou não um museu como ponto de interesse.
+     * @param l Local que verificar se contém algum museu.
+     * @return true se existe um museu no local, false se não existe nenhum museu no local.
+     */
     private boolean existeMuseu(Local l) {
         ArrayList<pInteresse> pontosinteresse = l.getPInteresse();
         for (pInteresse pi : pontosinteresse) {
@@ -323,8 +339,14 @@ public class Main extends JFrame{
             }
         }
         return false;
-    } // Verifica se o local tem um museu
+    }
 
+    /**
+     * Compara 2 viagens local a local e verifica se contêm os mesmos locais ou não.
+     * @param viagem1 Vetor que contém os 3 locais da primeira viagem.
+     * @param viagem2 Vetor que contém os 3 locais da segunda viagem.
+     * @return true se as 2 viagens contêm os 3 mesmos locais, false caso contenham algum local diferente.
+     */
     private boolean compararViagens(Local[] viagem1, Local[] viagem2) {
         int locais_iguais=0;
         for(int i=0; i<3; i++){
@@ -335,8 +357,14 @@ public class Main extends JFrame{
             }
         }
         return locais_iguais == 3;
-    } //Veririfca se as viagens são iguais
+    }
 
+    /**
+     * Verifica se uma certa viagem já exite numa lista de viagens.
+     * @param viagem Vetor que contém os 3 locais da viagem.
+     * @param viagens Lista de vetores de locais, em que cada um representa uma viagem, com 3 locais.
+     * @return true se a viagem já existe na lista, false caso contrário.
+     */
     private boolean compararViagemComLista(Local[] viagem, ArrayList<Local[]> viagens) {
         for(Local[] v: viagens){
             if(compararViagens(viagem, v)){
@@ -346,6 +374,12 @@ public class Main extends JFrame{
         return false;
     }//Verifica se uma viagem ja existe numa lsita de viagens
 
+    /**
+     * Cria uma lista de viagens com custo não superior ao dado, que não contêm o local dado e contêm pelo menos um museu(usada par alunos de mestrado).
+     * @param custo Custo máximo de cada viagem.
+     * @param hot Nome da cidade do local a evitar.
+     * @return Lista de vetores de locais, em que cada vetor corresponde a uma viagem, de 3 locais.
+     */
     public ArrayList<Local[]> criaViagensMes(int custo, String hot){
         ArrayList<Local[]> viagens = new ArrayList<>();
         for(Local m: locais){
@@ -371,6 +405,12 @@ public class Main extends JFrame{
         return viagens;
     } //Cria lista das viagens que satisfazem o custo máximo e o local a evitar
 
+    /**
+     * Cria uma lista de viagens com custo não superior ao dado, que contêm o local onde se encontra o ponto de interesse dadod e pelo menos um museu(usada par alunos de licenciatura).
+     * @param custo Custo máximo de cada viagem.
+     * @param hot Nome do ponto de interesse a não perder.
+     * @return Lista de vetores de locais, em que cada vetor corresponde a uma viagem, de 3 locais.
+     */
     public ArrayList<Local[]> criaViagensLic(int custo, String hot) {
         ArrayList<Local[]> viagens = new ArrayList<>();
         for (Local m : locais) {
@@ -391,6 +431,12 @@ public class Main extends JFrame{
         return viagens;
     } //Cria lista das viagens que satisfazem o custo máximo e o ponto de interesse
 
+    /**
+     * Ordena as viagens de uma lista de viagens pelo seu custo, por ordem crescente ou decrescente.
+     * @param viagens Lista da vetores de locais, em que cada um representa uma viagem, com 3 locais.
+     * @param ordem true se for pra ordenar as viagens por ordem crescente de custo, false caso seja por ordem decrescente de custo.
+     * @return lista de vetores de locais, em que cada vetor corresponde a uma viagem, de 3 locais, ordenadas pelo seu custo.
+     */
     public ArrayList<Local[]> ordenaViagens(ArrayList<Local[]> viagens, boolean ordem){
         ArrayList<Float> viagensCustos = new ArrayList<>();
         ArrayList<Local[]> viagensOrdenadas = new ArrayList<>();
@@ -421,24 +467,42 @@ public class Main extends JFrame{
             }
         }
         return viagensOrdenadas;
-    } //ordena a lista de viagens por ordem crescente(ordem=true) ou decrescente(ordem=false)
+    }
 
+    /**
+     * Cria uma String com os nomes da cidades dos locais de uma viagem e o custo da mesma.
+     * @param viagem Vetor de locais que representa uma viagem, de 3 locais.
+     * @return String que contém os nomes das cidade dos 3 locais da viagem e o custo desta.
+     */
     public String viagemString(Local[] viagem){
         return viagem[0].getCidade()+", "+viagem[1].getCidade()+", "+viagem[2].getCidade()+", "+custoViagem(viagem)+"€";
-    } // string de uma viagem com o preço
+    }
 
+    /**
+     * Cria uma lista com as strings de todas as viagens possíveis.
+     * @param viagens Lista de vetores de locais, em que cada vetor representa uma viagem, de 3 locais.
+     * @return Lista de Strings de toda as viagens possíveis(com os nomes das cidades dos locais de cada uma e o custo da mesma).
+     */
     public ArrayList<String>  viagensPossiveis(ArrayList<Local[]> viagens){
         ArrayList<String> viagenspossiveis = new ArrayList<>();
         for(Local[] v: viagens){
             viagemString(v);
         }
         return viagenspossiveis;
-    } // listas das strings das viagens possiveis com o preco de cada
+    }
 
+    /**
+     * Vai buscar os locais existentes.
+     * @return Lista de locais existentes.
+     */
     public ArrayList<Local> getLocais() {
         return locais;
-    }   //obtem lista dos locais
+    }
 
+    /**
+     * Obtém a lista dos locais mais votados, tendo em conta o número de vezes que cada um foi escolhido.
+     * @return Lista de Strings com os 3 locais mais escolhidos pelos alunos.
+     */
     public ArrayList<String> getMaisVotados() {
         int max1 = 0;
         int max2 = 0;
@@ -480,24 +544,34 @@ public class Main extends JFrame{
 
 
         return resultado;
-    }   //obtem lista dos locais mais votados
+    }
 
+    /**
+     * Obtém os alunos registados.
+     * @return Lista dos alunos registados.
+     */
     public ArrayList<Aluno> getAlunos() {
         return listaAlunos;
-    }   //obtem lista dos alunos
+    }
 
-    public void addAluno(Aluno aluno) {
-        listaAlunos.add(aluno);
-    } //adiciona aluno a lista de alunos
-
+    /**
+     * Obtém a lista dos nomes dos pontos de interesse de um local.
+     * @param l Local ao qual vamos buscar os pontos de interesse.
+     * @return Lista de Strings com nomes dos pontos de interesse do local.
+     */
     public ArrayList<String> getPInteresse(Local l) {
         ArrayList<String> pInteresses = new ArrayList<>();
         for(pInteresse pi: l.getPInteresse()){
             pInteresses.add(pi.getNome());
         }
         return pInteresses;
-    } //devolve a lista dos pontos de interesse de um local
+    }
 
+    /**
+     * Obtém a lista dos nomes dos pontos de interesse de um local, a partir do nome da cidade desse local.
+     * @param local String do nome da cidade do local.
+     * @return Lista das Strings com os nomes dos pontos de interesse do local.
+     */
     public ArrayList<String> getPInteresseS(String local) {
         ArrayList<String> pInteresses = new ArrayList<>();
         for (Local l : locais) {
@@ -508,9 +582,13 @@ public class Main extends JFrame{
             }
         }
         return pInteresses;
-    } //devolve a lista dos pontos de interesse de um local
+    }
 
-
+    /**
+     * Obtém a lista dos custos dos pontos de interesse de um local, a partir do nome da cidade deste.
+     * @param local String do nome da cidade do local.
+     * @return Lista de Floats dos custos dos pontos de interesse do local.
+     */
     public ArrayList<Float> getPIntCusto(String local) {
         ArrayList<Float> pInteresses = new ArrayList<>();
         for (Local l : locais) {
@@ -524,7 +602,11 @@ public class Main extends JFrame{
         return pInteresses;
     } //devolve a lista do custo dos pontos de interesse de um local
 
-
+    /**
+     * Obtém o nome de um local que contém um dado ponto de interesse, a partir do nome dele.
+     * @param pi String com o nome do ponto de interesse.
+     * @return String com o nome da cidade do local do ponto de interesse.
+     */
     public String getLocal(String pi){
         String local=null;
         loop:
