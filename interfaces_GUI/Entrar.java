@@ -9,68 +9,64 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Entrar extends JFrame{
-    private Registo j;
+class Entrar extends JFrame {
     private Main m;
-    private Menu menu;
     private boolean mestrado;
     private String hot;
     private int custo;
 
     private JButton b1, b2, b3;
-    private JLabel l1, l2, l3, l4;
+    private JLabel l1, l2;
     private JComboBox<String> fromC, pti;
     private JTextField number1;
 
 
-    private void escolheViagem(ActionEvent evt) {
-        ArrayList<Local[]> viagens = new ArrayList<>();
+    Entrar(Main m, Registo j) {
+        this.m = m;
+        mestrado = j.getMestrado();
+        if (mestrado) {
+            initMes();
+        } else {
+            initLic();
+        }
 
-        if (mestrado == true) {
+    }
+
+
+    Entrar(Main m, Menu menu) {
+        this.m = m;
+        mestrado = menu.getMestrado();
+        if (mestrado) {
+            initMes();
+        } else {
+            initLic();
+        }
+    }
+
+    private void escolheViagem() {
+        ArrayList<Local[]> viagens;
+
+        if (mestrado) {
             viagens = m.criaViagensMes(custo, hot);
         } else {
             viagens = m.criaViagensLic(custo, hot);
         }
 
         if (viagens.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Não existem viagens possíveis para esse valor!", "ERRO", 1);
+            JOptionPane.showMessageDialog(null, "Não existem viagens possíveis para esse valor!", "ERRO", JOptionPane.INFORMATION_MESSAGE);
         } else {
             this.setVisible(false);
             new escolheViagem(m, this).setVisible(true);
         }
     }
 
-
-
-    private void iniciaMenu(ActionEvent evt) {
+    private void iniciaMenu() {
 
         this.setVisible(false);
         new Menu(m).setVisible(true);
 
-    }
-
-    public Entrar(Main m, Registo j) {
-        this.m = m;
-        this.j = j;
-        mestrado = j.getMestrado();
-        if (mestrado == true) {
-            initMes();
-        } else {
-            initLic();
-        }
-
-    }
-
-    public Entrar(Main m, Menu menu) {
-        this.m = m;
-        this.menu = menu;
-        mestrado = menu.getMestrado();
-        if (mestrado == true) {
-            initMes();
-        } else {
-            initLic();
-        }
     }
 
     private void initLic() {
@@ -99,7 +95,7 @@ public class Entrar extends JFrame{
         background.add(l1, gbc);
 
         ArrayList<Local> listaLocais = m.getLocais();
-        ArrayList<String> locais = new ArrayList<String>();
+        ArrayList<String> locais = new ArrayList<>();
         for (Local tmp : listaLocais) {
             locais.add(tmp.getCidade());
         }
@@ -149,13 +145,7 @@ public class Entrar extends JFrame{
 
         gbc.insets = new Insets(80, 600, 0, 0);
         b2 = new JButton("Voltar");
-        b2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                iniciaMenu(e);
-            }
-        });
+        b2.addActionListener(e -> iniciaMenu());
 
 
         background.add(b2, gbc);
@@ -163,13 +153,7 @@ public class Entrar extends JFrame{
         gbc.insets = new Insets(0, 600, 0, 0);
         b3 = new JButton("Sair");
 
-        b3.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        b3.addActionListener(e -> System.exit(0));
 
         background.add(b3, gbc);
 
@@ -202,7 +186,7 @@ public class Entrar extends JFrame{
         background.add(l1, gbc);
 
         ArrayList<Local> listaLocais = m.getLocais();
-        ArrayList<String> locais = new ArrayList<String>();
+        ArrayList<String> locais = new ArrayList<>();
         for (Local tmp : listaLocais) {
             locais.add(tmp.getCidade());
         }
@@ -233,13 +217,7 @@ public class Entrar extends JFrame{
 
         gbc.insets = new Insets(80, 600, 0, 0);
         b2 = new JButton("Voltar");
-        b2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                iniciaMenu(e);
-            }
-        });
+        b2.addActionListener(e -> iniciaMenu());
 
 
         background.add(b2, gbc);
@@ -247,13 +225,7 @@ public class Entrar extends JFrame{
         gbc.insets = new Insets(0, 600, 0, 0);
         b3 = new JButton("Sair");
 
-        b3.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        b3.addActionListener(e -> System.exit(0));
 
         background.add(b3, gbc);
 
@@ -261,12 +233,24 @@ public class Entrar extends JFrame{
         this.setVisible(true);
     }
 
+    boolean getMestrado() {
+        return mestrado;
+    }
+
+    String getHot() {
+        return hot;
+    }
+
+    int getCusto() {
+        return custo;
+    }
+
     private class mudaCombo implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             ArrayList<Local> listaLocais = m.getLocais();
             ArrayList<String> aux = new ArrayList<>();
-            String cidade = fromC.getSelectedItem().toString();
+            String cidade = Objects.requireNonNull(fromC.getSelectedItem()).toString();
 
             for (Local tmp : listaLocais) {
                 if (tmp.getCidade().equals(cidade)) {
@@ -279,28 +263,16 @@ public class Entrar extends JFrame{
         }
     }
 
-    public boolean getMestrado() {
-        return mestrado;
-    }
-
-    public String getHot() {
-        return hot;
-    }
-
-    public int getCusto() {
-        return custo;
-    }
-
     private class BtnCalcula implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (mestrado == false) {
+            if (!mestrado) {
                 hot = (String) pti.getSelectedItem();
             } else {
                 hot = (String) fromC.getSelectedItem();
             }
             custo = Integer.parseInt(number1.getText());
-            escolheViagem(e);
+            escolheViagem();
 
         }
     }

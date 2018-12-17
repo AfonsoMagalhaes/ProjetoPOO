@@ -5,23 +5,17 @@ import po.Main;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class Registo extends JFrame{
+class Registo extends JFrame {
 
-    private JPanel canvas;
     private Main m;
-    private JButton b1, b2, b3;
-    private JLabel l1,l2,l3,l4,l5;
     private JTextField n1,n2;
     private JComboBox<String> fromC;
-    private String nome, email;
     private boolean mestrado;
 
 
-
-    public Registo(Main m){
+    Registo(Main m) {
         this.m=m;
         setTitle("A sua viagem de sonho!");
         setSize(900, 620);
@@ -41,9 +35,9 @@ public class Registo extends JFrame{
         gbc.anchor = GridBagConstraints.WEST;
 
 
-        canvas = new JPanel();
+        JPanel canvas = new JPanel();
         canvas.setLayout(new GridLayout(4,2,10,10));
-        l1 = new JLabel("Introduza o seu nome:", SwingConstants.RIGHT);
+        JLabel l1 = new JLabel("Introduza o seu nome:", SwingConstants.RIGHT);
         l1.setFont(new Font("Serif", Font.BOLD, 17));
         canvas.add(l1);
 
@@ -51,14 +45,14 @@ public class Registo extends JFrame{
         canvas.add(n1);
 
 
-        l2 = new JLabel("Intoduza o seu email:", SwingConstants.RIGHT);
+        JLabel l2 = new JLabel("Intoduza o seu email:", SwingConstants.RIGHT);
         l2.setFont(new Font("Serif", Font.BOLD, 17));
         canvas.add(l2);
 
         n2 = new JTextField(10);
         canvas.add(n2);
 
-        l4 = new JLabel("Selecione o grau do curso:", SwingConstants.RIGHT);
+        JLabel l4 = new JLabel("Selecione o grau do curso:", SwingConstants.RIGHT);
         l4.setFont(new Font("Serif", Font.BOLD, 17));
         canvas.add(l4);
 
@@ -68,19 +62,15 @@ public class Registo extends JFrame{
         canvas.add(fromC);
 
 
-        l3 = new JLabel("");
+        JLabel l3 = new JLabel("");
         canvas.add(l3);
 
-        b1 = new JButton("Registar");
-        b1.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    BtnRegista(e);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+        JButton b1 = new JButton("Registar");
+        b1.addActionListener(e -> {
+            try {
+                BtnRegista(e);
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
         });
         canvas.add(b1);
@@ -98,28 +88,16 @@ public class Registo extends JFrame{
 
 
         gbc.insets = new Insets(100, 500, 0, 0);
-        b2 = new JButton("Voltar");
-        b2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                iniciaMenu(e);
-            }
-        });
+        JButton b2 = new JButton("Voltar");
+        b2.addActionListener(this::iniciaMenu);
 
 
         background.add(b2,gbc);
 
         gbc.insets = new Insets(0, 500, 200, 0);
-        b3= new JButton("Sair");
+        JButton b3 = new JButton("Sair");
 
-        b3.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        b3.addActionListener(e -> System.exit(0));
 
         background.add(b3,gbc);
 
@@ -140,15 +118,15 @@ public class Registo extends JFrame{
 
     private void BtnRegista(ActionEvent e) throws IOException {
         boolean registado;
-        nome = n1.getText();
-        email = n2.getText();
+        String nome = n1.getText();
+        String email = n2.getText();
         mestrado = fromC.getSelectedIndex() == 1;
 
         registado = m.registo(nome, email, mestrado);
 
 
         if (!registado) {
-            JOptionPane.showMessageDialog(null, "O utilizador já existe", "ERRO", 1);
+            JOptionPane.showMessageDialog(null, "O utilizador já existe", "ERRO", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
             this.setVisible(false);
@@ -157,7 +135,7 @@ public class Registo extends JFrame{
 
     }
 
-    public boolean getMestrado() {
+    boolean getMestrado() {
         return mestrado;
     }
 

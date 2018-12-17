@@ -4,25 +4,14 @@ import po.Main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class locaisPopulares extends JFrame {
+class locaisPopulares extends JFrame {
     private Main m;
-    private JPanel canvas;
-    private ArrayList<String> maisVotados;
-    private JButton b2, b3;
-    private JLabel l1, l4, l2, l3;
 
-    private void iniciaMenu(ActionEvent evt) {
-        this.setVisible(false);
-        new Menu(m).setVisible(true);
-    }
-
-    public locaisPopulares(Main m){
+    locaisPopulares(Main m) {
         this.m = m;
-        maisVotados = new ArrayList<>();
+        ArrayList<String> maisVotados;
         maisVotados = m.getMaisVotados();
 
 
@@ -45,7 +34,7 @@ public class locaisPopulares extends JFrame {
 
         gbc.anchor = GridBagConstraints.WEST;
 
-        l4 = new JLabel("<html><u>Locais mais populares</u></html>");
+        JLabel l4 = new JLabel("<html><u>Locais mais populares</u></html>");
         l4.setFont(new Font("Serif", Font.BOLD, 40));
 
 
@@ -55,25 +44,25 @@ public class locaisPopulares extends JFrame {
         gbc.anchor = GridBagConstraints.WEST;
 
 
-        canvas = new JPanel();
+        JPanel canvas = new JPanel();
         canvas.setLayout(new GridLayout(3,2,10,10));
 
         gbc.insets = new Insets(50, 400, 0, 0);
 
 
-        l1 = new JLabel("1. " + maisVotados.get(0) + ", " + m.getLocal(maisVotados.get(0)), SwingConstants.CENTER);
+        JLabel l1 = new JLabel("1. " + maisVotados.get(0) + ", " + m.getLocal(maisVotados.get(0)), SwingConstants.CENTER);
 
         l1.setFont(new Font("Serif", Font.PLAIN, 35));
 
         background.add(l1, gbc);
 
-        l2 = new JLabel("2. " + maisVotados.get(1) + ", " + m.getLocal(maisVotados.get(1)), SwingConstants.CENTER);
+        JLabel l2 = new JLabel("2. " + maisVotados.get(1) + ", " + m.getLocal(maisVotados.get(1)), SwingConstants.CENTER);
 
         l2.setFont(new Font("Serif", Font.PLAIN, 30));
         gbc.insets = new Insets(10, 400, 0, 0);
         background.add(l2, gbc);
 
-        l3 = new JLabel("3. " + maisVotados.get(2) + ", " + m.getLocal(maisVotados.get(2)), SwingConstants.CENTER);
+        JLabel l3 = new JLabel("3. " + maisVotados.get(2) + ", " + m.getLocal(maisVotados.get(2)), SwingConstants.CENTER);
 
         l3.setFont(new Font("Serif", Font.PLAIN, 25));
 
@@ -83,28 +72,16 @@ public class locaisPopulares extends JFrame {
 
 
         gbc.insets = new Insets(100, 400, 0, 0);
-        b2 = new JButton("Voltar");
-        b2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                iniciaMenu(e);
-            }
-        });
+        JButton b2 = new JButton("Voltar");
+        b2.addActionListener(e -> iniciaMenu());
 
 
         background.add(b2,gbc);
 
         gbc.insets = new Insets(0, 400, 0, 0);
-        b3= new JButton("Sair");
+        JButton b3 = new JButton("Sair");
 
-        b3.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        b3.addActionListener(e -> System.exit(0));
 
         background.add(b3,gbc);
 
@@ -113,7 +90,9 @@ public class locaisPopulares extends JFrame {
         this.setVisible(true);
     }
 
-//    public static void main(String args[]) {
-//        new locaisPopulares();
-//    }
+    private void iniciaMenu() {
+        this.setVisible(false);
+        new Menu(m).setVisible(true);
+    }
+
 }

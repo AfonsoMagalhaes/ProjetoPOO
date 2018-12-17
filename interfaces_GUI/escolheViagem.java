@@ -9,28 +9,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class escolheViagem extends JFrame {
-    private Entrar j;
+class escolheViagem extends JFrame {
     private Main m;
     private JComboBox<String> fromC;
-    private JButton b1, b2, b3, ordena;
-    private boolean mestrado;
-    private String hot;
-    private int custo;
     private String escolha;
     private ArrayList<Local[]> viagens;
 
-    public escolheViagem(Main m, Entrar j) {
+    escolheViagem(Main m, Entrar j) {
         this.m = m;
-        this.j = j;
 
         viagens = new ArrayList<>();
-        mestrado = j.getMestrado();
-        hot = j.getHot();
-        custo = j.getCusto();
+        boolean mestrado = j.getMestrado();
+        String hot = j.getHot();
+        int custo = j.getCusto();
 
 
-        if (mestrado == true) {
+        if (mestrado) {
             viagens = m.criaViagensMes(custo, hot);
         } else {
             m.escreveMaisVotado(hot);
@@ -59,7 +53,7 @@ public class escolheViagem extends JFrame {
 
 //        String[] items = {"Lisboa, Coimbra, Porto, 100€", "Faro, Viseu, Braga, 90€"};
 //        fromC = new JComboBox<>(items);
-        ArrayList<String> locais = new ArrayList<String>();
+        ArrayList<String> locais = new ArrayList<>();
 
         for (Local[] tmp : viagens) {
 
@@ -71,26 +65,22 @@ public class escolheViagem extends JFrame {
         background.add(fromC, gbc);
 
 
-        ordena = new JButton("Reordena Locais por custo");
-        ordena.addActionListener(new ActionListener() {
+        JButton ordena = new JButton("Reordena Locais por custo");
+        ordena.addActionListener(e -> {
+            ArrayList<Local[]> viagensOrdenadas = m.ordenaViagens(viagens, true);
+            ArrayList<String> locais1 = new ArrayList<>();
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ArrayList<Local[]> viagensOrdenadas = m.ordenaViagens(viagens, true);
-                ArrayList<String> locais = new ArrayList<String>();
+            for (Local[] tmp : viagensOrdenadas) {
+                locais1.add(m.viagemString(tmp));
 
-                for (Local[] tmp : viagensOrdenadas) {
-                    locais.add(m.viagemString(tmp));
-
-                }
-                DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel(locais.toArray());
-                fromC.setModel(defaultComboBoxModel);
             }
+            DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel(locais1.toArray());
+            fromC.setModel(defaultComboBoxModel);
         });
         gbc.insets = new Insets(40, 600, 0, 0);
         background.add(ordena, gbc);
 
-        b1 = new JButton("Calcular viagem");
+        JButton b1 = new JButton("Calcular viagem");
         b1.addActionListener(new BtnCalcula());
 
         gbc.insets = new Insets(10, 600, 0, 0);
@@ -102,26 +92,14 @@ public class escolheViagem extends JFrame {
         gbc.insets = new Insets(80, 600, 0, 0);
 
 
-        b2 = new JButton("Menu principal");
-        b2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                iniciaMenu(e);
-            }
-        });
+        JButton b2 = new JButton("Menu principal");
+        b2.addActionListener(e -> iniciaMenu());
         background.add(b2, gbc);
 
         gbc.insets = new Insets(0, 600, 0, 0);
-        b3 = new JButton("Sair");
+        JButton b3 = new JButton("Sair");
 
-        b3.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        b3.addActionListener(e -> System.exit(0));
 
         background.add(b3, gbc);
 
@@ -130,17 +108,17 @@ public class escolheViagem extends JFrame {
 
     }
 
-    private void visualizarViagem(ActionEvent evt) {
+    private void visualizarViagem() {
         this.setVisible(false);
         new visualizarViagem(m, this).setVisible(true);
     }
 
-    private void iniciaMenu(ActionEvent evt) {
+    private void iniciaMenu() {
         this.setVisible(false);
         new Menu(m).setVisible(true);
     }
 
-    public String getEscolha() {
+    String getEscolha() {
         return escolha;
     }
 
@@ -148,7 +126,7 @@ public class escolheViagem extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             escolha = fromC.getSelectedItem().toString();
-            visualizarViagem(e);
+            visualizarViagem();
         }
     }
 }

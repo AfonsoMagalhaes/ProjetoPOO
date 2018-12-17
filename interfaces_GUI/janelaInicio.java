@@ -5,12 +5,9 @@ import po.Main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class janelaInicio extends JFrame {
     private Main m;
-    private JButton b1;
 
     public janelaInicio(Main m) {
         this.m = m;
@@ -33,18 +30,12 @@ public class janelaInicio extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
 
-        b1 = new JButton("Entrar");
+        JButton b1 = new JButton("Entrar");
         b1.setBackground(Color.WHITE);
-//        b1.setForeground(Color.lightGray);
         b1.setOpaque(true);
         b1.setBorderPainted(false);
 
-        b1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                iniciaMenu(e);
-            }
-        });
+        b1.addActionListener(e -> iniciaMenu());
 
 
         background.add(b1, gbc);
@@ -54,7 +45,7 @@ public class janelaInicio extends JFrame {
         this.setVisible(true);
     }
 
-    private void iniciaMenu(ActionEvent evt) {
+    private void iniciaMenu() {
         this.setVisible(false);
         new Menu(m).setVisible(true);
     }
